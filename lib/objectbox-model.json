@@ -1,0 +1,396 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "2:5289264950159129193",
+      "lastPropertyId": "11:21842510579154777",
+      "name": "StorageModel",
+      "properties": [
+        {
+          "id": "1:899342902428998748",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:7674909582053156588",
+          "name": "uuid",
+          "indexId": "7:8837941897921877262",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:2082650109279556433",
+          "name": "itemName",
+          "type": 9
+        },
+        {
+          "id": "4:6097370077058438972",
+          "name": "itemImage",
+          "type": 9
+        },
+        {
+          "id": "5:8413942245927625467",
+          "name": "quantity",
+          "type": 8
+        },
+        {
+          "id": "6:7077197220714972444",
+          "name": "buyPrice",
+          "type": 8
+        },
+        {
+          "id": "7:878786843833408149",
+          "name": "sellPrice",
+          "type": 8
+        },
+        {
+          "id": "8:8973605815734033042",
+          "name": "minAmount",
+          "type": 8
+        },
+        {
+          "id": "9:669552685581241048",
+          "name": "typeIndex",
+          "type": 6
+        },
+        {
+          "id": "10:3202531933537570339",
+          "name": "supplierId",
+          "indexId": "2:6194880861001699693",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "SupplierModel"
+        },
+        {
+          "id": "11:21842510579154777",
+          "name": "paidAmount",
+          "type": 8
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:9208822990900752414",
+      "lastPropertyId": "9:748095765277656098",
+      "name": "CustomerModel",
+      "properties": [
+        {
+          "id": "1:190585415310064296",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1309801374550826709",
+          "name": "uuid",
+          "indexId": "4:6427761274423895429",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:423883756646716996",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:8241765832006033816",
+          "name": "phone1",
+          "type": 9
+        },
+        {
+          "id": "5:5085124145233156954",
+          "name": "phone2",
+          "type": 9
+        },
+        {
+          "id": "6:9027356387153805910",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "8:137311694524982277",
+          "name": "receivableAmount",
+          "type": 8
+        },
+        {
+          "id": "9:748095765277656098",
+          "name": "payableAmount",
+          "type": 8
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:3415304222025532929",
+      "lastPropertyId": "8:8688011188511956793",
+      "name": "CreateInvoiceModel",
+      "properties": [
+        {
+          "id": "1:2057458220802821875",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:4198074042670456661",
+          "name": "uuid",
+          "indexId": "8:7607332561444127662",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:3784651634678198525",
+          "name": "totalInvoice",
+          "type": 8
+        },
+        {
+          "id": "4:8575457510512860908",
+          "name": "cashPaid",
+          "type": 8
+        },
+        {
+          "id": "5:2368253504708199285",
+          "name": "laterPaid",
+          "type": 8
+        },
+        {
+          "id": "6:4444633202267406207",
+          "name": "invoiceDate",
+          "type": 10
+        },
+        {
+          "id": "7:6233315288929262330",
+          "name": "paymentIndex",
+          "type": 6
+        },
+        {
+          "id": "8:8688011188511956793",
+          "name": "customerId",
+          "indexId": "9:677536105293545062",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "CustomerModel"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:7402174192306668538",
+          "name": "items",
+          "targetId": "7:1606597934801876537"
+        }
+      ]
+    },
+    {
+      "id": "7:1606597934801876537",
+      "lastPropertyId": "5:8660811941122145041",
+      "name": "ItemsInvoice",
+      "properties": [
+        {
+          "id": "1:2107347778151004175",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:8045338546582942720",
+          "name": "sellPrice",
+          "type": 8
+        },
+        {
+          "id": "3:5702608688327995180",
+          "name": "quantity",
+          "type": 8
+        },
+        {
+          "id": "4:7818387833869484809",
+          "name": "totalItemPrice",
+          "type": 8
+        },
+        {
+          "id": "5:8660811941122145041",
+          "name": "storageItemId",
+          "indexId": "10:4213817622721936743",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "StorageModel"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:1717198745578238179",
+      "lastPropertyId": "14:5948438757936141756",
+      "name": "TransactionModel",
+      "properties": [
+        {
+          "id": "1:243057304441581654",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:5852752717266437970",
+          "name": "uuid",
+          "indexId": "11:2912864994017705877",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:4201470090141938424",
+          "name": "userUuid",
+          "type": 9
+        },
+        {
+          "id": "4:2909643137126638181",
+          "name": "paymentAmount",
+          "type": 8
+        },
+        {
+          "id": "5:2515003860475023628",
+          "name": "createdAt",
+          "type": 10
+        },
+        {
+          "id": "6:6028283212541067497",
+          "name": "notes",
+          "type": 9
+        },
+        {
+          "id": "7:6521805011368747146",
+          "name": "transactionType",
+          "type": 6
+        },
+        {
+          "id": "8:2936510437728316714",
+          "name": "beginningBalance",
+          "type": 8
+        },
+        {
+          "id": "9:7618314127658819307",
+          "name": "endBalance",
+          "type": 8
+        },
+        {
+          "id": "10:967054690826890390",
+          "name": "invoiceProfit",
+          "type": 8
+        },
+        {
+          "id": "11:1830679829529419815",
+          "name": "paidInvoiceAmount",
+          "type": 8
+        },
+        {
+          "id": "12:417078565279352849",
+          "name": "userType",
+          "type": 6
+        },
+        {
+          "id": "13:7401941274657716944",
+          "name": "userName",
+          "type": 9
+        },
+        {
+          "id": "14:5948438757936141756",
+          "name": "storageItemUuid",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "9:4273291940691690034",
+      "lastPropertyId": "8:7380027613144447262",
+      "name": "SupplierModel",
+      "properties": [
+        {
+          "id": "1:5974118554154761449",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:726372674585929937",
+          "name": "uuid",
+          "indexId": "12:2470084761702707939",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:2527472329238900313",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:7547018738617588892",
+          "name": "phone1",
+          "type": 9
+        },
+        {
+          "id": "5:4448233346927128527",
+          "name": "phone2",
+          "type": 9
+        },
+        {
+          "id": "6:991584696007250421",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "7:318772651636078351",
+          "name": "receivableAmount",
+          "type": 8
+        },
+        {
+          "id": "8:7380027613144447262",
+          "name": "payableAmount",
+          "type": 8
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "9:4273291940691690034",
+  "lastIndexId": "12:2470084761702707939",
+  "lastRelationId": "1:7402174192306668538",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    2012309038458918598,
+    8674895074077432270,
+    8948141875499663187
+  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    6752771352222774177,
+    6600573847016762379,
+    2586518660551763223,
+    4822826251158611448,
+    3227327288925793807,
+    8522538787933854002,
+    3985744442807330365,
+    3235544059913130980,
+    327182763463604414,
+    2901761758646562592,
+    6734003741869660769,
+    8695103337163344616,
+    2794872322145582272,
+    3461668941822703355,
+    5479368148903129344,
+    4230486654202284661,
+    278478852885223230,
+    2479249803289863599,
+    6667440752228361409,
+    6097898792577330959,
+    9045011200947960786,
+    3499094377915928917,
+    3165491715114893339,
+    2773011440841409106
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

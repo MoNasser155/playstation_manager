@@ -1,0 +1,870 @@
+{
+    "Home": {
+        "en": "Home",
+        "ar": "الرئيسية"
+    },
+    "all": {
+        "en": "All",
+        "ar": "الكل"
+    },
+    "english": {
+        "en": "English",
+        "ar": "الانجليزية"
+    },
+    "arabic": {
+        "en": "Arabic",
+        "ar": "العربية"
+    },
+    "mon": {
+        "en": "Monday",
+        "ar": "الاثنين"
+    },
+    "tue": {
+        "en": "Tuesday",
+        "ar": "الثلاثاء"
+    },
+    "wed": {
+        "en": "Wednesday",
+        "ar": "الاربعاء"
+    },
+    "thu": {
+        "en": "Thursday",
+        "ar": "الخميس"
+    },
+    "fri": {
+        "en": "Friday",
+        "ar": "الجمعة"
+    },
+    "sat": {
+        "en": "Saturday",
+        "ar": "السبت"
+    },
+    "sun": {
+        "en": "Sunday",
+        "ar": "الاحد"
+    },
+    "pm": {
+        "en": "PM",
+        "ar": "مساء"
+    },
+    "am": {
+        "en": "AM",
+        "ar": "صباحا"
+    },
+    "at": {
+        "en": "at",
+        "ar": "في"
+    },
+    "dark_mode": {
+        "en": "Dark Mode",
+        "ar": "الوضع المظلم"
+    },
+    "home": {
+        "en": "Home",
+        "ar": "الرئيسية"
+    },
+    "search": {
+        "en": "Search",
+        "ar": "بحث"
+    },
+    "suppliers": {
+        "en": "Suppliers",
+        "ar": "الموردين"
+    },
+    "clear": {
+        "en": "Clear",
+        "ar": "مسح"
+    },
+    "filters": {
+        "en": "Filters",
+        "ar": "الفلاتر"
+    },
+    "apply": {
+        "en": "Apply",
+        "ar": "تطبيق"
+    },
+    "next": {
+        "en": "Next",
+        "ar": "التالي"
+    },
+    "viewAll": {
+        "en": "View All",
+        "ar": "عرض الكل"
+    },
+    "supplierName": {
+        "en": "Supplier Name",
+        "ar": "اسم المورد"
+    },
+    "balance": {
+        "en": "Balance",
+        "ar": "الرصيد"
+    },
+    "contact": {
+        "en": "Contact",
+        "ar": "معلومات الاتصال"
+    },
+    "addSupplier": {
+        "en": "Add Supplier",
+        "ar": "اضافة مورد"
+    },
+    "noSuppliers": {
+        "en": "No Suppliers",
+        "ar": "لا يوجد موردين"
+    },
+    "addNewSupplier": {
+        "en": "Add New Supplier",
+        "ar": "اضافة مورد جديد"
+    },
+    "enterNameRequired": {
+        "en": "Enter Name (Required)",
+        "ar": "ادخل الاسم (مطلوب)"
+    },
+    "enterPhoneRequired": {
+        "en": "Enter Phone (Required)",
+        "ar": "ادخل رقم الهاتف (مطلوب)"
+    },
+    "enterPhoneOptional": {
+        "en": "Enter Phone (Optional)",
+        "ar": "ادخل رقم الهاتف (اختياري)"
+    },
+    "enterAddressRequired": {
+        "en": "Enter Address (Required)",
+        "ar": "ادخل العنوان (مطلوب)"
+    },
+    "cancel": {
+        "en": "Cancel",
+        "ar": "الغاء"
+    },
+    "save": {
+        "en": "Save",
+        "ar": "حفظ"
+    },
+    "deleteSupplier": {
+        "en": "Are you sure you want to delete this supplier?",
+        "ar": "هل انت متاكد من حذف هذا المورد؟"
+    },
+    "deleteSupplierExp": {
+        "en": "Once you delete this supplier, all its data will be deleted.",
+        "ar": "بمجرد حذف هذا المورد، سيتم حذف جميع بياناته."
+    },
+    "delete": {
+        "en": "Delete",
+        "ar": "حذف"
+    },
+    "edit": {
+        "en": "Edit",
+        "ar": "تعديل"
+    },
+    "cannotDeleteSupplierWithBalance": {
+        "en": "Cannot delete supplier with non-zero account balance.",
+        "ar": "لا يمكن حذف المورد الذي لديه رصيد غير صفري."
+    },
+    "inventory": {
+        "en": "Inventory",
+        "ar": "المخزون"
+    },
+    "add": {
+        "en": "Add",
+        "ar": "اضافة"
+    },
+    "noItems": {
+        "en": "No Items",
+        "ar": "لا يوجد منتجات"
+    },
+    "addNewStorageItem": {
+        "en": "Add New Storage Item",
+        "ar": "اضافة صنف جديد"
+    },
+    "editStorageItem": {
+        "en": "Edit Storage Item",
+        "ar": "تعديل الصنف"
+    },
+    "selectSupplier": {
+        "en": "Select Supplier",
+        "ar": "اختر المورد"
+    },
+    "enterQuantity": {
+        "en": "Enter Quantity",
+        "ar": "ادخل الكمية"
+    },
+    "enterBuyPrice": {
+        "en": "Enter Buy Price",
+        "ar": "ادخل سعر الشراء"
+    },
+    "enterSellPrice": {
+        "en": "Enter Sell Price",
+        "ar": "ادخل سعر البيع"
+    },
+    "enterItemName": {
+        "en": "Enter Item Name",
+        "ar": "ادخل اسم الصنف"
+    },
+    "unit": {
+        "en": "Unit",
+        "ar": "وحدة"
+    },
+    "meter": {
+        "en": "Meter",
+        "ar": "متر"
+    },
+    "weight": {
+        "en": "Weight",
+        "ar": "وزن"
+    },
+    "selectUnit": {
+        "en": "Select Unit",
+        "ar": "اختر الوحدة"
+    },
+    "minAmount": {
+        "en": "Minimum Storage Amount",
+        "ar": "الحد الادني في المخزون"
+    },
+    "deleteStorageItem": {
+        "en": "Are you sure you want to delete this storage item?",
+        "ar": "هل انت متاكد من حذف هذا الصنف؟"
+    },
+    "deleteStorageItemExp": {
+        "en": "Once you delete this storage item, all its data will be deleted.",
+        "ar": "بمجرد حذف هذا الصنف، سيتم حذف جميع بياناته."
+    },
+    "errorGettingSupplierDetails": {
+        "en": "Error getting supplier details.",
+        "ar": "حدث خطأ في الحصول على تفاصيل المورد."
+    },
+    "addItem": {
+        "en": "Add Item",
+        "ar": "اضافة صنف"
+    },
+    "addTransaction": {
+        "en": "Add Transaction",
+        "ar": "اضافة معاملة"
+    },
+    "notes": {
+        "en": "Notes (Optional)",
+        "ar": "ملاحظات (اختياري)"
+    },
+    "total": {
+        "en": "Total",
+        "ar": "الاجمالي"
+    },
+    "addNewItem": {
+        "en": "Add New Item",
+        "ar": "اضافة صنف جديد"
+    },
+    "useExistingItem": {
+        "en": "Use Existing Item",
+        "ar": "استخدام صنف موجود"
+    },
+    "addToExistingItem": {
+        "en": "Add To Existing Item",
+        "ar": "اضافة الى صنف موجود"
+    },
+    "selectItem": {
+        "en": "Select Item",
+        "ar": "اختر الصنف"
+    },
+    "customers": {
+        "en": "Customers",
+        "ar": "العملاء"
+    },
+    "noCustomers": {
+        "en": "No Customers",
+        "ar": "لا يوجد عملاء"
+    },
+    "addCustomer": {
+        "en": "Add Customer",
+        "ar": "اضافة عميل"
+    },
+    "addNewCustomer": {
+        "en": "Add New Customer",
+        "ar": "اضافة عميل جديد"
+    },
+    "cannotDeleteCustomerWithBalance": {
+        "en": "Cannot delete customer with balance",
+        "ar": "لا يمكن حذف العميل الذي عليه رصيد"
+    },
+    "errorGettingCustomerDetails": {
+        "en": "Error getting customer details",
+        "ar": "حدث خطأ في الحصول على تفاصيل العميل"
+    },
+    "customerName": {
+        "en": "Customer Name",
+        "ar": "اسم العميل"
+    },
+    "deleteCustomer": {
+        "en": "Are you sure you want to delete this customer?",
+        "ar": "هل انت متاكد من حذف هذا العميل؟"
+    },
+    "deleteCustomerExp": {
+        "en": "Once you delete this customer, all its data will be deleted.",
+        "ar": "بمجرد حذف هذا العميل، سيتم حذف جميع بياناته."
+    },
+    "invoices": {
+        "en": "Invoices",
+        "ar": "الفواتير"
+    },
+    "cash": {
+        "en": "Cash",
+        "ar": "نقدي"
+    },
+    "later": {
+        "en": "Later",
+        "ar": "آجل"
+    },
+    "selectCustomer": {
+        "en": "Select Customer",
+        "ar": "اختر العميل"
+    },
+    "noCustomersFound": {
+        "en": "No Customers Found",
+        "ar": "لا يوجد عملاء"
+    },
+    "noStorageItemsFound": {
+        "en": "No Storage Items Found",
+        "ar": "لا يوجد اصناف"
+    },
+    "itemName": {
+        "en": "Item Name",
+        "ar": "اسم الصنف"
+    },
+    "price": {
+        "en": "Price",
+        "ar": "السعر"
+    },
+    "quantity": {
+        "en": "Quantity",
+        "ar": "الكمية"
+    },
+    "numberOfItems": {
+        "en": "Number of Items",
+        "ar": "عدد الاصناف"
+    },
+    "noInvoiceModelsFound": {
+        "en": "You can't create an invoice without customers or storage items",
+        "ar": "لا يمكن انشاء فاتورة بدون عملاء او اصناف"
+    },
+    "quantityLimitExceeded": {
+        "en": "Quantity cannot exceed available stock {}",
+        "ar": "الكمية لا يمكن أن تتجاوز الكمية المتاحة في المخزون {}"
+    },
+    "date": {
+        "en": "Date",
+        "ar": "التاريخ"
+    },
+    "invoiceId": {
+        "en": "Invoice ID",
+        "ar": "رقم الفاتورة"
+    },
+    "paidNow": {
+        "en": "Paid Now",
+        "ar": "المدفوع الآن"
+    },
+    "laterAmount": {
+        "en": "Later Amount",
+        "ar": "المبلغ الآجل"
+    },
+    "invoiceSaved": {
+        "en": "Invoice saved successfully",
+        "ar": "تم حفظ الفاتورة بنجاح"
+    },
+    "saveInvoice": {
+        "en": "Save Invoice",
+        "ar": "حفظ الفاتورة"
+    },
+    "createInvoice": {
+        "en": "Create Invoice",
+        "ar": "انشاء فاتورة"
+    },
+    "toPay": {
+        "en": "to pay",
+        "ar": "له"
+    },
+    "toRecieve": {
+        "en": "to recieve",
+        "ar": "عليه"
+    },
+    "invoiceProfit": {
+        "en": "Invoice Profit",
+        "ar": "ربح الفواتير"
+    },
+    "customerPayment": {
+        "en": "Customer Payment",
+        "ar": "دفعات العملاء"
+    },
+    "supplierPayment": {
+        "en": "Supplier Payment",
+        "ar": "دفعات الموردين"
+    },
+    "transactions": {
+        "en": "Transactions",
+        "ar": "المعاملات"
+    },
+    "noTransactionsFound": {
+        "en": "No Transactions Found",
+        "ar": "لا يوجد معاملات"
+    },
+    "addTransactionType": {
+        "en": "Add Transaction Type",
+        "ar": "اختر نوع المعاملة"
+    },
+    "selectTransactionType": {
+        "en": "Select Transaction Type",
+        "ar": "اختر نوع المعاملة"
+    },
+    "customer": {
+        "en": "Customer",
+        "ar": "عميل"
+    },
+    "supplier": {
+        "en": "Supplier",
+        "ar": "مورد"
+    },
+    "supplierPurchase": {
+        "en": "Supplier Purchase",
+        "ar": "مشتريات الموردين"
+    },
+    "payment": {
+        "en": "Payment",
+        "ar": "الدفع"
+    },
+    "type": {
+        "en": "Type",
+        "ar": "النوع"
+    },
+    "amount": {
+        "en": "Amount",
+        "ar": "المبلغ"
+    },
+    "enterAmount": {
+        "en": "Enter Amount",
+        "ar": "ادخل المبلغ"
+    },
+    "enterNotes": {
+        "en": "Enter Notes",
+        "ar": "ادخل الملاحظات"
+    },
+    "enterNotesOptional": {
+        "en": "Enter Notes (Optional)",
+        "ar": "ادخل الملاحظات (اختياري)"
+    },
+    "pleaseEnterEmail": {
+        "en": "Please enter your email",
+        "ar": "من فضلك ادخل البريد الالكتروني"
+    },
+    "invalidEmail": {
+        "en": "Invalid email",
+        "ar": "البريد الالكتروني غير صالح"
+    },
+    "requiredField": {
+        "en": "This field is required",
+        "ar": "هذا الحقل مطلوب"
+    },
+    "phoneMustBe10or11": {
+        "en": "Phone number must be 10 or 11 digits",
+        "ar": "رقم الهاتف يجب ان يكون 10 او 11 رقم"
+    },
+    "phoneDigitsOnly": {
+        "en": "Phone number must contain digits only",
+        "ar": "رقم الهاتف يجب ان يحتوي علي ارقام فقط"
+    },
+    "phonePrefix": {
+        "en": "Phone number must start with 010, 011, 012, or 015",
+        "ar": "رقم الهاتف يجب ان يبدا ب 010, 011, 012, او 015"
+    },
+    "note": {
+        "en": "Note",
+        "ar": "ملاحظة"
+    },
+    "noInvoicesFound": {
+        "en": "No Invoices Found",
+        "ar": "لا يوجد فواتير"
+    },
+    "before": {
+        "en": "Before",
+        "ar": "قبل"
+    },
+    "after": {
+        "en": "After",
+        "ar": "بعد"
+    },
+    "paidAmount": {
+        "en": "Paid Amount",
+        "ar": "المبلغ المدفوع"
+    },
+    "profit": {
+        "en": "Profit",
+        "ar": "الربح"
+    },
+    "noProfitData": {
+        "en": "No Profit Data",
+        "ar": "لا يوجد بيانات للربح"
+    },
+    "password": {
+        "en": "Password",
+        "ar": "كلمة المرور"
+    },
+    "confirmPassword": {
+        "en": "Confirm Password",
+        "ar": "تأكيد كلمة المرور"
+    },
+    "passwordHint": {
+        "en": "**********",
+        "ar": "**********"
+    },
+    "enterPassword": {
+        "en": "Enter Password",
+        "ar": "ادخل كلمة المرور"
+    },
+    "wrongPassword": {
+        "en": "Wrong Password",
+        "ar": "كلمة المرور خاطئة"
+    },
+    "confirmPasswordError": {
+        "en": "Password does not match",
+        "ar": "كلمة المرور غير متطابقة"
+    },
+    "passwordUpdatedSuccessfully": {
+        "en": "Password updated successfully",
+        "ar": "تم تحديث كلمة المرور بنجاح"
+    },
+    "passwordUpdateFailed": {
+        "en": "Password update failed",
+        "ar": "فشل تحديث كلمة المرور"
+    },
+    "submitPassword": {
+        "en": "Submit Password",
+        "ar": "تأكيد كلمة المرور"
+    },
+    "from": {
+        "en": "From",
+        "ar": "من"
+    },
+    "to": {
+        "en": "To",
+        "ar": "إلى"
+    },
+    "totalProfit": {
+        "en": "Total Profit",
+        "ar": "إجمالي الربح"
+    },
+    "pleaseSelectCustomer": {
+        "en": "Please select a customer",
+        "ar": "من فضلك اختر عميل"
+    },
+    "pleaseSelectSupplier": {
+        "en": "Please select a supplier",
+        "ar": "من فضلك اختر مورد"
+    },
+    "addUser": {
+        "en": "Add User",
+        "ar": "اضافة مستخدم"
+    },
+    "addStorageItem": {
+        "en": "Add Storage Item",
+        "ar": "اضافة صنف جديد"
+    },
+    "viewReports": {
+        "en": "View Reports",
+        "ar": "عرض التقارير"
+    },
+    "settings": {
+        "en": "Settings",
+        "ar": "الاعدادات"
+    },
+    "saveLocalBackup": {
+        "en": "Save Local Backup",
+        "ar": "حفظ نسخة احتياطية"
+    },
+    "driveBackup": {
+        "en": "Drive Backup",
+        "ar": "نسخة احتياطية علي درايف"
+    },
+    "darkMode": {
+        "en": "Dark Mode",
+        "ar": "الوضع الليلي"
+    },
+    "restoreLocalBackup": {
+        "en": "Restore Local Backup",
+        "ar": "استعادة نسخة احتياطية"
+    },
+    "backupCreatedSuccessfully": {
+        "en": "Backup Created Successfully",
+        "ar": "تم حفظ نسخة احتياطية بنجاح"
+    },
+    "backupSourceNotFound": {
+        "en": "Backup Source Not Found",
+        "ar": "مصدر النسخة الاحتياطية غير موجود"
+    },
+    "backupCreationFailed": {
+        "en": "Backup Creation Failed",
+        "ar": "فشل حفظ النسخة الاحتياطية"
+    },
+    "restoreFailed": {
+        "en": "Restore Failed",
+        "ar": "فشل استعادة النسخة الاحتياطية"
+    },
+    "backupRestoredSuccessfully": {
+        "en": "Backup Restored Successfully",
+        "ar": "تم استعادة النسخة الاحتياطية بنجاح"
+    },
+    "backupRestoreFailed": {
+        "en": "Backup Restore Failed",
+        "ar": "فشل استعادة النسخة الاحتياطية"
+    },
+    "name": {
+        "en": "Name",
+        "ar": "الاسم"
+    },
+    "january": {
+        "en": "january",
+        "ar": "يناير"
+    },
+    "february": {
+        "en": "february",
+        "ar": "فبراير"
+    },
+    "march": {
+        "en": "march",
+        "ar": "مارس"
+    },
+    "april": {
+        "en": "april",
+        "ar": "أبريل"
+    },
+    "may": {
+        "en": "may",
+        "ar": "مايو"
+    },
+    "june": {
+        "en": "june",
+        "ar": "يونيو"
+    },
+    "july": {
+        "en": "july",
+        "ar": "يوليو"
+    },
+    "august": {
+        "en": "august",
+        "ar": "أغسطس"
+    },
+    "september": {
+        "en": "september",
+        "ar": "سبتمبر"
+    },
+    "october": {
+        "en": "october",
+        "ar": "أكتوبر"
+    },
+    "november": {
+        "en": "november",
+        "ar": "نوفمبر"
+    },
+    "december": {
+        "en": "december",
+        "ar": "ديسمبر"
+    },
+    "refundInvoice": {
+        "en": "Refund Invoice",
+        "ar": "فاتورة مرتجعة"
+    },
+    "selectInvoice": {
+        "en": "Select Invoice",
+        "ar": "اختر فاتورة"
+    },
+    "noInvoicesForCustomer": {
+        "en": "No invoices found for this customer",
+        "ar": "لا يوجد فواتير للعميل"
+    },
+    "originalQuantity": {
+        "en": "Original Quantity",
+        "ar": "الكمية الاصلية"
+    },
+    "refundAmount": {
+        "en": "Refund Amount",
+        "ar": "مبلغ الارتجاع"
+    },
+    "refundSaved": {
+        "en": "Refund invoice saved successfully",
+        "ar": "تم حفظ فاتورة الارتجاع بنجاح"
+    },
+    "refundPrice": {
+        "en": "Refund Price",
+        "ar": "سعر الارتجاع"
+    },
+    "exportPdf": {
+        "en": "Export Pdf",
+        "ar": "تصدير pdf"
+    },
+    "savePdf": {
+        "en": "Save Pdf",
+        "ar": "حفظ pdf"
+    },
+    "fileName": {
+        "en": "File Name",
+        "ar": "اسم الملف"
+    },
+    "paid": {
+        "en": "Paid",
+        "ar": "المدفوع"
+    },
+    "errorGettingInvoiceDetails": {
+        "en": "Error getting invoice details",
+        "ar": "خطأ في الحصول على تفاصيل الفاتورة"
+    },
+    "signInWithGoogle": {
+        "en": "Sign in with Google",
+        "ar": "تسجيل الدخول باستخدام جوجل"
+    },
+    "signInWasCancelled": {
+        "en": "Sign in was cancelled",
+        "ar": "تم الغاء تسجيل الدخول"
+    },
+    "googleSignInFailed": {
+        "en": "Google sign in failed",
+        "ar": "فشل تسجيل الدخول باستخدام جوجل"
+    },
+    "googleSignInTimedOut": {
+        "en": "Google sign in timed out",
+        "ar": "تم انتهاء وقت تسجيل الدخول باستخدام جوجل"
+    },
+    "machineMismatch": {
+        "en": "This account is linked to another machine",
+        "ar": "هذا الحساب مرتبط بجهاز اخر"
+    },
+    "noMachineId": {
+        "en": "Machine id not found",
+        "ar": "لم يتم العثور على معرّف الجهاز"
+    },
+    "noUserFound": {
+        "en": "No user found",
+        "ar": "لم يتم العثور على مستخدم"
+    },
+    "accountNotActive": {
+        "en": "Account not active",
+        "ar": "الحساب غير نشط"
+    },
+    "serverError": {
+        "en": "Server error",
+        "ar": "خطأ في الخادم"
+    },
+    "signOut": {
+        "en": "Sign Out",
+        "ar": "تسجيل الخروج"
+    },
+    "authFailed": {
+        "en": "Authentication failed",
+        "ar": "فشل تسجيل الدخول"
+    },
+    "erpSystem": {
+        "en": "ERP System",
+        "ar": "نظام ERP"
+    },
+    "signInVerifyLicense": {
+        "en": "Sign in to verify your license",
+        "ar": "سجل الدخول للتحقق من ترخيصك"
+    },
+    "continueWithGoogle": {
+        "en": "Continue with Google",
+        "ar": "المتابعة باستخدام جوجل"
+    },
+    "openingBrowser": {
+        "en": "Opening browser…",
+        "ar": "جاري فتح المتصفح..."
+    },
+    "licenseLockNotice": {
+        "en": "Your license will be locked to this machine on first sign-in.",
+        "ar": "سيتم قفل ترخيصك على هذا الجهاز عند تسجيل الدخول لأول مرة."
+    },
+    "licenseRegisteredToAnotherMachine": {
+        "en": "License Registered to Another Machine",
+        "ar": "الترخيص مسجل بجهاز آخر"
+    },
+    "licenseLockedToDifferentDevice": {
+        "en": "This license is locked to a different device Contact your admin to transfer it.",
+        "ar": "هذا الترخيص مغلق على جهاز آخر. اتصل بالمسؤول لنقله."
+    },
+    "waitingForActivation": {
+        "en": "Waiting for Activation",
+        "ar": "في انتظار التفعيل"
+    },
+    "accountRegisteredPendingActivation": {
+        "en": "Your account has been registered. An admin must activate it in Supabase.",
+        "ar": "تم تسجيل حسابك. يجب على المسؤول تفعيله في قاعدة البيانات."
+    },
+    "email": {
+        "en": "Email",
+        "ar": "البريد الإلكتروني"
+    },
+    "machineId": {
+        "en": "Machine ID",
+        "ar": "معرّف الجهاز"
+    },
+    "machineIdCopied": {
+        "en": "Machine ID copied to clipboard",
+        "ar": "تم نسخ معرّف الجهاز إلى الحافظة"
+    },
+    "listeningForActivation": {
+        "en": "Listening for activation via Realtime…",
+        "ar": "جاري الاستماع للتفعيل في الوقت الفعلي..."
+    },
+    "appName":{
+        "en":"خيوط البدري",
+        "ar":"خيوط البدري"
+    },
+    "activeLicence":{
+        "en":"Contact Developer For Licence Activation",
+        "ar":"تواصل مع المطور لتفعيل الترخيص"    
+    },
+    "contactUs":{
+        "en":"Contact Us",
+        "ar":"تواصل معنا"
+    },
+    "editCustomer":{
+        "en":"Edit Customer",
+        "ar":"تعديل العميل"
+    },
+    "customerUpdatedSuccessfully":{
+        "en":"Customer updated successfully",
+        "ar":"تم تحديث العميل بنجاح"
+    },
+    "supplierUpdatedSuccessfully":{
+        "en":"Supplier updated successfully",
+        "ar":"تم تحديث المورد بنجاح"
+    },
+    "itemDetails":{
+        "en":"Item Details",
+        "ar":"تفاصيل الصنف"
+    },
+    "buyPrice":{
+        "en":"Buy Price",
+        "ar":"سعر الشراء"
+    },
+    "sellPrice":{
+        "en":"Sell Price",
+        "ar":"سعر البيع"
+    },
+    "totalBuyPrice":{
+        "en":"Total Buy Price",
+        "ar":"إجمالي سعر الشراء"
+    },
+    "egp":{
+        "en":"EGP",
+        "ar":"جنيه"
+    },
+    "addToItem":{
+        "en":"Add To Item",
+        "ar":"أضف للصنف"
+    },
+    "failedToLoadImage":{
+        "en":"Failed to load image", 
+        "ar":"فشل تحميل الصورة"
+    },
+    "updatedSuccessfully":{
+        "en":"Updated successfully",
+        "ar":"تم التحديث بنجاح"
+    },
+    "deletedSuccessfully":{
+        "en":"Deleted successfully",
+        "ar":"تم الحذف بنجاح"
+    }
+}

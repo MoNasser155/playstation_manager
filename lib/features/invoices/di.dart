@@ -1,0 +1,47 @@
+import '../../core/shared/di.dart';
+import 'data/datasources/invoice_local_data_source.dart';
+import 'data/repositories/invoice_repository_impl.dart';
+import 'domain/repositories/invoice_repository.dart';
+import 'domain/usecases/create_invoice_usecase.dart';
+import 'domain/usecases/get_all_invoice_models_usecase.dart';
+import 'domain/usecases/get_customer_invoices_usecase.dart';
+import 'domain/usecases/refund_invoice_usecase.dart';
+import 'presentation/cubits/cubit/invoice_cubit.dart';
+import 'presentation/cubits/refund_cubit/refund_invoice_cubit.dart';
+
+initInvoicesDI() {
+  //data source
+  sl.registerLazySingleton<InvoiceLocalDataSource>(
+    () => InvoiceLocalDataSourceImpl(),
+  );
+
+  //repository
+  sl.registerLazySingleton<InvoiceRepository>(() => InvoiceRepositoryImpl());
+
+  //use cases
+  sl.registerLazySingleton<GetAllInvoiceModelsUseCase>(
+    () => GetAllInvoiceModelsUseCase(),
+  );
+  sl.registerLazySingleton<CreateInvoiceUseCase>(
+    () => CreateInvoiceUseCase(),
+  );
+  sl.registerLazySingleton<GetCustomerInvoicesUseCase>(
+    () => GetCustomerInvoicesUseCase(),
+  );
+  sl.registerLazySingleton<RefundInvoiceUseCase>(
+    () => RefundInvoiceUseCase(),
+  );
+
+  //cubit
+  sl.registerFactory<InvoiceCubit>(() => InvoiceCubit());
+  sl.registerFactory<RefundInvoiceCubit>(() => RefundInvoiceCubit());
+}
+
+Future<void> resetInvoicesDI() async {
+  await sl.resetLazySingleton<InvoiceLocalDataSource>();
+  await sl.resetLazySingleton<InvoiceRepository>();
+  await sl.resetLazySingleton<GetAllInvoiceModelsUseCase>();
+  await sl.resetLazySingleton<CreateInvoiceUseCase>();
+  await sl.resetLazySingleton<GetCustomerInvoicesUseCase>();
+  await sl.resetLazySingleton<RefundInvoiceUseCase>();
+}

@@ -1,0 +1,1 @@
+enum DesktopDrawerMode { open, shortened }
