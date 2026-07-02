@@ -8,8 +8,8 @@ import 'domain/usecases/get_all_storage_items_usecase.dart';
 import 'domain/usecases/get_storage_item_by_uuid_usecase.dart';
 import 'domain/usecases/update_storage_item_usecase.dart';
 import 'presentation/cubits/add_storage_item_cubit/add_storage_item_cubit.dart';
-import 'presentation/cubits/storage_item_details_cubit/storage_item_details_cubit.dart';
 import 'presentation/cubits/storage_cubit/storage_cubit.dart';
+import 'presentation/cubits/storage_item_details_cubit/storage_item_details_cubit.dart';
 
 initStorageDI() {
   // Data sources
@@ -31,14 +31,4 @@ initStorageDI() {
   sl.registerFactory<StorageCubit>(() => StorageCubit());
   sl.registerFactory<AddStorageItemCubit>(() => AddStorageItemCubit());
   sl.registerFactory<StorageItemDetailsCubit>(() => StorageItemDetailsCubit());
-}
-
-Future<void> resetStorageDI() async {
-  await sl.resetLazySingleton<StorageLocaleDataSource>();
-  await sl.resetLazySingleton<StorageRepository>();
-  await sl.resetLazySingleton<GetAllStorageItemsUseCase>();
-  await sl.resetLazySingleton<AddStorageItemUseCase>();
-  await sl.resetLazySingleton<DeleteStorageItemUseCase>();
-  await sl.resetLazySingleton<UpdateStorageItemUseCase>();
-  await sl.resetLazySingleton<GetStorageItemByUuidUseCase>();
 }

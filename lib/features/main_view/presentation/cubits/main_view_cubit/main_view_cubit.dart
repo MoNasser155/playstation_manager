@@ -17,7 +17,6 @@ import '../../../../invoices/data/models/create_invoice_model.dart';
 import '../../../../invoices/presentation/screens/invoice_screen.dart';
 import '../../../../profit/presentation/screens/profit_screen.dart';
 import '../../../../storage/presentation/screens/storage_screen.dart';
-import '../../../../suppliers/presentation/screens/suppliers_screen.dart';
 import '../../../../transactions/presentation/screens/transactions_screen.dart';
 import '../../../data/models/taps_model.dart';
 import '../../screens/desktop_main_view_screen.dart';
@@ -41,7 +40,6 @@ class MainViewCubit extends BaseCubit<MainViewState> {
     TapsModel(title: LocaleKeys.home, icon: VectorIcons.home),
     TapsModel(title: LocaleKeys.invoices, icon: VectorIcons.receipt),
     TapsModel(title: LocaleKeys.customers, icon: VectorIcons.customer),
-    TapsModel(title: LocaleKeys.suppliers, icon: VectorIcons.supplier),
     TapsModel(title: LocaleKeys.inventory, icon: VectorIcons.inventory),
     TapsModel(title: LocaleKeys.transactions, icon: VectorIcons.transactions),
     TapsModel(title: LocaleKeys.profit, icon: VectorIcons.profit),
@@ -67,7 +65,6 @@ class MainViewCubit extends BaseCubit<MainViewState> {
       invoice: data?.length == 2 ? data![1] as CreateInvoiceModel? : null,
     ),
     CustomersScreen(),
-    SuppliersScreen(),
     StorageScreen(),
     TransactionsScreen(),
     ProfitScreen(),

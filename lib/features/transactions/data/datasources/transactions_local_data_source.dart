@@ -5,8 +5,6 @@ import '../../../../core/enums/user_type.dart';
 import '../../../../core/objectbox/objectbox.g.dart';
 import '../../../../core/objectbox/objectbox_store.dart';
 import '../../../../core/shared/di.dart';
-import '../../../customers/data/models/customer_model.dart';
-import '../../../suppliers/data/models/supplier_model.dart';
 import '../models/transaction_model.dart';
 
 abstract class TransactionsLocalDataSource {
@@ -30,79 +28,35 @@ class TransactionsLocalDataSourceImpl implements TransactionsLocalDataSource {
 
   @override
   int createTransaction(TransactionModel model) {
-    // Only process balance updates for customerPayment (1) and supplierPayment (3)
+    // Only process balance updates for customerPayment (1)
     final isCustomerPayment =
         model.transactionType == TransactionType.customerPayment.index;
-    final isSupplierPayment =
-        model.transactionType == TransactionType.supplierPayment.index;
 
-    if (!isCustomerPayment && !isSupplierPayment) {
-      // For other transaction types (invoiceProfit, supplierPurchase), just save
+    if (!isCustomerPayment) {
+      // For other transaction types (invoiceProfit), just save
       return _store.transactions.put(model);
     }
 
-    if (isCustomerPayment) {
-      // Step 1: Fetch customer
-      final customerQuery =
-          _store.customers
-              .query(CustomerModel_.uuid.equals(model.userUuid))
-              .build();
-      final customer = customerQuery.findFirst();
-      customerQuery.close();
-
-      if (customer == null) throw CustomerNotFoundException();
-
-      // Calculate balances
-      final beginningBalance = customer.netAmount;
-      // When a customer pays, their debt (receivable) decreases
-      final newReceivable = customer.receivableAmount - model.paymentAmount;
-      final endBalance = newReceivable - customer.payableAmount;
-
-      final updatedModel = TransactionModel.create(
-        uuid: model.uuid,
-        userUuid: model.userUuid,
-        userName: customer.name,
-        notes: model.notes,
-        beginningBalance: beginningBalance,
-        paymentAmount: 0,
-        paidInvoiceAmount: model.paymentAmount,
-        endBalance: endBalance,
-        transactionType: model.transactionTypeVal,
-        userType: model.userTypeVal,
-        createdAt: model.createdAt,
-      );
-
-      // Step 2: Save transaction
-      final transactionId = _store.transactions.put(updatedModel);
-
-      // Step 3: Update customer balance
-      // ✅ Correct: Decrease receivableAmount directly
-      _store.customers.put(customer.copyWith(receivableAmount: newReceivable));
-
-      return transactionId;
-    }
-
-    // isSupplierPayment
-    // Step 1: Fetch supplier
-    final supplierQuery =
-        _store.suppliers
-            .query(SupplierModel_.uuid.equals(model.userUuid))
+    // Step 1: Fetch customer
+    final customerQuery =
+        _store.customers
+            .query(CustomerModel_.uuid.equals(model.userUuid))
             .build();
-    final supplier = supplierQuery.findFirst();
-    supplierQuery.close();
+    final customer = customerQuery.findFirst();
+    customerQuery.close();
 
-    if (supplier == null) throw SupplierNotFoundException();
+    if (customer == null) throw CustomerNotFoundException();
 
     // Calculate balances
-    final beginningBalance = supplier.netAmount;
-    // When you pay a supplier, your debt (payable) decreases
-    final newPayable = supplier.payableAmount - model.paymentAmount;
-    final endBalance = supplier.receivableAmount - newPayable;
+    final beginningBalance = customer.netAmount;
+    // When a customer pays, their debt (receivable) decreases
+    final newReceivable = customer.receivableAmount - model.paymentAmount;
+    final endBalance = newReceivable - customer.payableAmount;
 
     final updatedModel = TransactionModel.create(
       uuid: model.uuid,
       userUuid: model.userUuid,
-      userName: supplier.name,
+      userName: customer.name,
       notes: model.notes,
       beginningBalance: beginningBalance,
       paymentAmount: 0,
@@ -116,9 +70,8 @@ class TransactionsLocalDataSourceImpl implements TransactionsLocalDataSource {
     // Step 2: Save transaction
     final transactionId = _store.transactions.put(updatedModel);
 
-    // Step 3: Update supplier balance
-    // ✅ Correct: Decrease payableAmount directly
-    _store.suppliers.put(supplier.copyWith(payableAmount: newPayable));
+    // Step 3: Update customer balance
+    _store.customers.put(customer.copyWith(receivableAmount: newReceivable));
 
     return transactionId;
   }
@@ -128,9 +81,6 @@ class TransactionsLocalDataSourceImpl implements TransactionsLocalDataSource {
     final List<TransactionModel> transactions = [];
     transactions.addAll(
       getTransactionsByUserType(UserType.customer, from: from, to: to),
-    );
-    transactions.addAll(
-      getTransactionsByUserType(UserType.supplier, from: from, to: to),
     );
     transactions.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     return transactions;
@@ -172,36 +122,21 @@ class TransactionsLocalDataSourceImpl implements TransactionsLocalDataSource {
   }) {
     //get user
     final userQuery =
-        type.isCustomer
-            ? _store.customers.query(CustomerModel_.uuid.equals(uuid)).build()
-            : _store.suppliers.query(SupplierModel_.uuid.equals(uuid)).build();
+        _store.customers.query(CustomerModel_.uuid.equals(uuid)).build();
 
     final user = userQuery.findFirst();
     userQuery.close();
     if (user == null) {
-      throw type.isCustomer
-          ? CustomerNotFoundException()
-          : SupplierNotFoundException();
+      throw CustomerNotFoundException();
     }
     // get transactions
-    if (type.isCustomer) {
-      final customerUser = user as CustomerModel;
-      final transactionsQuery =
-          _store.transactions
-              .query(TransactionModel_.userUuid.equals(customerUser.uuid))
-              .build();
-      final transactions = transactionsQuery.find();
-      transactionsQuery.close();
-      return transactions;
-    } else {
-      final supplierUser = user as SupplierModel;
-      final transactionsQuery =
-          _store.transactions
-              .query(TransactionModel_.userUuid.equals(supplierUser.uuid))
-              .build();
-      final transactions = transactionsQuery.find();
-      transactionsQuery.close();
-      return transactions;
-    }
+    final customerUser = user;
+    final transactionsQuery =
+        _store.transactions
+            .query(TransactionModel_.userUuid.equals(customerUser.uuid))
+            .build();
+    final transactions = transactionsQuery.find();
+    transactionsQuery.close();
+    return transactions;
   }
 }

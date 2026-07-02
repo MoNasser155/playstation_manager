@@ -17,7 +17,6 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 import '../../features/customers/data/models/customer_model.dart';
 import '../../features/invoices/data/models/create_invoice_model.dart';
 import '../../features/storage/data/models/storage_model.dart';
-import '../../features/suppliers/data/models/supplier_model.dart';
 import '../../features/transactions/data/models/transaction_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -83,15 +82,6 @@ final _entities = <obx_int.ModelEntity>[
         name: 'typeIndex',
         type: 6,
         flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(10, 3202531933537570339),
-        name: 'supplierId',
-        type: 11,
-        flags: 520,
-        indexId: const obx_int.IdUid(2, 6194880861001699693),
-        relationField: 'supplier',
-        relationTarget: 'SupplierModel',
       ),
       obx_int.ModelProperty(
         id: const obx_int.IdUid(11, 21842510579154777),
@@ -368,65 +358,6 @@ final _entities = <obx_int.ModelEntity>[
     relations: <obx_int.ModelRelation>[],
     backlinks: <obx_int.ModelBacklink>[],
   ),
-  obx_int.ModelEntity(
-    id: const obx_int.IdUid(9, 4273291940691690034),
-    name: 'SupplierModel',
-    lastPropertyId: const obx_int.IdUid(8, 7380027613144447262),
-    flags: 0,
-    properties: <obx_int.ModelProperty>[
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(1, 5974118554154761449),
-        name: 'id',
-        type: 6,
-        flags: 1,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(2, 726372674585929937),
-        name: 'uuid',
-        type: 9,
-        flags: 2080,
-        indexId: const obx_int.IdUid(12, 2470084761702707939),
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(3, 2527472329238900313),
-        name: 'name',
-        type: 9,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(4, 7547018738617588892),
-        name: 'phone1',
-        type: 9,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(5, 4448233346927128527),
-        name: 'phone2',
-        type: 9,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(6, 991584696007250421),
-        name: 'address',
-        type: 9,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(7, 318772651636078351),
-        name: 'receivableAmount',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(8, 7380027613144447262),
-        name: 'payableAmount',
-        type: 8,
-        flags: 0,
-      ),
-    ],
-    relations: <obx_int.ModelRelation>[],
-    backlinks: <obx_int.ModelBacklink>[],
-  ),
 ];
 
 /// Shortcut for [obx.Store.new] that passes [getObjectBoxModel] and for Flutter
@@ -480,8 +411,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
       2012309038458918598,
       8674895074077432270,
       8948141875499663187,
+      4273291940691690034,
     ],
-    retiredIndexUids: const [],
+    retiredIndexUids: const [6194880861001699693],
     retiredPropertyUids: const [
       6752771352222774177,
       6600573847016762379,
@@ -507,6 +439,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
       3499094377915928917,
       3165491715114893339,
       2773011440841409106,
+      3202531933537570339,
+      5974118554154761449,
+      726372674585929937,
+      2527472329238900313,
+      7547018738617588892,
+      4448233346927128527,
+      991584696007250421,
+      318772651636078351,
+      7380027613144447262,
     ],
     retiredRelationUids: const [],
     modelVersion: 5,
@@ -517,7 +458,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
   final bindings = <Type, obx_int.EntityDefinition>{
     StorageModel: obx_int.EntityDefinition<StorageModel>(
       model: _entities[0],
-      toOneRelations: (StorageModel object) => [object.supplier],
+      toOneRelations: (StorageModel object) => [],
       toManyRelations: (StorageModel object) => {},
       getId: (StorageModel object) => object.id,
       setId: (StorageModel object, int id) {
@@ -537,7 +478,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
         fbb.addFloat64(6, object.sellPrice);
         fbb.addFloat64(7, object.minAmount);
         fbb.addInt64(8, object.typeIndex);
-        fbb.addInt64(9, object.supplier.targetId);
         fbb.addFloat64(10, object.paidAmount);
         fbb.finish(fbb.endTable());
         return object.id ?? 0;
@@ -607,13 +547,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           minAmount: minAmountParam,
           paidAmount: paidAmountParam,
         );
-        object.supplier.targetId = const fb.Int64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          22,
-          0,
-        );
-        object.supplier.attach(store);
+
         return object;
       },
     ),
@@ -958,85 +892,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
         return object;
       },
     ),
-    SupplierModel: obx_int.EntityDefinition<SupplierModel>(
-      model: _entities[5],
-      toOneRelations: (SupplierModel object) => [],
-      toManyRelations: (SupplierModel object) => {},
-      getId: (SupplierModel object) => object.id,
-      setId: (SupplierModel object, int id) {
-        object.id = id;
-      },
-      objectToFB: (SupplierModel object, fb.Builder fbb) {
-        final uuidOffset = fbb.writeString(object.uuid);
-        final nameOffset = fbb.writeString(object.name);
-        final phone1Offset = fbb.writeString(object.phone1);
-        final phone2Offset = object.phone2 == null
-            ? null
-            : fbb.writeString(object.phone2!);
-        final addressOffset = object.address == null
-            ? null
-            : fbb.writeString(object.address!);
-        fbb.startTable(9);
-        fbb.addInt64(0, object.id ?? 0);
-        fbb.addOffset(1, uuidOffset);
-        fbb.addOffset(2, nameOffset);
-        fbb.addOffset(3, phone1Offset);
-        fbb.addOffset(4, phone2Offset);
-        fbb.addOffset(5, addressOffset);
-        fbb.addFloat64(6, object.receivableAmount);
-        fbb.addFloat64(7, object.payableAmount);
-        fbb.finish(fbb.endTable());
-        return object.id ?? 0;
-      },
-      objectFromFB: (obx.Store store, ByteData fbData) {
-        final buffer = fb.BufferContext(fbData);
-        final rootOffset = buffer.derefObject(0);
-        final idParam = const fb.Int64Reader().vTableGetNullable(
-          buffer,
-          rootOffset,
-          4,
-        );
-        final uuidParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGet(buffer, rootOffset, 6, '');
-        final nameParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGet(buffer, rootOffset, 8, '');
-        final phone1Param = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGet(buffer, rootOffset, 10, '');
-        final phone2Param = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGetNullable(buffer, rootOffset, 12);
-        final addressParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGetNullable(buffer, rootOffset, 14);
-        final receivableAmountParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          16,
-          0,
-        );
-        final payableAmountParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          18,
-          0,
-        );
-        final object = SupplierModel(
-          id: idParam,
-          uuid: uuidParam,
-          name: nameParam,
-          phone1: phone1Param,
-          phone2: phone2Param,
-          address: addressParam,
-          receivableAmount: receivableAmountParam,
-          payableAmount: payableAmountParam,
-        );
-
-        return object;
-      },
-    ),
   };
 
   return obx_int.ModelDefinition(model, bindings);
@@ -1089,14 +944,9 @@ class StorageModel_ {
     _entities[0].properties[8],
   );
 
-  /// See [StorageModel.supplier].
-  static final supplier = obx.QueryRelationToOne<StorageModel, SupplierModel>(
-    _entities[0].properties[9],
-  );
-
   /// See [StorageModel.paidAmount].
   static final paidAmount = obx.QueryDoubleProperty<StorageModel>(
-    _entities[0].properties[10],
+    _entities[0].properties[9],
   );
 }
 
@@ -1291,48 +1141,5 @@ class TransactionModel_ {
   /// See [TransactionModel.storageItemUuid].
   static final storageItemUuid = obx.QueryStringProperty<TransactionModel>(
     _entities[4].properties[13],
-  );
-}
-
-/// [SupplierModel] entity fields to define ObjectBox queries.
-class SupplierModel_ {
-  /// See [SupplierModel.id].
-  static final id = obx.QueryIntegerProperty<SupplierModel>(
-    _entities[5].properties[0],
-  );
-
-  /// See [SupplierModel.uuid].
-  static final uuid = obx.QueryStringProperty<SupplierModel>(
-    _entities[5].properties[1],
-  );
-
-  /// See [SupplierModel.name].
-  static final name = obx.QueryStringProperty<SupplierModel>(
-    _entities[5].properties[2],
-  );
-
-  /// See [SupplierModel.phone1].
-  static final phone1 = obx.QueryStringProperty<SupplierModel>(
-    _entities[5].properties[3],
-  );
-
-  /// See [SupplierModel.phone2].
-  static final phone2 = obx.QueryStringProperty<SupplierModel>(
-    _entities[5].properties[4],
-  );
-
-  /// See [SupplierModel.address].
-  static final address = obx.QueryStringProperty<SupplierModel>(
-    _entities[5].properties[5],
-  );
-
-  /// See [SupplierModel.receivableAmount].
-  static final receivableAmount = obx.QueryDoubleProperty<SupplierModel>(
-    _entities[5].properties[6],
-  );
-
-  /// See [SupplierModel.payableAmount].
-  static final payableAmount = obx.QueryDoubleProperty<SupplierModel>(
-    _entities[5].properties[7],
   );
 }

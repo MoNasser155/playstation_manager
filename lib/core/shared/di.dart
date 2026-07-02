@@ -7,7 +7,6 @@ import '../../features/invoices/di.dart';
 import '../../features/main_view/di.dart';
 import '../../features/profit/di.dart';
 import '../../features/storage/di.dart';
-import '../../features/suppliers/di.dart';
 import '../../features/transactions/di.dart';
 import '../objectbox/objectbox_store.dart';
 import 'cubits/global_theming_cubit.dart';
@@ -18,7 +17,6 @@ initDI() async {
   initAuthDI();
   initHomeDI();
   initMainViewDI();
-  initSuppliersDI();
   initStorageDI();
   initCustomersDI();
   initInvoicesDI();

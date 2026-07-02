@@ -6,21 +6,17 @@ import 'package:local_erp_system/core/widgets/expanded_drop_down.dart';
 import 'package:local_erp_system/features/transactions/presentation/cubits/cubit/add_transaction_cubit.dart';
 
 import '../../../../../core/constants/app_values.dart';
-import '../../../../../core/enums/user_type.dart';
-import '../../../../../core/utils/gaps.dart';
 import '../../../../../core/languages/local_keys.g.dart';
 import '../../../../../core/shared/di.dart';
+import '../../../../../core/utils/gaps.dart';
 import '../../../../../core/utils/navigator_helper.dart';
 import '../../../../../core/utils/validations.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_dialog.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
-import '../../../../../core/widgets/row_taps/custom_taps_row.dart';
 import '../../../../customers/data/models/customer_model.dart';
-import '../../../../suppliers/data/models/supplier_model.dart';
 
 part '_customer_dropdown.dart';
-part '_supplier_dropdown.dart';
 
 class CustomAddTransactionProvider extends StatelessWidget {
   const CustomAddTransactionProvider({super.key});
@@ -41,39 +37,11 @@ class _CustomAddTransaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDialog(
       children: [
-        BlocSelector<AddTransactionCubit, AddTransactionState, int>(
-          selector: (state) {
-            return state.tapIndex;
-          },
-          builder: (context, tapIndex) {
-            final cubit = AddTransactionCubit.get(context);
-            return CustomTapsRow(
-              itemsCount: UserType.values.length,
-              itemsName: UserType.values.map((e) => e.localizedName).toList(),
-              selectedIndex: tapIndex,
-              onTap: cubit.changeTapIndex,
-            );
-          },
-        ),
+        _CustomersDropdown(),
         gapH(20),
         BlocBuilder<AddTransactionCubit, AddTransactionState>(
           buildWhen: (previous, current) {
-            return previous.tapIndex != current.tapIndex;
-          },
-          builder: (context, state) {
-            switch (state.userType) {
-              case UserType.customer:
-                return _CustomersDropdown();
-              case UserType.supplier:
-                return _SuppliersDropdown();
-            }
-          },
-        ),
-        gapH(20),
-        BlocBuilder<AddTransactionCubit, AddTransactionState>(
-          buildWhen: (previous, current) {
-            return previous.supplierStatus != current.supplierStatus ||
-                previous.customerStatus != current.customerStatus;
+            return previous.customerStatus != current.customerStatus;
           },
           builder: (context, state) {
             final cubit = AddTransactionCubit.get(context);
@@ -120,16 +88,13 @@ class _CustomAddTransaction extends StatelessWidget {
             ),
             BlocBuilder<AddTransactionCubit, AddTransactionState>(
               buildWhen: (previous, current) {
-                return previous.customer != current.customer ||
-                    previous.supplier != current.supplier;
+                return previous.customer != current.customer;
               },
               builder: (context, state) {
                 final cubit = AddTransactionCubit.get(context);
                 return Expanded(
                   child: CustomButton(
-                    isLoading:
-                        state.customerStatus.isLoading ||
-                        state.supplierStatus.isLoading,
+                    isLoading: state.customerStatus.isLoading,
                     title: LocaleKeys.save,
                     onTap: () {
                       cubit.createTransaction(context);

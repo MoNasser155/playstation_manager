@@ -20,7 +20,6 @@ import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_dialog.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/expanded_drop_down.dart';
-import '../../../../suppliers/data/models/supplier_model.dart';
 import '../../../data/models/storage_model.dart';
 import '../../cubits/add_storage_item_cubit/add_storage_item_cubit.dart';
 
@@ -29,16 +28,15 @@ part 'item_image_picker.dart';
 part 'prices_fields.dart';
 part 'quantity_and_unit_fields.dart';
 part 'storage_item_dropdown.dart';
-part 'supplier_dropdown.dart';
+
 
 class AddStorageItemProvider extends StatelessWidget {
-  const AddStorageItemProvider({super.key, this.supplier, this.item});
-  final SupplierModel? supplier;
+  const AddStorageItemProvider({super.key, this.item});
   final StorageModel? item;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<AddStorageItemCubit>()..init(supplier,item),
+      create: (context) => sl<AddStorageItemCubit>()..init(item),
       child: CustomAddNewStorageItem(),
     );
   }
@@ -109,22 +107,7 @@ class _AddNewStorageItemFields extends StatelessWidget {
               validate: Validations.validateEmpty,
             ),
             gapH(12),
-            Row(
-              spacing: AppSpacing.h8,
-              children: [
-                Expanded(flex: 2, child: _SupplierDropdown(cubit: cubit)),
-                Expanded(
-                  child: CustomTextField(
-                    hint: LocaleKeys.paidAmount,
-                    controller: cubit.supplierCashAmountController,
-                    prefix: Icon(Icons.attach_money),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+
             gapH(20),
             _ItemImagePicker(cubit: cubit),
             gapH(20),
@@ -169,22 +152,7 @@ class _UseExistingStorageItemFields extends StatelessWidget {
             gapH(24),
             _StorageItemDropdown(cubit: cubit),
             gapH(12),
-            Row(
-              spacing: AppSpacing.h8,
-              children: [
-                Expanded(flex: 2, child: _SupplierDropdown(cubit: cubit)),
-                Expanded(
-                  child: CustomTextField(
-                    hint: LocaleKeys.paidAmount,
-                    controller: cubit.supplierCashAmountController,
-                    prefix: Icon(Icons.attach_money),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+
             gapH(12),
             _DisabledWrapper(
               isDisabled: !itemSelected,

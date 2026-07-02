@@ -15,8 +15,6 @@ import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../../core/shared/di.dart';
 import '../../../../../core/utils/navigator_helper.dart';
 import '../../../../../core/widgets/custom_snack_bar.dart';
-import '../../../../suppliers/data/models/supplier_model.dart';
-import '../../../../suppliers/domain/usecases/get_all_suppliers_usecase.dart';
 import '../../../data/models/storage_model.dart';
 import '../../../domain/usecases/add_storage_item_usecase.dart';
 import '../../../domain/usecases/get_all_storage_items_usecase.dart';
@@ -29,7 +27,6 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
   static AddStorageItemCubit get(context) =>
       BlocProvider.of<AddStorageItemCubit>(context);
 
-  final _getAllSuppliersUsecase = sl<GetAllSuppliersUseCase>();
   final _addStorageItemUseCase = sl<AddStorageItemUseCase>();
   final _getAllStorageItemsUseCase = sl<GetAllStorageItemsUseCase>();
 
@@ -38,30 +35,19 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
   final buyPriceController = TextEditingController();
   final sellPriceController = TextEditingController();
   final minAmountController = TextEditingController();
-  final supplierCashAmountController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  void init(SupplierModel? supplier, StorageModel? item) {
-    final isFromSupplierDetails = supplier != null;
+  void init(StorageModel? item) {
     final isFromStorageDetails = item != null;
     safeEmit(
       state.copyWith(
-        status: StateStatus.loading,
-        selectedSupplier: supplier,
-        supplierLocked: isFromSupplierDetails,
         selectedStorageItem: item,
         itemLocked: isFromStorageDetails,
-        selectedTabIndex:
-            isFromSupplierDetails
-                ? 1
-                : isFromStorageDetails
-                ? 1
-                : 0,
+        selectedTabIndex: isFromStorageDetails ? 1 : 0,
       ),
     );
-    _getSuppliers();
-    if (isFromSupplierDetails || isFromStorageDetails) {
+    if (isFromStorageDetails) {
       _getStorageItems();
     }
   }
@@ -87,25 +73,6 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
         ),
       );
     }
-  }
-
-  Future<void> _getSuppliers() async {
-    final result = await _getAllSuppliersUsecase();
-    result.fold(
-      (failure) {
-        safeEmit(
-          state.copyWith(
-            status: StateStatus.failure,
-            errMessage: failure.message,
-          ),
-        );
-      },
-      (suppliers) {
-        safeEmit(
-          state.copyWith(status: StateStatus.success, suppliers: suppliers),
-        );
-      },
-    );
   }
 
   Future<void> _getStorageItems() async {
@@ -135,19 +102,6 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
     safeEmit(state.copyWith(selectedStorageItem: storageItem));
   }
 
-  void setSelectedSupplier(SupplierModel? supplier) {
-    safeEmit(
-      state.copyWith(
-        selectedSupplier: supplier,
-        storageItems: [],
-        selectedStorageItem: null,
-      ),
-    );
-    if (state.selectedTabIndex == 1) {
-      _getStorageItems();
-    }
-  }
-
   Future pickImage() async {
     try {
       FilePickerResult? result = await FilePicker.pickFiles(
@@ -173,26 +127,12 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
 
   StorageModel _getStorageModel(String itemImage) {
     final StorageModel model;
-    final double newPaidAmount =
-        supplierCashAmountController.text.isEmpty
-            ? 0
-            : double.parse(supplierCashAmountController.text);
     if (state.selectedTabIndex == 1 && state.selectedStorageItem != null) {
       final existing = state.selectedStorageItem!;
-
-      double totalSupplierAmount =
-          state.selectedSupplier!.netAmount +
-          (double.parse(buyPriceController.text) *
-              double.parse(quantityController.text)) -
-          newPaidAmount;
       model = existing.copyWith(
-        paidAmount: newPaidAmount,
         quantity: double.parse(quantityController.text),
         buyPrice: double.parse(buyPriceController.text),
         sellPrice: double.parse(sellPriceController.text),
-        supplier: state.selectedSupplier!.copyWith(
-          payableAmount: totalSupplierAmount,
-        ),
       );
     } else {
       model = StorageModel.create(
@@ -204,9 +144,8 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
         buyPrice: double.parse(buyPriceController.text),
         sellPrice: double.parse(sellPriceController.text),
         minAmount: double.parse(minAmountController.text),
-        paidAmount: newPaidAmount,
+        paidAmount: 0,
       );
-      model.supplier.target = state.selectedSupplier;
     }
 
     return model;
@@ -214,10 +153,6 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
 
   Future<void> addStorageItem(BuildContext context) async {
     if (!formKey.currentState!.validate()) return;
-    if (state.selectedSupplier == null) {
-      CustomSnackBar.top(context: context, msg: LocaleKeys.selectSupplier);
-      return;
-    }
     if (state.selectedTabIndex == 0) {
       if (state.selectedUnit == null) {
         CustomSnackBar.top(context: context, msg: LocaleKeys.selectUnit);
@@ -233,7 +168,9 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
     safeEmit(state.copyWith(status: StateStatus.loading));
 
     String finalImagePath = '';
-    if (state.selectedTabIndex == 0 && state.itemImagePath != null && state.itemImagePath!.isNotEmpty) {
+    if (state.selectedTabIndex == 0 &&
+        state.itemImagePath != null &&
+        state.itemImagePath!.isNotEmpty) {
       try {
         final appDir = await getApplicationDocumentsDirectory();
         final directory = Directory('${appDir.path}/StorageItem_images');
@@ -241,7 +178,10 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
           await directory.create(recursive: true);
         }
         final extension = path.extension(state.itemImagePath!);
-        final sanitizedName = nameController.text.replaceAll(RegExp(r'[\\/:*?"<>|]'), '_');
+        final sanitizedName = nameController.text.replaceAll(
+          RegExp(r'[\\/:*?"<>|]'),
+          '_',
+        );
         final targetFileName = '$sanitizedName$extension';
         final savedImagePath = path.join(directory.path, targetFileName);
         final normalizedPath = savedImagePath.replaceAll('\\', '/');
@@ -256,11 +196,14 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
       } catch (e) {
         // ignore or log
       }
-    } else if (state.selectedTabIndex == 1 && state.selectedStorageItem != null) {
+    } else if (state.selectedTabIndex == 1 &&
+        state.selectedStorageItem != null) {
       finalImagePath = state.selectedStorageItem!.itemImage;
     }
 
-    final result = await _addStorageItemUseCase(_getStorageModel(finalImagePath));
+    final result = await _addStorageItemUseCase(
+      _getStorageModel(finalImagePath),
+    );
     result.fold(
       (failure) {
         safeEmit(
@@ -284,7 +227,6 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
     buyPriceController.clear();
     sellPriceController.clear();
     minAmountController.clear();
-    supplierCashAmountController.clear();
   }
 
   @override
@@ -294,7 +236,6 @@ class AddStorageItemCubit extends BaseCubit<AddStorageItemState> {
     buyPriceController.dispose();
     sellPriceController.dispose();
     minAmountController.dispose();
-    supplierCashAmountController.dispose();
     formKey.currentState?.reset();
     return super.close();
   }

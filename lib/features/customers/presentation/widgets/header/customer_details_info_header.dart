@@ -6,7 +6,6 @@ import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
 import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/languages/local_keys.g.dart';
-import '../../../../../core/services/pdf-transactions/save_pdf.dart';
 import '../../../../../core/shared/di.dart';
 import '../../../../../core/utils/gaps.dart';
 import '../../../../../core/utils/navigator_helper.dart';

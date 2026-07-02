@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/core/extentions/date_extensions.dart';
 import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
 import '../../../../core/constants/app_values.dart';
 import '../../../../core/enums/user_type.dart';
 import '../../../../core/languages/local_keys.g.dart';
-import '../../../../core/services/pdf-transactions/save_pdf.dart';
 import '../../../../core/utils/gaps.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_sliver_appbar.dart';
@@ -84,36 +82,6 @@ class CustomTransactionsAppbar extends StatelessWidget {
                                 }
                               },
                             ),
-                          ),
-                          gapWFix(12),
-                          BlocBuilder<TransactionsCubit, TransactionsState>(
-                            buildWhen: (previous, current) {
-                              return previous.transactions !=
-                                  current.transactions;
-                            },
-                            builder: (context, state) {
-                              return Expanded(
-                                child: CustomButton(
-                                  buttonHeight: 40,
-                                  title: LocaleKeys.exportPdf,
-                                  onTap: () {
-                                    showDialog<String>(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder:
-                                          (_) => SavePdfDialog(
-                                            transactions: state.transactions,
-                                            initialName:
-                                                DateTime.now()
-                                                    .shortenFormattedPdfDate,
-                                            totalAmount: state.totalAmount
-                                                .toStringAsFixed(2),
-                                          ),
-                                    );
-                                  },
-                                ),
-                              );
-                            },
                           ),
                         ],
                       ),

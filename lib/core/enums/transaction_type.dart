@@ -2,9 +2,7 @@ import '../languages/local_keys.g.dart';
 
 enum TransactionType { 
   invoiceProfit,
-  customerPayment,
-  supplierPurchase,
-  supplierPayment;
+  customerPayment;
 
   String get localizedName {
     switch (this) {
@@ -12,10 +10,6 @@ enum TransactionType {
         return LocaleKeys.invoiceProfit;
       case TransactionType.customerPayment:
         return LocaleKeys.customerPayment;
-      case TransactionType.supplierPurchase:
-        return LocaleKeys.supplierPurchase;
-      case TransactionType.supplierPayment:
-        return LocaleKeys.supplierPayment;
     }
   }
 }

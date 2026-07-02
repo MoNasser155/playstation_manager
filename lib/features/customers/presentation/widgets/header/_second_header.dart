@@ -91,25 +91,7 @@ class _SecondCustomerDetailsHeader extends StatelessWidget {
                 },
               ),
             ),
-            gapW(12),
-            Expanded(
-              child: CustomButton(
-                title: LocaleKeys.exportPdf,
-                onTap: () {
-                  showDialog<String>(
-                    context: context,
-                    barrierDismissible: false,
-                    builder:
-                        (_) => SavePdfDialog(
-                          transactions: state.transactions,
-                          customer: state.customerDetails.customer,
-                          totalAmount:
-                              state.customerDetails.customer.simpledAmount,
-                        ),
-                  );
-                },
-              ),
-            ),
+           
           ],
         );
       },

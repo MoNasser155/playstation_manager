@@ -1,7 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
 import '../../../../core/enums/storage_item_type.dart';
-import '../../../suppliers/data/models/supplier_model.dart';
 
 @Entity()
 class StorageModel {
@@ -21,7 +20,7 @@ class StorageModel {
   @Transient()
   StorageItemType get type => StorageItemType.values[typeIndex];
 
-  final supplier = ToOne<SupplierModel>();
+
 
   StorageModel({
     this.id,
@@ -71,7 +70,6 @@ class StorageModel {
     double? quantity,
     double? buyPrice,
     double? sellPrice,
-    SupplierModel? supplier,
     double? minAmount,
     double? paidAmount,
   }) {
@@ -87,7 +85,6 @@ class StorageModel {
       minAmount: minAmount ?? this.minAmount,
       paidAmount: paidAmount ?? this.paidAmount,
     );
-    copy.supplier.target = supplier ?? this.supplier.target;
     return copy;
   }
 

@@ -5,15 +5,6 @@ abstract class AppException implements Exception {
   const AppException(this.messageKey);
 }
 
-class SupplierHasBalanceException extends AppException {
-  SupplierHasBalanceException()
-    : super(LocaleKeys.cannotDeleteSupplierWithBalance);
-}
-
-class SupplierNotFoundException extends AppException {
-  SupplierNotFoundException() : super(LocaleKeys.errorGettingSupplierDetails);
-}
-
 class CustomerHasBalanceException extends AppException {
   CustomerHasBalanceException()
     : super(LocaleKeys.cannotDeleteCustomerWithBalance);

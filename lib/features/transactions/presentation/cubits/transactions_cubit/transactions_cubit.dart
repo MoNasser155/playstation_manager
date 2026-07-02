@@ -129,9 +129,6 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
       case 1:
         _getTransactionsByType(UserType.customer);
         break;
-      case 2:
-        _getTransactionsByType(UserType.supplier);
-        break;
       default:
         break;
     }
