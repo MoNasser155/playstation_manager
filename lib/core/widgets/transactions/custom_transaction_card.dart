@@ -60,34 +60,7 @@ class CustomTransactionCardWidget extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              transaction.beginningBalance.toString(),
-              style: context.textTheme.titleMedium,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              transaction.paymentAmount.toString(),
-              style: context.textTheme.titleMedium,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              transaction.paidInvoiceAmount.toString(),
-              style: context.textTheme.titleMedium,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              transaction.endBalance.toString(),
+              transaction.invoiceProfit?.toStringAsFixed(2) ?? '0.00',
               style: context.textTheme.titleMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

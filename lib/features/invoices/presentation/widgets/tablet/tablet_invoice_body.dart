@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/gaps.dart';
-import '../desktop/invoice_save_button.dart';
+import '../invoice_save_button.dart';
 import '../invoice_items_list/invoice_item_add_button.dart';
 import '../invoice_items_list/invoice_items_header_row.dart';
 import '../invoice_items_list/invoice_items_list.dart';

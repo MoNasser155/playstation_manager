@@ -119,27 +119,9 @@ final _entities = <obx_int.ModelEntity>[
         flags: 0,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(4, 8575457510512860908),
-        name: 'cashPaid',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(5, 2368253504708199285),
-        name: 'laterPaid',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
         id: const obx_int.IdUid(6, 4444633202267406207),
         name: 'invoiceDate',
         type: 10,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(7, 6233315288929262330),
-        name: 'paymentIndex',
-        type: 6,
         flags: 0,
       ),
       obx_int.ModelProperty(
@@ -242,18 +224,6 @@ final _entities = <obx_int.ModelEntity>[
         indexId: const obx_int.IdUid(11, 2912864994017705877),
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(3, 4201470090141938424),
-        name: 'userUuid',
-        type: 9,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(4, 2909643137126638181),
-        name: 'paymentAmount',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
         id: const obx_int.IdUid(5, 2515003860475023628),
         name: 'createdAt',
         type: 10,
@@ -272,26 +242,8 @@ final _entities = <obx_int.ModelEntity>[
         flags: 0,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(8, 2936510437728316714),
-        name: 'beginningBalance',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(9, 7618314127658819307),
-        name: 'endBalance',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
         id: const obx_int.IdUid(10, 967054690826890390),
         name: 'invoiceProfit',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(11, 1830679829529419815),
-        name: 'paidInvoiceAmount',
         type: 8,
         flags: 0,
       ),
@@ -299,12 +251,6 @@ final _entities = <obx_int.ModelEntity>[
         id: const obx_int.IdUid(12, 417078565279352849),
         name: 'userType',
         type: 6,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(13, 7401941274657716944),
-        name: 'userName',
-        type: 9,
         flags: 0,
       ),
       obx_int.ModelProperty(
@@ -464,6 +410,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
       9027356387153805910,
       137311694524982277,
       748095765277656098,
+      8575457510512860908,
+      2368253504708199285,
+      6233315288929262330,
+      4201470090141938424,
+      2909643137126638181,
+      2936510437728316714,
+      7618314127658819307,
+      1830679829529419815,
+      7401941274657716944,
     ],
     retiredRelationUids: const [],
     modelVersion: 5,
@@ -583,10 +538,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         fbb.addInt64(0, object.id ?? 0);
         fbb.addOffset(1, uuidOffset);
         fbb.addFloat64(2, object.totalInvoice);
-        fbb.addFloat64(3, object.cashPaid);
-        fbb.addFloat64(4, object.laterPaid);
         fbb.addInt64(5, object.invoiceDate.millisecondsSinceEpoch);
-        fbb.addInt64(6, object.paymentIndex);
         fbb.addBool(8, object.isSession);
         fbb.addInt64(9, object.sessionStartDate?.millisecondsSinceEpoch);
         fbb.addFloat64(10, object.hourlyRate);
@@ -616,26 +568,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
           8,
           0,
         );
-        final cashPaidParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          10,
-          0,
-        );
-        final laterPaidParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          12,
-          0,
-        );
         final invoiceDateParam = DateTime.fromMillisecondsSinceEpoch(
           const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0),
-        );
-        final paymentIndexParam = const fb.Int64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          16,
-          0,
         );
         final isSessionParam = const fb.BoolReader().vTableGet(
           buffer,
@@ -656,10 +590,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           id: idParam,
           uuid: uuidParam,
           totalInvoice: totalInvoiceParam,
-          cashPaid: cashPaidParam,
-          laterPaid: laterPaidParam,
           invoiceDate: invoiceDateParam,
-          paymentIndex: paymentIndexParam,
           isSession: isSessionParam,
           sessionStartDate: sessionStartDateParam,
           hourlyRate: hourlyRateParam,
@@ -749,30 +680,20 @@ obx_int.ModelDefinition getObjectBoxModel() {
       },
       objectToFB: (TransactionModel object, fb.Builder fbb) {
         final uuidOffset = fbb.writeString(object.uuid);
-        final userUuidOffset = fbb.writeString(object.userUuid);
         final notesOffset = object.notes == null
             ? null
             : fbb.writeString(object.notes!);
-        final userNameOffset = object.userName == null
-            ? null
-            : fbb.writeString(object.userName!);
         final storageItemUuidOffset = object.storageItemUuid == null
             ? null
             : fbb.writeString(object.storageItemUuid!);
         fbb.startTable(15);
         fbb.addInt64(0, object.id ?? 0);
         fbb.addOffset(1, uuidOffset);
-        fbb.addOffset(2, userUuidOffset);
-        fbb.addFloat64(3, object.paymentAmount);
         fbb.addInt64(4, object.createdAt.millisecondsSinceEpoch);
         fbb.addOffset(5, notesOffset);
         fbb.addInt64(6, object.transactionType);
-        fbb.addFloat64(7, object.beginningBalance);
-        fbb.addFloat64(8, object.endBalance);
         fbb.addFloat64(9, object.invoiceProfit);
-        fbb.addFloat64(10, object.paidInvoiceAmount);
         fbb.addInt64(11, object.userType);
-        fbb.addOffset(12, userNameOffset);
         fbb.addOffset(13, storageItemUuidOffset);
         fbb.finish(fbb.endTable());
         return object.id ?? 0;
@@ -788,27 +709,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final uuidParam = const fb.StringReader(
           asciiOptimization: true,
         ).vTableGet(buffer, rootOffset, 6, '');
-        final userUuidParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGet(buffer, rootOffset, 8, '');
-        final userNameParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGetNullable(buffer, rootOffset, 28);
-        final beginningBalanceParam = const fb.Float64Reader()
-            .vTableGetNullable(buffer, rootOffset, 18);
-        final paymentAmountParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          10,
-          0,
-        );
-        final paidInvoiceAmountParam = const fb.Float64Reader()
-            .vTableGetNullable(buffer, rootOffset, 24);
-        final endBalanceParam = const fb.Float64Reader().vTableGetNullable(
-          buffer,
-          rootOffset,
-          20,
-        );
         final invoiceProfitParam = const fb.Float64Reader().vTableGetNullable(
           buffer,
           rootOffset,
@@ -838,12 +738,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final object = TransactionModel(
           id: idParam,
           uuid: uuidParam,
-          userUuid: userUuidParam,
-          userName: userNameParam,
-          beginningBalance: beginningBalanceParam,
-          paymentAmount: paymentAmountParam,
-          paidInvoiceAmount: paidInvoiceAmountParam,
-          endBalance: endBalanceParam,
           invoiceProfit: invoiceProfitParam,
           transactionType: transactionTypeParam,
           userType: userTypeParam,
@@ -995,44 +889,29 @@ class CreateInvoiceModel_ {
     _entities[1].properties[2],
   );
 
-  /// See [CreateInvoiceModel.cashPaid].
-  static final cashPaid = obx.QueryDoubleProperty<CreateInvoiceModel>(
-    _entities[1].properties[3],
-  );
-
-  /// See [CreateInvoiceModel.laterPaid].
-  static final laterPaid = obx.QueryDoubleProperty<CreateInvoiceModel>(
-    _entities[1].properties[4],
-  );
-
   /// See [CreateInvoiceModel.invoiceDate].
   static final invoiceDate = obx.QueryDateProperty<CreateInvoiceModel>(
-    _entities[1].properties[5],
-  );
-
-  /// See [CreateInvoiceModel.paymentIndex].
-  static final paymentIndex = obx.QueryIntegerProperty<CreateInvoiceModel>(
-    _entities[1].properties[6],
+    _entities[1].properties[3],
   );
 
   /// See [CreateInvoiceModel.isSession].
   static final isSession = obx.QueryBooleanProperty<CreateInvoiceModel>(
-    _entities[1].properties[7],
+    _entities[1].properties[4],
   );
 
   /// See [CreateInvoiceModel.sessionStartDate].
   static final sessionStartDate = obx.QueryDateProperty<CreateInvoiceModel>(
-    _entities[1].properties[8],
+    _entities[1].properties[5],
   );
 
   /// See [CreateInvoiceModel.hourlyRate].
   static final hourlyRate = obx.QueryDoubleProperty<CreateInvoiceModel>(
-    _entities[1].properties[9],
+    _entities[1].properties[6],
   );
 
   /// See [CreateInvoiceModel.device].
   static final device = obx.QueryRelationToOne<CreateInvoiceModel, DeviceModel>(
-    _entities[1].properties[10],
+    _entities[1].properties[7],
   );
 
   /// see [CreateInvoiceModel.items]
@@ -1082,64 +961,34 @@ class TransactionModel_ {
     _entities[3].properties[1],
   );
 
-  /// See [TransactionModel.userUuid].
-  static final userUuid = obx.QueryStringProperty<TransactionModel>(
-    _entities[3].properties[2],
-  );
-
-  /// See [TransactionModel.paymentAmount].
-  static final paymentAmount = obx.QueryDoubleProperty<TransactionModel>(
-    _entities[3].properties[3],
-  );
-
   /// See [TransactionModel.createdAt].
   static final createdAt = obx.QueryDateProperty<TransactionModel>(
-    _entities[3].properties[4],
+    _entities[3].properties[2],
   );
 
   /// See [TransactionModel.notes].
   static final notes = obx.QueryStringProperty<TransactionModel>(
-    _entities[3].properties[5],
+    _entities[3].properties[3],
   );
 
   /// See [TransactionModel.transactionType].
   static final transactionType = obx.QueryIntegerProperty<TransactionModel>(
-    _entities[3].properties[6],
-  );
-
-  /// See [TransactionModel.beginningBalance].
-  static final beginningBalance = obx.QueryDoubleProperty<TransactionModel>(
-    _entities[3].properties[7],
-  );
-
-  /// See [TransactionModel.endBalance].
-  static final endBalance = obx.QueryDoubleProperty<TransactionModel>(
-    _entities[3].properties[8],
+    _entities[3].properties[4],
   );
 
   /// See [TransactionModel.invoiceProfit].
   static final invoiceProfit = obx.QueryDoubleProperty<TransactionModel>(
-    _entities[3].properties[9],
-  );
-
-  /// See [TransactionModel.paidInvoiceAmount].
-  static final paidInvoiceAmount = obx.QueryDoubleProperty<TransactionModel>(
-    _entities[3].properties[10],
+    _entities[3].properties[5],
   );
 
   /// See [TransactionModel.userType].
   static final userType = obx.QueryIntegerProperty<TransactionModel>(
-    _entities[3].properties[11],
-  );
-
-  /// See [TransactionModel.userName].
-  static final userName = obx.QueryStringProperty<TransactionModel>(
-    _entities[3].properties[12],
+    _entities[3].properties[6],
   );
 
   /// See [TransactionModel.storageItemUuid].
   static final storageItemUuid = obx.QueryStringProperty<TransactionModel>(
-    _entities[3].properties[13],
+    _entities[3].properties[7],
   );
 }
 

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:local_erp_system/features/devices/data/models/device_model.dart';
 
 import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/app_constants.dart';
@@ -12,7 +13,6 @@ import '../../../../../core/services/backup_service.dart';
 import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../devices/presentation/screens/devices_screen.dart';
 import '../../../../home/presentation/screens/home_screen.dart';
-import '../../../../invoices/data/models/create_invoice_model.dart';
 import '../../../../invoices/presentation/screens/invoice_screen.dart';
 import '../../../../profit/presentation/screens/profit_screen.dart';
 import '../../../../storage/presentation/screens/storage_screen.dart';
@@ -57,7 +57,10 @@ class MainViewCubit extends BaseCubit<MainViewState> {
   List<Widget> drawerViews(List<Object>? data) => [
     HomeScreen(),
     InvoiceScreen(
-      invoice: data?.length == 2 ? data![1] as CreateInvoiceModel? : null,
+      device:
+          data?.isNotEmpty == true && data![0] is DeviceModel
+              ? data[0] as DeviceModel?
+              : null,
     ),
     StorageScreen(),
     DevicesScreen(),

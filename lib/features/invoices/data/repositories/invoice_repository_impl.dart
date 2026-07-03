@@ -35,24 +35,7 @@ class InvoiceRepositoryImpl with ErrorHandler implements InvoiceRepository {
     );
   }
 
-  @override
-  Future<Either<Failure, int>> refundInvoice({
-    required String invoiceUuid,
-    required List<ItemsInvoice> adjustedItems,
-    required double newTotal,
-    required double newCashPaid,
-    required double newLaterPaid,
-  }) async {
-    return wrapBoxOperationSync(
-      () => _invoiceLocalDataSource.refundInvoice(
-        invoiceUuid: invoiceUuid,
-        adjustedItems: adjustedItems,
-        newTotal: newTotal,
-        newCashPaid: newCashPaid,
-        newLaterPaid: newLaterPaid,
-      ),
-    );
-  }
+
 
   @override
   Future<Either<Failure, List<CreateInvoiceModel>>> getActiveSessions() async {

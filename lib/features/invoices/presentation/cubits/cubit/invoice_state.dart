@@ -3,7 +3,6 @@ part of 'invoice_cubit.dart';
 class InvoiceState extends Equatable {
   final StateStatus status;
   final String? errMessage;
-  final PaymentType paymentType;
   final GetInvoiceModels invoiceModels;
   final StorageModel? selectedStorageItem;
   final String invoiceUuid;
@@ -11,7 +10,6 @@ class InvoiceState extends Equatable {
   final List<ItemsInvoice> invoiceItems;
   final double totalInvoice;
   final double currentInputTotal;
-  final double cashPaid; 
 
   // Devices & Sessions fields
   final List<DeviceModel> devices;
@@ -24,7 +22,6 @@ class InvoiceState extends Equatable {
   const InvoiceState({
     required this.status,
     this.errMessage,
-    required this.paymentType,
     required this.invoiceModels,
     this.selectedStorageItem,
     required this.invoiceUuid,
@@ -32,7 +29,6 @@ class InvoiceState extends Equatable {
     required this.invoiceItems,
     required this.totalInvoice,
     required this.currentInputTotal,
-    required this.cashPaid,
     required this.devices,
     this.selectedDevice,
     this.activeSessionInvoice,
@@ -44,7 +40,6 @@ class InvoiceState extends Equatable {
   factory InvoiceState.initial() {
     return InvoiceState(
       status: StateStatus.initial,
-      paymentType: PaymentType.cash,
       invoiceModels: GetInvoiceModels(
         storageItems: [],
         warnings: [],
@@ -55,7 +50,6 @@ class InvoiceState extends Equatable {
       invoiceItems: [],
       totalInvoice: 0,
       currentInputTotal: 0,
-      cashPaid: 0,
       devices: const [],
       selectedDevice: null,
       activeSessionInvoice: null,
@@ -65,21 +59,16 @@ class InvoiceState extends Equatable {
     );
   }
 
-  double get laterPaid => (totalInvoice - cashPaid).clamp(0, double.infinity);
-
   bool get canAddItem => selectedStorageItem != null && currentInputTotal > 0;
 
   bool get canSaveInvoice =>
       !isSessionActive &&
       invoiceItems.isNotEmpty &&
-      totalInvoice > 0 &&
-      (paymentType == PaymentType.cash ||
-          (paymentType == PaymentType.later && cashPaid >= 0));
+      totalInvoice > 0;
 
   InvoiceState copyWith({
     StateStatus? status,
     String? errMessage,
-    PaymentType? paymentType,
     GetInvoiceModels? invoiceModels,
     StorageModel? selectedStorageItem,
     bool clearSelectedStorageItem = false,
@@ -88,7 +77,6 @@ class InvoiceState extends Equatable {
     List<ItemsInvoice>? invoiceItems,
     double? totalInvoice,
     double? currentInputTotal,
-    double? cashPaid,
     List<DeviceModel>? devices,
     DeviceModel? selectedDevice,
     bool clearSelectedDevice = false,
@@ -101,7 +89,6 @@ class InvoiceState extends Equatable {
     return InvoiceState(
       status: status ?? this.status,
       errMessage: errMessage ?? this.errMessage,
-      paymentType: paymentType ?? this.paymentType,
       invoiceModels: invoiceModels ?? this.invoiceModels,
       selectedStorageItem:
           clearSelectedStorageItem
@@ -112,7 +99,6 @@ class InvoiceState extends Equatable {
       invoiceItems: invoiceItems ?? this.invoiceItems,
       totalInvoice: totalInvoice ?? this.totalInvoice,
       currentInputTotal: currentInputTotal ?? this.currentInputTotal,
-      cashPaid: cashPaid ?? this.cashPaid,
       devices: devices ?? this.devices,
       selectedDevice: clearSelectedDevice ? null : selectedDevice ?? this.selectedDevice,
       activeSessionInvoice: clearActiveSessionInvoice ? null : activeSessionInvoice ?? this.activeSessionInvoice,
@@ -126,7 +112,6 @@ class InvoiceState extends Equatable {
   List<Object?> get props => [
     status,
     errMessage,
-    paymentType,
     invoiceModels,
     selectedStorageItem,
     invoiceUuid,
@@ -134,7 +119,6 @@ class InvoiceState extends Equatable {
     invoiceItems,
     totalInvoice,
     currentInputTotal,
-    cashPaid,
     devices,
     selectedDevice,
     activeSessionInvoice,
