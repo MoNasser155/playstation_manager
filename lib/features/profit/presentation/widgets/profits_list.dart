@@ -100,7 +100,7 @@ class _CustomProfitCardWidget extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              transaction.invoiceProfit.toString(),
+              transaction.sessionProfit.toString(),
               style: context.textTheme.titleMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

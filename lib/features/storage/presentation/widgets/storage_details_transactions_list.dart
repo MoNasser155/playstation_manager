@@ -102,7 +102,7 @@ class _CustomTransactionCardWidget extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              transaction.invoiceProfit?.toStringAsFixed(2) ?? '0.00',
+              transaction.sessionProfit?.toStringAsFixed(2) ?? '0.00',
               style: context.textTheme.titleMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

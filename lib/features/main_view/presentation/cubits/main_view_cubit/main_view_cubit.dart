@@ -13,7 +13,7 @@ import '../../../../../core/services/backup_service.dart';
 import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../devices/presentation/screens/devices_screen.dart';
 import '../../../../home/presentation/screens/home_screen.dart';
-import '../../../../invoices/presentation/screens/invoice_screen.dart';
+import '../../../../sessions/presentation/screens/session_screen.dart';
 import '../../../../profit/presentation/screens/profit_screen.dart';
 import '../../../../storage/presentation/screens/storage_screen.dart';
 import '../../../../transactions/presentation/screens/transactions_screen.dart';
@@ -37,7 +37,7 @@ class MainViewCubit extends BaseCubit<MainViewState> {
 
   List<TapsModel> get taps => [
     TapsModel(title: LocaleKeys.home, icon: VectorIcons.home),
-    TapsModel(title: LocaleKeys.invoices, icon: VectorIcons.receipt),
+    TapsModel(title: LocaleKeys.sessions, icon: VectorIcons.receipt),
     TapsModel(title: LocaleKeys.devices, icon: VectorIcons.gamepad),
     TapsModel(title: LocaleKeys.inventory, icon: VectorIcons.inventory),
     TapsModel(title: LocaleKeys.transactions, icon: VectorIcons.transactions),
@@ -56,7 +56,7 @@ class MainViewCubit extends BaseCubit<MainViewState> {
 
   List<Widget> drawerViews(List<Object>? data) => [
     HomeScreen(),
-    InvoiceScreen(
+    SessionScreen(
       device:
           data?.isNotEmpty == true && data![0] is DeviceModel
               ? data[0] as DeviceModel?

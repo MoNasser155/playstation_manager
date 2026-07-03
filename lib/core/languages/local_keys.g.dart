@@ -223,8 +223,8 @@ abstract class LocaleKeys {
   static const String _deleteCustomerExp = 'delete_customer_exp';
   static String get deleteCustomerExp => _deleteCustomerExp.tr();
 
-  static const String _invoices = 'invoices';
-  static String get invoices => _invoices.tr();
+  static const String _sessions = 'sessions';
+  static String get sessions => _sessions.tr();
 
   static const String _cash = 'cash';
   static String get cash => _cash.tr();
@@ -253,8 +253,8 @@ abstract class LocaleKeys {
   static const String _numberOfItems = 'number_of_items';
   static String get numberOfItems => _numberOfItems.tr();
 
-  static const String _noInvoiceModelsFound = 'no_invoice_models_found';
-  static String get noInvoiceModelsFound => _noInvoiceModelsFound.tr();
+  static const String _noSessionModelsFound = 'no_session_models_found';
+  static String get noSessionModelsFound => _noSessionModelsFound.tr();
 
   static const String _quantityLimitExceeded = 'quantity_limit_exceeded';
   static String get quantityLimitExceeded => _quantityLimitExceeded.tr();
@@ -262,8 +262,8 @@ abstract class LocaleKeys {
   static const String _date = 'date';
   static String get date => _date.tr();
 
-  static const String _invoiceId = 'invoice_id';
-  static String get invoiceId => _invoiceId.tr();
+  static const String _sessionId = 'session_id';
+  static String get sessionId => _sessionId.tr();
 
   static const String _paidNow = 'paid_now';
   static String get paidNow => _paidNow.tr();
@@ -271,14 +271,14 @@ abstract class LocaleKeys {
   static const String _laterAmount = 'later_amount';
   static String get laterAmount => _laterAmount.tr();
 
-  static const String _invoiceSaved = 'invoice_saved';
-  static String get invoiceSaved => _invoiceSaved.tr();
+  static const String _sessionSaved = 'session_saved';
+  static String get sessionSaved => _sessionSaved.tr();
 
-  static const String _saveInvoice = 'save_invoice';
-  static String get saveInvoice => _saveInvoice.tr();
+  static const String _saveSession = 'save_session';
+  static String get saveSession => _saveSession.tr();
 
-  static const String _createInvoice = 'create_invoice';
-  static String get createInvoice => _createInvoice.tr();
+  static const String _createSession = 'create_session';
+  static String get createSession => _createSession.tr();
 
   static const String _toPay = 'to_pay';
   static String get toPay => _toPay.tr();
@@ -286,8 +286,8 @@ abstract class LocaleKeys {
   static const String _toRecieve = 'to_recieve';
   static String get toRecieve => _toRecieve.tr();
 
-  static const String _invoiceProfit = 'invoice_profit';
-  static String get invoiceProfit => _invoiceProfit.tr();
+  static const String _sessionProfit = 'session_profit';
+  static String get sessionProfit => _sessionProfit.tr();
 
   static const String _customerPayment = 'customer_payment';
   static String get customerPayment => _customerPayment.tr();
@@ -355,8 +355,8 @@ abstract class LocaleKeys {
   static const String _note = 'note';
   static String get note => _note.tr();
 
-  static const String _noInvoicesFound = 'no_invoices_found';
-  static String get noInvoicesFound => _noInvoicesFound.tr();
+  static const String _noSessionsFound = 'no_sessions_found';
+  static String get noSessionsFound => _noSessionsFound.tr();
 
   static const String _before = 'before';
   static String get before => _before.tr();
@@ -493,14 +493,14 @@ abstract class LocaleKeys {
   static const String _december = 'december';
   static String get december => _december.tr();
 
-  static const String _refundInvoice = 'refund_invoice';
-  static String get refundInvoice => _refundInvoice.tr();
+  static const String _refundSession = 'refund_session';
+  static String get refundSession => _refundSession.tr();
 
-  static const String _selectInvoice = 'select_invoice';
-  static String get selectInvoice => _selectInvoice.tr();
+  static const String _selectSession = 'select_session';
+  static String get selectSession => _selectSession.tr();
 
-  static const String _noInvoicesForCustomer = 'no_invoices_for_customer';
-  static String get noInvoicesForCustomer => _noInvoicesForCustomer.tr();
+  static const String _noSessionsForCustomer = 'no_sessions_for_customer';
+  static String get noSessionsForCustomer => _noSessionsForCustomer.tr();
 
   static const String _originalQuantity = 'original_quantity';
   static String get originalQuantity => _originalQuantity.tr();
@@ -526,8 +526,8 @@ abstract class LocaleKeys {
   static const String _paid = 'paid';
   static String get paid => _paid.tr();
 
-  static const String _errorGettingInvoiceDetails = 'error_getting_invoice_details';
-  static String get errorGettingInvoiceDetails => _errorGettingInvoiceDetails.tr();
+  static const String _errorGettingSessionDetails = 'error_getting_session_details';
+  static String get errorGettingSessionDetails => _errorGettingSessionDetails.tr();
 
   static const String _signInWithGoogle = 'sign_in_with_google';
   static String get signInWithGoogle => _signInWithGoogle.tr();
@@ -696,9 +696,6 @@ abstract class LocaleKeys {
 
   static const String _noDevices = 'no_devices';
   static String get noDevices => _noDevices.tr();
-
-  static const String _sessions = 'sessions';
-  static String get sessions => _sessions.tr();
 
   static const String _startSession = 'start_session';
   static String get startSession => _startSession.tr();

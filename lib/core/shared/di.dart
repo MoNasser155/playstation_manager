@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import '../../features/auth/di.dart';
 import '../../features/devices/di.dart';
 import '../../features/home/di.dart';
-import '../../features/invoices/di.dart';
+import '../../features/sessions/di.dart';
 import '../../features/main_view/di.dart';
 import '../../features/profit/di.dart';
 import '../../features/storage/di.dart';
@@ -19,7 +19,7 @@ initDI() async {
   initMainViewDI();
   initStorageDI();
   initDevicesDI();
-  initInvoicesDI();
+  initSessionsDI();
   initTransactionsDI();
   initProfitDI();
 }

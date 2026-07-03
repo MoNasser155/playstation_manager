@@ -17,7 +17,7 @@ enum HomeCards {
       case HomeCards.addStorageItem:
         return LocaleKeys.addStorageItem;
       case HomeCards.addInvoice:
-        return LocaleKeys.createInvoice;
+        return LocaleKeys.createSession;
       case HomeCards.viewReports:
         return LocaleKeys.viewReports;
       case HomeCards.settings:

@@ -16,7 +16,7 @@ class ProfitLocalDataSourceImpl implements ProfitLocalDataSource {
   ProfitsModel getProfit({DateTime? from, DateTime? to}) {
     final transactions =
         _store.transactions.getAll().where((e) {
-          if (e.transactionType != TransactionType.invoiceProfit.index) {
+          if (e.transactionType != TransactionType.sessionProfit.index) {
             return false;
           }
 
@@ -28,7 +28,7 @@ class ProfitLocalDataSourceImpl implements ProfitLocalDataSource {
 
     final totalProfit = transactions.fold<double>(
       0,
-      (previous, element) => previous + (element.invoiceProfit ?? 0),
+      (previous, element) => previous + (element.sessionProfit ?? 0),
     );
 
     return ProfitsModel(totalProfit: totalProfit, transactions: transactions);

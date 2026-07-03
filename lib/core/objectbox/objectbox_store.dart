@@ -4,7 +4,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../../features/devices/data/models/device_model.dart';
-import '../../features/invoices/data/models/create_invoice_model.dart';
+import '../../features/sessions/data/models/session_model.dart';
 import '../../features/storage/data/models/storage_model.dart';
 import '../../features/transactions/data/models/transaction_model.dart';
 import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
@@ -29,8 +29,8 @@ class ObjectBoxStore {
 
   // One getter per entity — all from the same store
   Box<StorageModel> get storage => store.box<StorageModel>();
-  Box<CreateInvoiceModel> get invoices => store.box<CreateInvoiceModel>();
-  Box<ItemsInvoice> get invoiceItems => store.box<ItemsInvoice>();
+  Box<SessionModel> get sessions => store.box<SessionModel>();
+  Box<SessionItem> get sessionItems => store.box<SessionItem>();
   Box<TransactionModel> get transactions => store.box<TransactionModel>();
   Box<DeviceModel> get devices => store.box<DeviceModel>();
   // add more boxes here as your app grows...

@@ -15,7 +15,7 @@ import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import '../../features/devices/data/models/device_model.dart';
-import '../../features/invoices/data/models/create_invoice_model.dart';
+import '../../features/sessions/data/models/session_model.dart';
 import '../../features/storage/data/models/storage_model.dart';
 import '../../features/transactions/data/models/transaction_model.dart';
 
@@ -94,126 +94,9 @@ final _entities = <obx_int.ModelEntity>[
     backlinks: <obx_int.ModelBacklink>[],
   ),
   obx_int.ModelEntity(
-    id: const obx_int.IdUid(6, 3415304222025532929),
-    name: 'CreateInvoiceModel',
-    lastPropertyId: const obx_int.IdUid(13, 3457360220319903264),
-    flags: 0,
-    properties: <obx_int.ModelProperty>[
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(1, 2057458220802821875),
-        name: 'id',
-        type: 6,
-        flags: 129,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(2, 4198074042670456661),
-        name: 'uuid',
-        type: 9,
-        flags: 2080,
-        indexId: const obx_int.IdUid(8, 7607332561444127662),
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(3, 3784651634678198525),
-        name: 'totalInvoice',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(6, 4444633202267406207),
-        name: 'invoiceDate',
-        type: 10,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(9, 8060014244078331336),
-        name: 'isSession',
-        type: 1,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(10, 6480102315715244152),
-        name: 'sessionStartDate',
-        type: 10,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(11, 2870216539185637800),
-        name: 'hourlyRate',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(12, 1914880427519149473),
-        name: 'deviceId',
-        type: 11,
-        flags: 520,
-        indexId: const obx_int.IdUid(14, 270546992311053501),
-        relationField: 'device',
-        relationTarget: 'DeviceModel',
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(13, 3457360220319903264),
-        name: 'playTypeIndex',
-        type: 6,
-        flags: 0,
-      ),
-    ],
-    relations: <obx_int.ModelRelation>[
-      obx_int.ModelRelation(
-        id: const obx_int.IdUid(1, 7402174192306668538),
-        name: 'items',
-        targetId: const obx_int.IdUid(7, 1606597934801876537),
-      ),
-    ],
-    backlinks: <obx_int.ModelBacklink>[],
-  ),
-  obx_int.ModelEntity(
-    id: const obx_int.IdUid(7, 1606597934801876537),
-    name: 'ItemsInvoice',
-    lastPropertyId: const obx_int.IdUid(5, 8660811941122145041),
-    flags: 0,
-    properties: <obx_int.ModelProperty>[
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(1, 2107347778151004175),
-        name: 'id',
-        type: 6,
-        flags: 129,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(2, 8045338546582942720),
-        name: 'sellPrice',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(3, 5702608688327995180),
-        name: 'quantity',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(4, 7818387833869484809),
-        name: 'totalItemPrice',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
-        id: const obx_int.IdUid(5, 8660811941122145041),
-        name: 'storageItemId',
-        type: 11,
-        flags: 520,
-        indexId: const obx_int.IdUid(10, 4213817622721936743),
-        relationField: 'storageItem',
-        relationTarget: 'StorageModel',
-      ),
-    ],
-    relations: <obx_int.ModelRelation>[],
-    backlinks: <obx_int.ModelBacklink>[],
-  ),
-  obx_int.ModelEntity(
     id: const obx_int.IdUid(8, 1717198745578238179),
     name: 'TransactionModel',
-    lastPropertyId: const obx_int.IdUid(14, 5948438757936141756),
+    lastPropertyId: const obx_int.IdUid(15, 4895229251137059571),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -248,12 +131,6 @@ final _entities = <obx_int.ModelEntity>[
         flags: 0,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(10, 967054690826890390),
-        name: 'invoiceProfit',
-        type: 8,
-        flags: 0,
-      ),
-      obx_int.ModelProperty(
         id: const obx_int.IdUid(12, 417078565279352849),
         name: 'userType',
         type: 6,
@@ -263,6 +140,12 @@ final _entities = <obx_int.ModelEntity>[
         id: const obx_int.IdUid(14, 5948438757936141756),
         name: 'storageItemUuid',
         type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(15, 4895229251137059571),
+        name: 'sessionProfit',
+        type: 8,
         flags: 0,
       ),
     ],
@@ -322,6 +205,123 @@ final _entities = <obx_int.ModelEntity>[
     relations: <obx_int.ModelRelation>[],
     backlinks: <obx_int.ModelBacklink>[],
   ),
+  obx_int.ModelEntity(
+    id: const obx_int.IdUid(11, 1688196429026926418),
+    name: 'SessionItem',
+    lastPropertyId: const obx_int.IdUid(5, 8857749000856284685),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 301870939188287080),
+        name: 'id',
+        type: 6,
+        flags: 129,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 4912830857444928953),
+        name: 'sellPrice',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 1498980081632244228),
+        name: 'quantity',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 1465208722395061176),
+        name: 'totalItemPrice',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 8857749000856284685),
+        name: 'storageItemId',
+        type: 11,
+        flags: 520,
+        indexId: const obx_int.IdUid(15, 7115999719522627640),
+        relationField: 'storageItem',
+        relationTarget: 'StorageModel',
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
+  obx_int.ModelEntity(
+    id: const obx_int.IdUid(12, 598215090025013211),
+    name: 'SessionModel',
+    lastPropertyId: const obx_int.IdUid(9, 2148714557396176972),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 642438683300131716),
+        name: 'id',
+        type: 6,
+        flags: 129,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 3726906034593537234),
+        name: 'uuid',
+        type: 9,
+        flags: 2080,
+        indexId: const obx_int.IdUid(16, 4880959261626829073),
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 8149561182186018600),
+        name: 'totalSession',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 1287347565601257599),
+        name: 'sessionDate',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 7296098752907466635),
+        name: 'isSession',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 8585270249996753263),
+        name: 'sessionStartDate',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 6722173794614173791),
+        name: 'hourlyRate',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(8, 6522225723420904956),
+        name: 'playTypeIndex',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 2148714557396176972),
+        name: 'deviceId',
+        type: 11,
+        flags: 520,
+        indexId: const obx_int.IdUid(17, 2695997294890375803),
+        relationField: 'device',
+        relationTarget: 'DeviceModel',
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[
+      obx_int.ModelRelation(
+        id: const obx_int.IdUid(2, 9107058361469645354),
+        name: 'items',
+        targetId: const obx_int.IdUid(11, 1688196429026926418),
+      ),
+    ],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
 ];
 
 /// Shortcut for [obx.Store.new] that passes [getObjectBoxModel] and for Flutter
@@ -367,9 +367,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
     // Typically, this is done with `dart run build_runner build`.
     generatorVersion: obx_int.GeneratorVersion.v2025_12_16,
     entities: _entities,
-    lastEntityId: const obx_int.IdUid(10, 7788442270770736492),
-    lastIndexId: const obx_int.IdUid(14, 270546992311053501),
-    lastRelationId: const obx_int.IdUid(1, 7402174192306668538),
+    lastEntityId: const obx_int.IdUid(12, 598215090025013211),
+    lastIndexId: const obx_int.IdUid(17, 2695997294890375803),
+    lastRelationId: const obx_int.IdUid(2, 9107058361469645354),
     lastSequenceId: const obx_int.IdUid(0, 0),
     retiredEntityUids: const [
       2012309038458918598,
@@ -377,6 +377,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
       8948141875499663187,
       4273291940691690034,
       9208822990900752414,
+      3415304222025532929,
+      1606597934801876537,
     ],
     retiredIndexUids: const [6194880861001699693, 677536105293545062],
     retiredPropertyUids: const [
@@ -431,6 +433,21 @@ obx_int.ModelDefinition getObjectBoxModel() {
       7618314127658819307,
       1830679829529419815,
       7401941274657716944,
+      967054690826890390,
+      2057458220802821875,
+      4198074042670456661,
+      3784651634678198525,
+      4444633202267406207,
+      8060014244078331336,
+      6480102315715244152,
+      2870216539185637800,
+      1914880427519149473,
+      3457360220319903264,
+      2107347778151004175,
+      8045338546582942720,
+      5702608688327995180,
+      7818387833869484809,
+      8660811941122145041,
     ],
     retiredRelationUids: const [],
     modelVersion: 5,
@@ -534,164 +551,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
         return object;
       },
     ),
-    CreateInvoiceModel: obx_int.EntityDefinition<CreateInvoiceModel>(
-      model: _entities[1],
-      toOneRelations: (CreateInvoiceModel object) => [object.device],
-      toManyRelations: (CreateInvoiceModel object) => {
-        obx_int.RelInfo<CreateInvoiceModel>.toMany(1, object.id!): object.items,
-      },
-      getId: (CreateInvoiceModel object) => object.id,
-      setId: (CreateInvoiceModel object, int id) {
-        object.id = id;
-      },
-      objectToFB: (CreateInvoiceModel object, fb.Builder fbb) {
-        final uuidOffset = fbb.writeString(object.uuid);
-        fbb.startTable(14);
-        fbb.addInt64(0, object.id ?? 0);
-        fbb.addOffset(1, uuidOffset);
-        fbb.addFloat64(2, object.totalInvoice);
-        fbb.addInt64(5, object.invoiceDate.millisecondsSinceEpoch);
-        fbb.addBool(8, object.isSession);
-        fbb.addInt64(9, object.sessionStartDate?.millisecondsSinceEpoch);
-        fbb.addFloat64(10, object.hourlyRate);
-        fbb.addInt64(11, object.device.targetId);
-        fbb.addInt64(12, object.playTypeIndex);
-        fbb.finish(fbb.endTable());
-        return object.id ?? 0;
-      },
-      objectFromFB: (obx.Store store, ByteData fbData) {
-        final buffer = fb.BufferContext(fbData);
-        final rootOffset = buffer.derefObject(0);
-        final sessionStartDateValue = const fb.Int64Reader().vTableGetNullable(
-          buffer,
-          rootOffset,
-          22,
-        );
-        final idParam = const fb.Int64Reader().vTableGetNullable(
-          buffer,
-          rootOffset,
-          4,
-        );
-        final uuidParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGet(buffer, rootOffset, 6, '');
-        final totalInvoiceParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          8,
-          0,
-        );
-        final invoiceDateParam = DateTime.fromMillisecondsSinceEpoch(
-          const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0),
-        );
-        final isSessionParam = const fb.BoolReader().vTableGet(
-          buffer,
-          rootOffset,
-          20,
-          false,
-        );
-        final sessionStartDateParam = sessionStartDateValue == null
-            ? null
-            : DateTime.fromMillisecondsSinceEpoch(sessionStartDateValue);
-        final hourlyRateParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          24,
-          0,
-        );
-        final playTypeIndexParam = const fb.Int64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          28,
-          0,
-        );
-        final object = CreateInvoiceModel(
-          id: idParam,
-          uuid: uuidParam,
-          totalInvoice: totalInvoiceParam,
-          invoiceDate: invoiceDateParam,
-          isSession: isSessionParam,
-          sessionStartDate: sessionStartDateParam,
-          hourlyRate: hourlyRateParam,
-          playTypeIndex: playTypeIndexParam,
-        );
-        object.device.targetId = const fb.Int64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          26,
-          0,
-        );
-        object.device.attach(store);
-        obx_int.InternalToManyAccess.setRelInfo<CreateInvoiceModel>(
-          object.items,
-          store,
-          obx_int.RelInfo<CreateInvoiceModel>.toMany(1, object.id!),
-        );
-        return object;
-      },
-    ),
-    ItemsInvoice: obx_int.EntityDefinition<ItemsInvoice>(
-      model: _entities[2],
-      toOneRelations: (ItemsInvoice object) => [object.storageItem],
-      toManyRelations: (ItemsInvoice object) => {},
-      getId: (ItemsInvoice object) => object.id,
-      setId: (ItemsInvoice object, int id) {
-        object.id = id;
-      },
-      objectToFB: (ItemsInvoice object, fb.Builder fbb) {
-        fbb.startTable(6);
-        fbb.addInt64(0, object.id ?? 0);
-        fbb.addFloat64(1, object.sellPrice);
-        fbb.addFloat64(2, object.quantity);
-        fbb.addFloat64(3, object.totalItemPrice);
-        fbb.addInt64(4, object.storageItem.targetId);
-        fbb.finish(fbb.endTable());
-        return object.id ?? 0;
-      },
-      objectFromFB: (obx.Store store, ByteData fbData) {
-        final buffer = fb.BufferContext(fbData);
-        final rootOffset = buffer.derefObject(0);
-        final idParam = const fb.Int64Reader().vTableGetNullable(
-          buffer,
-          rootOffset,
-          4,
-        );
-        final sellPriceParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          6,
-          0,
-        );
-        final quantityParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          8,
-          0,
-        );
-        final totalItemPriceParam = const fb.Float64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          10,
-          0,
-        );
-        final object = ItemsInvoice(
-          id: idParam,
-          sellPrice: sellPriceParam,
-          quantity: quantityParam,
-          totalItemPrice: totalItemPriceParam,
-        );
-        object.storageItem.targetId = const fb.Int64Reader().vTableGet(
-          buffer,
-          rootOffset,
-          12,
-          0,
-        );
-        object.storageItem.attach(store);
-        return object;
-      },
-    ),
     TransactionModel: obx_int.EntityDefinition<TransactionModel>(
-      model: _entities[3],
+      model: _entities[1],
       toOneRelations: (TransactionModel object) => [],
       toManyRelations: (TransactionModel object) => {},
       getId: (TransactionModel object) => object.id,
@@ -706,15 +567,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final storageItemUuidOffset = object.storageItemUuid == null
             ? null
             : fbb.writeString(object.storageItemUuid!);
-        fbb.startTable(15);
+        fbb.startTable(16);
         fbb.addInt64(0, object.id ?? 0);
         fbb.addOffset(1, uuidOffset);
         fbb.addInt64(4, object.createdAt.millisecondsSinceEpoch);
         fbb.addOffset(5, notesOffset);
         fbb.addInt64(6, object.transactionType);
-        fbb.addFloat64(9, object.invoiceProfit);
         fbb.addInt64(11, object.userType);
         fbb.addOffset(13, storageItemUuidOffset);
+        fbb.addFloat64(14, object.sessionProfit);
         fbb.finish(fbb.endTable());
         return object.id ?? 0;
       },
@@ -729,10 +590,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final uuidParam = const fb.StringReader(
           asciiOptimization: true,
         ).vTableGet(buffer, rootOffset, 6, '');
-        final invoiceProfitParam = const fb.Float64Reader().vTableGetNullable(
+        final sessionProfitParam = const fb.Float64Reader().vTableGetNullable(
           buffer,
           rootOffset,
-          22,
+          32,
         );
         final transactionTypeParam = const fb.Int64Reader().vTableGet(
           buffer,
@@ -758,7 +619,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final object = TransactionModel(
           id: idParam,
           uuid: uuidParam,
-          invoiceProfit: invoiceProfitParam,
+          sessionProfit: sessionProfitParam,
           transactionType: transactionTypeParam,
           userType: userTypeParam,
           createdAt: createdAtParam,
@@ -770,7 +631,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
       },
     ),
     DeviceModel: obx_int.EntityDefinition<DeviceModel>(
-      model: _entities[4],
+      model: _entities[2],
       toOneRelations: (DeviceModel object) => [],
       toManyRelations: (DeviceModel object) => {},
       getId: (DeviceModel object) => object.id,
@@ -842,6 +703,162 @@ obx_int.ModelDefinition getObjectBoxModel() {
         return object;
       },
     ),
+    SessionItem: obx_int.EntityDefinition<SessionItem>(
+      model: _entities[3],
+      toOneRelations: (SessionItem object) => [object.storageItem],
+      toManyRelations: (SessionItem object) => {},
+      getId: (SessionItem object) => object.id,
+      setId: (SessionItem object, int id) {
+        object.id = id;
+      },
+      objectToFB: (SessionItem object, fb.Builder fbb) {
+        fbb.startTable(6);
+        fbb.addInt64(0, object.id ?? 0);
+        fbb.addFloat64(1, object.sellPrice);
+        fbb.addFloat64(2, object.quantity);
+        fbb.addFloat64(3, object.totalItemPrice);
+        fbb.addInt64(4, object.storageItem.targetId);
+        fbb.finish(fbb.endTable());
+        return object.id ?? 0;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final idParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          4,
+        );
+        final sellPriceParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          6,
+          0,
+        );
+        final quantityParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          8,
+          0,
+        );
+        final totalItemPriceParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          0,
+        );
+        final object = SessionItem(
+          id: idParam,
+          sellPrice: sellPriceParam,
+          quantity: quantityParam,
+          totalItemPrice: totalItemPriceParam,
+        );
+        object.storageItem.targetId = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          12,
+          0,
+        );
+        object.storageItem.attach(store);
+        return object;
+      },
+    ),
+    SessionModel: obx_int.EntityDefinition<SessionModel>(
+      model: _entities[4],
+      toOneRelations: (SessionModel object) => [object.device],
+      toManyRelations: (SessionModel object) => {
+        obx_int.RelInfo<SessionModel>.toMany(2, object.id!): object.items,
+      },
+      getId: (SessionModel object) => object.id,
+      setId: (SessionModel object, int id) {
+        object.id = id;
+      },
+      objectToFB: (SessionModel object, fb.Builder fbb) {
+        final uuidOffset = fbb.writeString(object.uuid);
+        fbb.startTable(10);
+        fbb.addInt64(0, object.id ?? 0);
+        fbb.addOffset(1, uuidOffset);
+        fbb.addFloat64(2, object.totalSession);
+        fbb.addInt64(3, object.sessionDate.millisecondsSinceEpoch);
+        fbb.addBool(4, object.isSession);
+        fbb.addInt64(5, object.sessionStartDate?.millisecondsSinceEpoch);
+        fbb.addFloat64(6, object.hourlyRate);
+        fbb.addInt64(7, object.playTypeIndex);
+        fbb.addInt64(8, object.device.targetId);
+        fbb.finish(fbb.endTable());
+        return object.id ?? 0;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final sessionStartDateValue = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          14,
+        );
+        final idParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          4,
+        );
+        final uuidParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final totalSessionParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          8,
+          0,
+        );
+        final sessionDateParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0),
+        );
+        final isSessionParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          12,
+          false,
+        );
+        final sessionStartDateParam = sessionStartDateValue == null
+            ? null
+            : DateTime.fromMillisecondsSinceEpoch(sessionStartDateValue);
+        final hourlyRateParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          16,
+          0,
+        );
+        final playTypeIndexParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          18,
+          0,
+        );
+        final object = SessionModel(
+          id: idParam,
+          uuid: uuidParam,
+          totalSession: totalSessionParam,
+          sessionDate: sessionDateParam,
+          isSession: isSessionParam,
+          sessionStartDate: sessionStartDateParam,
+          hourlyRate: hourlyRateParam,
+          playTypeIndex: playTypeIndexParam,
+        );
+        object.device.targetId = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          20,
+          0,
+        );
+        object.device.attach(store);
+        obx_int.InternalToManyAccess.setRelInfo<SessionModel>(
+          object.items,
+          store,
+          obx_int.RelInfo<SessionModel>.toMany(2, object.id!),
+        );
+        return object;
+      },
+    ),
   };
 
   return obx_int.ModelDefinition(model, bindings);
@@ -900,128 +917,46 @@ class StorageModel_ {
   );
 }
 
-/// [CreateInvoiceModel] entity fields to define ObjectBox queries.
-class CreateInvoiceModel_ {
-  /// See [CreateInvoiceModel.id].
-  static final id = obx.QueryIntegerProperty<CreateInvoiceModel>(
-    _entities[1].properties[0],
-  );
-
-  /// See [CreateInvoiceModel.uuid].
-  static final uuid = obx.QueryStringProperty<CreateInvoiceModel>(
-    _entities[1].properties[1],
-  );
-
-  /// See [CreateInvoiceModel.totalInvoice].
-  static final totalInvoice = obx.QueryDoubleProperty<CreateInvoiceModel>(
-    _entities[1].properties[2],
-  );
-
-  /// See [CreateInvoiceModel.invoiceDate].
-  static final invoiceDate = obx.QueryDateProperty<CreateInvoiceModel>(
-    _entities[1].properties[3],
-  );
-
-  /// See [CreateInvoiceModel.isSession].
-  static final isSession = obx.QueryBooleanProperty<CreateInvoiceModel>(
-    _entities[1].properties[4],
-  );
-
-  /// See [CreateInvoiceModel.sessionStartDate].
-  static final sessionStartDate = obx.QueryDateProperty<CreateInvoiceModel>(
-    _entities[1].properties[5],
-  );
-
-  /// See [CreateInvoiceModel.hourlyRate].
-  static final hourlyRate = obx.QueryDoubleProperty<CreateInvoiceModel>(
-    _entities[1].properties[6],
-  );
-
-  /// See [CreateInvoiceModel.device].
-  static final device = obx.QueryRelationToOne<CreateInvoiceModel, DeviceModel>(
-    _entities[1].properties[7],
-  );
-
-  /// See [CreateInvoiceModel.playTypeIndex].
-  static final playTypeIndex = obx.QueryIntegerProperty<CreateInvoiceModel>(
-    _entities[1].properties[8],
-  );
-
-  /// see [CreateInvoiceModel.items]
-  static final items =
-      obx.QueryRelationToMany<CreateInvoiceModel, ItemsInvoice>(
-        _entities[1].relations[0],
-      );
-}
-
-/// [ItemsInvoice] entity fields to define ObjectBox queries.
-class ItemsInvoice_ {
-  /// See [ItemsInvoice.id].
-  static final id = obx.QueryIntegerProperty<ItemsInvoice>(
-    _entities[2].properties[0],
-  );
-
-  /// See [ItemsInvoice.sellPrice].
-  static final sellPrice = obx.QueryDoubleProperty<ItemsInvoice>(
-    _entities[2].properties[1],
-  );
-
-  /// See [ItemsInvoice.quantity].
-  static final quantity = obx.QueryDoubleProperty<ItemsInvoice>(
-    _entities[2].properties[2],
-  );
-
-  /// See [ItemsInvoice.totalItemPrice].
-  static final totalItemPrice = obx.QueryDoubleProperty<ItemsInvoice>(
-    _entities[2].properties[3],
-  );
-
-  /// See [ItemsInvoice.storageItem].
-  static final storageItem = obx.QueryRelationToOne<ItemsInvoice, StorageModel>(
-    _entities[2].properties[4],
-  );
-}
-
 /// [TransactionModel] entity fields to define ObjectBox queries.
 class TransactionModel_ {
   /// See [TransactionModel.id].
   static final id = obx.QueryIntegerProperty<TransactionModel>(
-    _entities[3].properties[0],
+    _entities[1].properties[0],
   );
 
   /// See [TransactionModel.uuid].
   static final uuid = obx.QueryStringProperty<TransactionModel>(
-    _entities[3].properties[1],
+    _entities[1].properties[1],
   );
 
   /// See [TransactionModel.createdAt].
   static final createdAt = obx.QueryDateProperty<TransactionModel>(
-    _entities[3].properties[2],
+    _entities[1].properties[2],
   );
 
   /// See [TransactionModel.notes].
   static final notes = obx.QueryStringProperty<TransactionModel>(
-    _entities[3].properties[3],
+    _entities[1].properties[3],
   );
 
   /// See [TransactionModel.transactionType].
   static final transactionType = obx.QueryIntegerProperty<TransactionModel>(
-    _entities[3].properties[4],
-  );
-
-  /// See [TransactionModel.invoiceProfit].
-  static final invoiceProfit = obx.QueryDoubleProperty<TransactionModel>(
-    _entities[3].properties[5],
+    _entities[1].properties[4],
   );
 
   /// See [TransactionModel.userType].
   static final userType = obx.QueryIntegerProperty<TransactionModel>(
-    _entities[3].properties[6],
+    _entities[1].properties[5],
   );
 
   /// See [TransactionModel.storageItemUuid].
   static final storageItemUuid = obx.QueryStringProperty<TransactionModel>(
-    _entities[3].properties[7],
+    _entities[1].properties[6],
+  );
+
+  /// See [TransactionModel.sessionProfit].
+  static final sessionProfit = obx.QueryDoubleProperty<TransactionModel>(
+    _entities[1].properties[7],
   );
 }
 
@@ -1029,36 +964,117 @@ class TransactionModel_ {
 class DeviceModel_ {
   /// See [DeviceModel.id].
   static final id = obx.QueryIntegerProperty<DeviceModel>(
-    _entities[4].properties[0],
+    _entities[2].properties[0],
   );
 
   /// See [DeviceModel.uuid].
   static final uuid = obx.QueryStringProperty<DeviceModel>(
-    _entities[4].properties[1],
+    _entities[2].properties[1],
   );
 
   /// See [DeviceModel.name].
   static final name = obx.QueryStringProperty<DeviceModel>(
-    _entities[4].properties[2],
+    _entities[2].properties[2],
   );
 
   /// See [DeviceModel.hourlyRate].
   static final hourlyRate = obx.QueryDoubleProperty<DeviceModel>(
-    _entities[4].properties[3],
+    _entities[2].properties[3],
   );
 
   /// See [DeviceModel.typeIndex].
   static final typeIndex = obx.QueryIntegerProperty<DeviceModel>(
-    _entities[4].properties[4],
+    _entities[2].properties[4],
   );
 
   /// See [DeviceModel.statusIndex].
   static final statusIndex = obx.QueryIntegerProperty<DeviceModel>(
-    _entities[4].properties[5],
+    _entities[2].properties[5],
   );
 
   /// See [DeviceModel.multiPlayerHourlyRate].
   static final multiPlayerHourlyRate = obx.QueryDoubleProperty<DeviceModel>(
+    _entities[2].properties[6],
+  );
+}
+
+/// [SessionItem] entity fields to define ObjectBox queries.
+class SessionItem_ {
+  /// See [SessionItem.id].
+  static final id = obx.QueryIntegerProperty<SessionItem>(
+    _entities[3].properties[0],
+  );
+
+  /// See [SessionItem.sellPrice].
+  static final sellPrice = obx.QueryDoubleProperty<SessionItem>(
+    _entities[3].properties[1],
+  );
+
+  /// See [SessionItem.quantity].
+  static final quantity = obx.QueryDoubleProperty<SessionItem>(
+    _entities[3].properties[2],
+  );
+
+  /// See [SessionItem.totalItemPrice].
+  static final totalItemPrice = obx.QueryDoubleProperty<SessionItem>(
+    _entities[3].properties[3],
+  );
+
+  /// See [SessionItem.storageItem].
+  static final storageItem = obx.QueryRelationToOne<SessionItem, StorageModel>(
+    _entities[3].properties[4],
+  );
+}
+
+/// [SessionModel] entity fields to define ObjectBox queries.
+class SessionModel_ {
+  /// See [SessionModel.id].
+  static final id = obx.QueryIntegerProperty<SessionModel>(
+    _entities[4].properties[0],
+  );
+
+  /// See [SessionModel.uuid].
+  static final uuid = obx.QueryStringProperty<SessionModel>(
+    _entities[4].properties[1],
+  );
+
+  /// See [SessionModel.totalSession].
+  static final totalSession = obx.QueryDoubleProperty<SessionModel>(
+    _entities[4].properties[2],
+  );
+
+  /// See [SessionModel.sessionDate].
+  static final sessionDate = obx.QueryDateProperty<SessionModel>(
+    _entities[4].properties[3],
+  );
+
+  /// See [SessionModel.isSession].
+  static final isSession = obx.QueryBooleanProperty<SessionModel>(
+    _entities[4].properties[4],
+  );
+
+  /// See [SessionModel.sessionStartDate].
+  static final sessionStartDate = obx.QueryDateProperty<SessionModel>(
+    _entities[4].properties[5],
+  );
+
+  /// See [SessionModel.hourlyRate].
+  static final hourlyRate = obx.QueryDoubleProperty<SessionModel>(
     _entities[4].properties[6],
+  );
+
+  /// See [SessionModel.playTypeIndex].
+  static final playTypeIndex = obx.QueryIntegerProperty<SessionModel>(
+    _entities[4].properties[7],
+  );
+
+  /// See [SessionModel.device].
+  static final device = obx.QueryRelationToOne<SessionModel, DeviceModel>(
+    _entities[4].properties[8],
+  );
+
+  /// see [SessionModel.items]
+  static final items = obx.QueryRelationToMany<SessionModel, SessionItem>(
+    _entities[4].relations[0],
   );
 }

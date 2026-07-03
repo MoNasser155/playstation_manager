@@ -9,7 +9,7 @@ class TransactionModel {
   int? id;
   @Unique()
   final String uuid;
-  final double? invoiceProfit;
+  final double? sessionProfit;
   @Property(type: PropertyType.date)
   final DateTime createdAt;
   final String? notes;
@@ -28,7 +28,7 @@ class TransactionModel {
   TransactionModel({
     this.id,
     required this.uuid,
-    this.invoiceProfit,
+    this.sessionProfit,
     required this.transactionType,
     required this.userType,
     required this.createdAt,
@@ -39,7 +39,7 @@ class TransactionModel {
   factory TransactionModel.create({
     int? id,
     required String uuid,
-    double? invoiceProfit,
+    double? sessionProfit,
     required TransactionType transactionType,
     required UserType userType,
     required DateTime createdAt,
@@ -49,7 +49,7 @@ class TransactionModel {
     return TransactionModel(
       id: id,
       uuid: uuid,
-      invoiceProfit: invoiceProfit,
+      sessionProfit: sessionProfit,
       transactionType: transactionType.index,
       userType: userType.index,
       createdAt: createdAt,
@@ -60,8 +60,8 @@ class TransactionModel {
 
   factory TransactionModel.initial() => TransactionModel(
     uuid: '',
-    invoiceProfit: 0,
-    transactionType: TransactionType.invoiceProfit.index,
+    sessionProfit: 0,
+    transactionType: TransactionType.sessionProfit.index,
     userType: UserType.customer.index,
     createdAt: DateTime.now(),
     notes: '',

@@ -6,7 +6,7 @@ import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../../core/shared/di.dart';
 import '../../../../../core/utils/navigator_helper.dart';
 import '../../../../../core/widgets/custom_snack_bar.dart';
-import '../../../../invoices/domain/usecases/get_active_sessions_usecase.dart';
+import '../../../../sessions/domain/usecases/get_active_sessions_usecase.dart';
 import '../../../domain/usecases/delete_device_usecase.dart';
 import '../../../domain/usecases/get_all_devices_usecase.dart';
 import 'devices_state.dart';
@@ -42,8 +42,8 @@ class DevicesCubit extends BaseCubit<DevicesState> {
 
         sessionResult.fold(
           (_) {},
-          (activeInvoices) {
-            for (final inv in activeInvoices) {
+          (activeSessions) {
+            for (final inv in activeSessions) {
               final dev = inv.device.target;
               if (dev != null && inv.sessionStartDate != null) {
                 startDates[dev.uuid] = inv.sessionStartDate!;

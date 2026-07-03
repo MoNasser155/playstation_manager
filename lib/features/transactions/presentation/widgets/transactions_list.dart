@@ -95,7 +95,7 @@ class _TransactionItem extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Text(
-              transaction.invoiceProfit?.toStringAsFixed(2) ?? '0.00',
+              transaction.sessionProfit?.toStringAsFixed(2) ?? '0.00',
               style: context.textTheme.titleLarge!.copyWith(letterSpacing: 1.2),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,

@@ -24,11 +24,11 @@ class NoStorageItemsExeption extends AppException {
 
 class NoCustomersAndStorageItemsFoundException extends AppException {
   NoCustomersAndStorageItemsFoundException()
-    : super(LocaleKeys.noInvoiceModelsFound);
+    : super(LocaleKeys.noSessionModelsFound);
 }
 
-class NoInvoicesFoundException extends AppException {
-  NoInvoicesFoundException() : super(LocaleKeys.noInvoicesFound);
+class NoSessionsFoundException extends AppException {
+  NoSessionsFoundException() : super(LocaleKeys.noSessionsFound);
 }
 
 class BackupSourceNotFoundException extends AppException {
@@ -43,8 +43,8 @@ class RestoreFailedException extends AppException {
   RestoreFailedException() : super(LocaleKeys.restoreFailed);
 }
 
-class InvoiceNotFoundException extends AppException {
-  InvoiceNotFoundException() : super(LocaleKeys.errorGettingInvoiceDetails);
+class SessionNotFoundException extends AppException {
+  SessionNotFoundException() : super(LocaleKeys.errorGettingSessionDetails);
 }
 
 class GoogleSignInFailedException extends AppException {

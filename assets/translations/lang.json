@@ -299,9 +299,9 @@
         "en": "Once you delete this customer, all its data will be deleted.",
         "ar": "بمجرد حذف هذا العميل، سيتم حذف جميع بياناته."
     },
-    "invoices": {
-        "en": "Invoices",
-        "ar": "الفواتير"
+    "sessions": {
+        "en": "Sessions",
+        "ar": "الجلسات"
     },
     "cash": {
         "en": "Cash",
@@ -339,9 +339,9 @@
         "en": "Number of Items",
         "ar": "عدد الاصناف"
     },
-    "noInvoiceModelsFound": {
-        "en": "You can't create an invoice without customers or storage items",
-        "ar": "لا يمكن انشاء فاتورة بدون عملاء او اصناف"
+    "noSessionModelsFound": {
+        "en": "You can't create a session without customers or storage items",
+        "ar": "لا يمكن انشاء جلسة بدون عملاء او اصناف"
     },
     "quantityLimitExceeded": {
         "en": "Quantity cannot exceed available stock {}",
@@ -351,9 +351,9 @@
         "en": "Date",
         "ar": "التاريخ"
     },
-    "invoiceId": {
-        "en": "Invoice ID",
-        "ar": "رقم الفاتورة"
+    "sessionId": {
+        "en": "Session ID",
+        "ar": "رقم الجلسة"
     },
     "paidNow": {
         "en": "Paid Now",
@@ -363,17 +363,17 @@
         "en": "Later Amount",
         "ar": "المبلغ الآجل"
     },
-    "invoiceSaved": {
-        "en": "Invoice saved successfully",
-        "ar": "تم حفظ الفاتورة بنجاح"
+    "sessionSaved": {
+        "en": "Session saved successfully",
+        "ar": "تم حفظ الجلسة بنجاح"
     },
-    "saveInvoice": {
-        "en": "Save Invoice",
-        "ar": "حفظ الفاتورة"
+    "saveSession": {
+        "en": "Save Session",
+        "ar": "حفظ الجلسة"
     },
-    "createInvoice": {
-        "en": "Create Invoice",
-        "ar": "انشاء فاتورة"
+    "createSession": {
+        "en": "Create Session",
+        "ar": "انشاء جلسة"
     },
     "toPay": {
         "en": "to pay",
@@ -383,9 +383,9 @@
         "en": "to recieve",
         "ar": "عليه"
     },
-    "invoiceProfit": {
-        "en": "Invoice Profit",
-        "ar": "ربح الفواتير"
+    "sessionProfit": {
+        "en": "Session Profit",
+        "ar": "ربح الجلسات"
     },
     "customerPayment": {
         "en": "Customer Payment",
@@ -475,9 +475,9 @@
         "en": "Note",
         "ar": "ملاحظة"
     },
-    "noInvoicesFound": {
-        "en": "No Invoices Found",
-        "ar": "لا يوجد فواتير"
+    "noSessionsFound": {
+        "en": "No Sessions Found",
+        "ar": "لا يوجد جلسات"
     },
     "before": {
         "en": "Before",
@@ -663,17 +663,17 @@
         "en": "december",
         "ar": "ديسمبر"
     },
-    "refundInvoice": {
-        "en": "Refund Invoice",
-        "ar": "فاتورة مرتجعة"
+    "refundSession": {
+        "en": "Refund Session",
+        "ar": "مرتجع الجلسة"
     },
-    "selectInvoice": {
-        "en": "Select Invoice",
-        "ar": "اختر فاتورة"
+    "selectSession": {
+        "en": "Select Session",
+        "ar": "اختر جلسة"
     },
-    "noInvoicesForCustomer": {
-        "en": "No invoices found for this customer",
-        "ar": "لا يوجد فواتير للعميل"
+    "noSessionsForCustomer": {
+        "en": "No sessions found for this customer",
+        "ar": "لا يوجد جلسات للعميل"
     },
     "originalQuantity": {
         "en": "Original Quantity",
@@ -684,8 +684,8 @@
         "ar": "مبلغ الارتجاع"
     },
     "refundSaved": {
-        "en": "Refund invoice saved successfully",
-        "ar": "تم حفظ فاتورة الارتجاع بنجاح"
+        "en": "Refund session saved successfully",
+        "ar": "تم حفظ مرتجع الجلسة بنجاح"
     },
     "refundPrice": {
         "en": "Refund Price",
@@ -707,9 +707,9 @@
         "en": "Paid",
         "ar": "المدفوع"
     },
-    "errorGettingInvoiceDetails": {
-        "en": "Error getting invoice details",
-        "ar": "خطأ في الحصول على تفاصيل الفاتورة"
+    "errorGettingSessionDetails": {
+        "en": "Error getting session details",
+        "ar": "خطأ في الحصول على تفاصيل الجلسة"
     },
     "signInWithGoogle": {
         "en": "Sign in with Google",

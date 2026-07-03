@@ -88,7 +88,7 @@ class _DeviceCardState extends State<DeviceCard> {
     return InkWell(
       onTap: () {
         if (widget.device.uuid.isEmpty) return;
-        // Navigate to Invoices tab and select this device
+        // Navigate to Sessions tab and select this device
         final mainViewCubit = MainViewCubit.get(context);
         mainViewCubit.setSelectedTap(1, send: [widget.device]);
       },

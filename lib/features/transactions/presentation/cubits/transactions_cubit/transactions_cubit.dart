@@ -54,7 +54,7 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
   void calculateTotalAmount() {
     final totalAmount = state.transactions.fold<double>(
       0,
-      (previous, element) => previous + (element.invoiceProfit ?? 0.0),
+      (previous, element) => previous + (element.sessionProfit ?? 0.0),
     );
     safeEmit(state.copyWith(totalAmount: totalAmount));
   }
