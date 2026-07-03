@@ -8,7 +8,6 @@ import '../../../../core/enums/play_type.dart';
 import '../../../../core/languages/local_keys.g.dart';
 import '../../../../core/utils/gaps.dart';
 import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/custom_sliver_padding.dart';
 import '../../../../core/widgets/expanded_drop_down.dart';
 import '../../../devices/data/models/device_model.dart';
 import '../cubits/cubit/session_cubit.dart';
@@ -21,7 +20,8 @@ class MainSessionDataHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomSliverPadding(
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: AppPadding.pf20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
