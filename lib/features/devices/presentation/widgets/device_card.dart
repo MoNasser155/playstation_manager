@@ -79,8 +79,6 @@ class _DeviceCardState extends State<DeviceCard> {
     return "$hours:$minutes:$seconds";
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     final statusColor = widget.device.status.color;
@@ -153,7 +151,6 @@ class _DeviceCardState extends State<DeviceCard> {
             ),
             const Spacer(),
             if (widget.device.status == DeviceStatus.reserved) ...[
-              // Active session indicator
               Center(
                 child: StreamBuilder<int>(
                   stream: Stream.periodic(const Duration(seconds: 1), (i) => i),

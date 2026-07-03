@@ -98,11 +98,7 @@ class SessionCubit extends BaseCubit<SessionState> {
   Future<void> _getAllDevices() async {
     final result = await _getAllDevicesUseCase();
     result.fold((_) {}, (devicesList) {
-      final availableDevices = <DeviceModel>[...devicesList];
-      availableDevices.removeWhere(
-        (device) => device.status != DeviceStatus.available,
-      );
-      safeEmit(state.copyWith(devices: availableDevices));
+      safeEmit(state.copyWith(devices: devicesList));
     });
   }
 
