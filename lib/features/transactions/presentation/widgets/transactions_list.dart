@@ -68,7 +68,7 @@ class _TransactionItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 5,
+            flex: 7,
             child: Tooltip(
               message: transaction.notes ?? "",
               padding: EdgeInsets.symmetric(
@@ -93,26 +93,7 @@ class _TransactionItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
-            child: Text(
-              '${transaction.userName}',
-              style: context.textTheme.titleLarge!.copyWith(letterSpacing: 1.2),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              '${transaction.beginningBalance}',
-              style: context.textTheme.titleLarge!.copyWith(letterSpacing: 1.2),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          ),
-
-          Expanded(
-            flex: 2,
+            flex: 3,
             child: Text(
               '${transaction.paymentAmount}',
               style: context.textTheme.titleLarge!.copyWith(letterSpacing: 1.2),
@@ -121,16 +102,7 @@ class _TransactionItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
-            child: Text(
-              '${transaction.endBalance}',
-              style: context.textTheme.titleLarge!.copyWith(letterSpacing: 1.2),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          ),
-          Expanded(
-            flex: 2,
+            flex: 3,
             child: Text(
               transaction.transactionTypeVal.localizedName,
               style: context.textTheme.titleLarge,

@@ -14,7 +14,6 @@ import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../../core/shared/di.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/custom_snack_bar.dart';
-import '../../../../customers/data/models/customer_model.dart';
 import '../../../../devices/data/models/device_model.dart';
 import '../../../../devices/domain/usecases/get_all_devices_usecase.dart';
 import '../../../../storage/data/models/storage_model.dart';
@@ -57,12 +56,11 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
         state.selectedStorageItem?.quantity.toStringAsFixed(2) ?? '';
   }
 
-  init(BuildContext context, {CustomerModel? customer, DeviceModel? device}) {
+  init(BuildContext context, {DeviceModel? device}) {
     safeEmit(state.copyWith(status: StateStatus.loading));
 
     _getAllInvoiceModels(context);
     _getAllDevices();
-    if (customer != null) setCustomer(customer);
     if (device != null) {
       selectDevice(device);
     }
@@ -295,11 +293,6 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     );
   }
 
-  void setCustomer(CustomerModel customer) {
-    if (customer != state.selectedCustomer) {
-      safeEmit(state.copyWith(selectedCustomer: customer));
-    }
-  }
 
   void changePayType(PaymentType paymentType) {
     if (paymentType != state.paymentType) {
@@ -438,8 +431,6 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
       paymentType: state.paymentType,
     );
 
-    // Link customer if any (only when not session, or if customer is allowed, but we don't use customers)
-    invoice.customer.target = state.selectedCustomer;
 
     // Link items
     invoice.items.addAll(state.invoiceItems);

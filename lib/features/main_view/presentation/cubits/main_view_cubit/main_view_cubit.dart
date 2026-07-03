@@ -10,8 +10,6 @@ import '../../../../../core/errors/exceptions.dart';
 import '../../../../../core/languages/local_keys.g.dart';
 import '../../../../../core/services/backup_service.dart';
 import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
-import '../../../../customers/data/models/customer_model.dart';
-import '../../../../customers/presentation/screens/customers_screen.dart';
 import '../../../../devices/presentation/screens/devices_screen.dart';
 import '../../../../home/presentation/screens/home_screen.dart';
 import '../../../../invoices/data/models/create_invoice_model.dart';
@@ -40,7 +38,6 @@ class MainViewCubit extends BaseCubit<MainViewState> {
   List<TapsModel> get taps => [
     TapsModel(title: LocaleKeys.home, icon: VectorIcons.home),
     TapsModel(title: LocaleKeys.invoices, icon: VectorIcons.receipt),
-    TapsModel(title: LocaleKeys.customers, icon: VectorIcons.customer),
     TapsModel(title: LocaleKeys.inventory, icon: VectorIcons.inventory),
     TapsModel(title: LocaleKeys.devices, icon: VectorIcons.customer),
     TapsModel(title: LocaleKeys.transactions, icon: VectorIcons.transactions),
@@ -60,13 +57,8 @@ class MainViewCubit extends BaseCubit<MainViewState> {
   List<Widget> drawerViews(List<Object>? data) => [
     HomeScreen(),
     InvoiceScreen(
-      customer:
-          data?.length == 2
-              ? data![0] as CustomerModel?
-              : data?.firstOrNull as CustomerModel?,
       invoice: data?.length == 2 ? data![1] as CreateInvoiceModel? : null,
     ),
-    CustomersScreen(),
     StorageScreen(),
     DevicesScreen(),
     TransactionsScreen(),

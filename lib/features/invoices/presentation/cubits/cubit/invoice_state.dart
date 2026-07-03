@@ -5,7 +5,6 @@ class InvoiceState extends Equatable {
   final String? errMessage;
   final PaymentType paymentType;
   final GetInvoiceModels invoiceModels;
-  final CustomerModel? selectedCustomer;
   final StorageModel? selectedStorageItem;
   final String invoiceUuid;
   final List<CreateInvoiceModel> invoiceList;
@@ -27,7 +26,6 @@ class InvoiceState extends Equatable {
     this.errMessage,
     required this.paymentType,
     required this.invoiceModels,
-    this.selectedCustomer,
     this.selectedStorageItem,
     required this.invoiceUuid,
     required this.invoiceList,
@@ -48,11 +46,9 @@ class InvoiceState extends Equatable {
       status: StateStatus.initial,
       paymentType: PaymentType.cash,
       invoiceModels: GetInvoiceModels(
-        customers: [],
         storageItems: [],
         warnings: [],
       ),
-      selectedCustomer: null,
       selectedStorageItem: null,
       invoiceUuid: const Uuid().v4(),
       invoiceList: [],
@@ -85,7 +81,6 @@ class InvoiceState extends Equatable {
     String? errMessage,
     PaymentType? paymentType,
     GetInvoiceModels? invoiceModels,
-    CustomerModel? selectedCustomer,
     StorageModel? selectedStorageItem,
     bool clearSelectedStorageItem = false,
     String? invoiceUuid,
@@ -108,7 +103,6 @@ class InvoiceState extends Equatable {
       errMessage: errMessage ?? this.errMessage,
       paymentType: paymentType ?? this.paymentType,
       invoiceModels: invoiceModels ?? this.invoiceModels,
-      selectedCustomer: selectedCustomer ?? this.selectedCustomer,
       selectedStorageItem:
           clearSelectedStorageItem
               ? null
@@ -134,7 +128,6 @@ class InvoiceState extends Equatable {
     errMessage,
     paymentType,
     invoiceModels,
-    selectedCustomer,
     selectedStorageItem,
     invoiceUuid,
     invoiceList,

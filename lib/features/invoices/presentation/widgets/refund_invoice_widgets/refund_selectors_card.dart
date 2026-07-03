@@ -6,7 +6,6 @@ import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/languages/local_keys.g.dart';
 import '../../../../../core/widgets/expanded_drop_down.dart';
-import '../../../../customers/data/models/customer_model.dart';
 import '../../../data/models/create_invoice_model.dart';
 import '../../cubits/refund_cubit/refund_invoice_cubit.dart';
 
@@ -18,9 +17,7 @@ class RefundSelectorsCard extends StatelessWidget {
     return BlocBuilder<RefundInvoiceCubit, RefundInvoiceState>(
       buildWhen:
           (prev, cur) =>
-              prev.customers != cur.customers ||
-              prev.selectedCustomer != cur.selectedCustomer ||
-              prev.customerInvoices != cur.customerInvoices ||
+              prev.invoices != cur.invoices ||
               prev.selectedInvoice != cur.selectedInvoice,
       builder: (context, state) {
         final cubit = RefundInvoiceCubit.get(context);
@@ -34,34 +31,17 @@ class RefundSelectorsCard extends StatelessWidget {
           child: Column(
             spacing: AppSpacing.v12,
             children: [
-              // Customer dropdown
-              ExpandedDropdown<CustomerModel>(
-                withSearch: true,
-                hint: LocaleKeys.selectCustomer,
-                items: state.customers,
-                isEnabled: state.customers.isNotEmpty,
-                selectedValue: state.selectedCustomer?.name,
-                backgroundColor: context.mapCard,
-                searchFieldColor: context.mapCard,
-                itemLabelBuilder: (c) => c.name,
-                onChanged: (val) {
-                  if (val != null) cubit.setCustomer(context, val);
-                },
-              ),
               // Invoice dropdown
               ExpandedDropdown<CreateInvoiceModel>(
                 withSearch: true,
-                hint:
-                    state.selectedCustomer == null
-                        ? LocaleKeys.pleaseSelectCustomer
-                        : state.customerInvoices.isEmpty
-                        ? LocaleKeys.noInvoicesForCustomer
-                        : LocaleKeys.selectInvoice,
-                items: state.customerInvoices,
-                isEnabled: state.customerInvoices.isNotEmpty,
+                hint: state.invoices.isEmpty
+                    ? LocaleKeys.noInvoicesFound
+                    : LocaleKeys.selectInvoice,
+                items: state.invoices,
+                isEnabled: state.invoices.isNotEmpty,
                 selectedValue:
                     state.selectedInvoice != null
-                        ? '${state.selectedInvoice!.uuid.substring(0, 8)}... '
+                        ? 'ID: ${state.selectedInvoice!.uuid.substring(0, 8)}... '
                             '(${state.selectedInvoice!.totalInvoice.toStringAsFixed(2)}'
                             ' - ${state.selectedInvoice!.paymentType.localizedName})'
                         : null,

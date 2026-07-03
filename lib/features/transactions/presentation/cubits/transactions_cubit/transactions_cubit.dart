@@ -2,23 +2,20 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/enums/state_status.dart';
-import '../../../../../core/enums/user_type.dart';
 import '../../../../../core/languages/local_keys.g.dart';
 import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../../core/shared/di.dart';
 import '../../../data/models/transaction_model.dart';
 import '../../../domain/usecases/get_all_transactions_usecase.dart';
-import '../../../domain/usecases/get_transactions_by_type_usecase.dart';
 
 part 'transactions_state.dart';
 
 class TransactionsCubit extends BaseCubit<TransactionsState> {
   TransactionsCubit() : super(TransactionsState.initial());
 
-  static TransactionsCubit get(context) => BlocProvider.of(context);
+  static TransactionsCubit get(context) => BlocProvider.of<TransactionsCubit>(context);
 
   final _getAllTransactionsUsecase = sl<GetAllTransactionsUseCase>();
-  final _getTransactionsByTypeUseCase = sl<GetTransactionsByTypeUseCase>();
 
   void init() async {
     safeEmit(state.copyWith(status: StateStatus.loading));
@@ -28,36 +25,13 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
   void changeTapIndex(int index) {
     if (state.selectedTapIndex != index) {
       safeEmit(state.copyWith(selectedTapIndex: index));
-      _refreshCurrentTap();
+      _getAllTransactions();
     }
   }
 
   Future<void> _getAllTransactions() async {
     safeEmit(state.copyWith(status: StateStatus.loading));
     final result = await _getAllTransactionsUsecase.call(
-      from: state.fromDate,
-      to: state.toDate,
-    );
-    result.fold(
-      (failure) {
-        safeEmit(state.copyWith(status: StateStatus.failure));
-      },
-      (transactions) {
-        calculateTotalAmount();
-        safeEmit(
-          state.copyWith(
-            status: StateStatus.success,
-            transactions: transactions,
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _getTransactionsByType(UserType type) async {
-    safeEmit(state.copyWith(status: StateStatus.loading));
-    final result = await _getTransactionsByTypeUseCase.call(
-      type,
       from: state.fromDate,
       to: state.toDate,
     );
@@ -97,7 +71,7 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
           selectedMonth: -1,
         ),
       );
-      _refreshCurrentTap();
+      _getAllTransactions();
       return;
     }
 
@@ -105,7 +79,7 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
     final from = DateTime(year, oneBasedMonth, 1, 0, 0, 0);
     final to = DateTime(year, oneBasedMonth + 1, 0, 23, 59, 59);
     safeEmit(state.copyWith(fromDate: from, toDate: to, selectedMonth: month));
-    _refreshCurrentTap();
+    _getAllTransactions();
   }
 
   void onDateRangeChanged(DateTime from, DateTime to) {
@@ -118,20 +92,7 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
         selectedMonth: -1,
       ),
     );
-    _refreshCurrentTap();
-  }
-
-  void _refreshCurrentTap() {
-    switch (state.selectedTapIndex) {
-      case 0:
-        _getAllTransactions();
-        break;
-      case 1:
-        _getTransactionsByType(UserType.customer);
-        break;
-      default:
-        break;
-    }
+    _getAllTransactions();
   }
 
   List<String> get monthNames => [

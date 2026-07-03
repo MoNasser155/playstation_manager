@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-import '../../features/customers/data/models/customer_model.dart';
 import '../../features/devices/data/models/device_model.dart';
 import '../../features/invoices/data/models/create_invoice_model.dart';
 import '../../features/storage/data/models/storage_model.dart';
@@ -30,7 +29,6 @@ class ObjectBoxStore {
 
   // One getter per entity — all from the same store
   Box<StorageModel> get storage => store.box<StorageModel>();
-  Box<CustomerModel> get customers => store.box<CustomerModel>();
   Box<CreateInvoiceModel> get invoices => store.box<CreateInvoiceModel>();
   Box<ItemsInvoice> get invoiceItems => store.box<ItemsInvoice>();
   Box<TransactionModel> get transactions => store.box<TransactionModel>();

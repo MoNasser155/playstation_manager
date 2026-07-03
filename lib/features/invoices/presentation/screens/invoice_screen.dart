@@ -6,7 +6,6 @@ import '../../../../core/enums/main_view_mode.dart';
 import '../../../../core/languages/local_keys.g.dart';
 import '../../../../core/shared/di.dart';
 import '../../../../core/widgets/row_taps/custom_taps_row.dart';
-import '../../../customers/data/models/customer_model.dart';
 import '../../../devices/data/models/device_model.dart';
 import '../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';
 import '../../data/models/create_invoice_model.dart';
@@ -20,8 +19,7 @@ import '../widgets/tablet/tablet_invoice_body.dart';
 import '../widgets/tablet/tablet_refund_invoice_body.dart';
 
 class InvoiceScreen extends StatefulWidget {
-  const InvoiceScreen({super.key, this.customer, this.invoice, this.device});
-  final CustomerModel? customer;
+  const InvoiceScreen({super.key, this.invoice, this.device});
   final CreateInvoiceModel? invoice;
   final DeviceModel? device;
 
@@ -67,7 +65,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                     create:
                         (context) =>
                             sl<InvoiceCubit>()
-                              ..init(context, customer: widget.customer, device: widget.device),
+                              ..init(context, device: widget.device),
                     child: BlocBuilder<MainViewCubit, MainViewState>(
                       buildWhen:
                           (previous, current) => previous.mode != current.mode,
@@ -90,7 +88,6 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                         (context) =>
                             sl<RefundInvoiceCubit>()..init(
                               context,
-                              customer: widget.customer,
                               invoice: widget.invoice,
                             ),
                     child: BlocBuilder<MainViewCubit, MainViewState>(

@@ -1,7 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
 import '../../../../core/enums/payment_type.dart';
-import '../../../customers/data/models/customer_model.dart';
 import '../../../devices/data/models/device_model.dart';
 import '../../../storage/data/models/storage_model.dart';
 
@@ -25,7 +24,6 @@ class CreateInvoiceModel {
   @Transient()
   PaymentType get paymentType => PaymentType.values[paymentIndex];
 
-  final customer = ToOne<CustomerModel>();
   final device = ToOne<DeviceModel>();
   final items = ToMany<ItemsInvoice>();
 

@@ -3,9 +3,7 @@ part of 'refund_invoice_cubit.dart';
 class RefundInvoiceState extends Equatable {
   final StateStatus status;
   final String? errMessage;
-  final List<CustomerModel> customers;
-  final CustomerModel? selectedCustomer;
-  final List<CreateInvoiceModel> customerInvoices;
+  final List<CreateInvoiceModel> invoices;
   final CreateInvoiceModel? selectedInvoice;
   final List<ItemsInvoice> adjustedItems;
   final Map<String, double> originalQuantities;
@@ -17,9 +15,7 @@ class RefundInvoiceState extends Equatable {
   const RefundInvoiceState({
     required this.status,
     this.errMessage,
-    required this.customers,
-    this.selectedCustomer,
-    required this.customerInvoices,
+    required this.invoices,
     this.selectedInvoice,
     required this.adjustedItems,
     required this.originalQuantities,
@@ -33,9 +29,7 @@ class RefundInvoiceState extends Equatable {
     return const RefundInvoiceState(
       status: StateStatus.initial,
       errMessage: null,
-      customers: [],
-      selectedCustomer: null,
-      customerInvoices: [],
+      invoices: [],
       selectedInvoice: null,
       adjustedItems: [],
       originalQuantities: {},
@@ -52,7 +46,7 @@ class RefundInvoiceState extends Equatable {
   }
 
   bool get canSaveRefund {
-    if (selectedCustomer == null || selectedInvoice == null || status == StateStatus.loading) {
+    if (selectedInvoice == null || status == StateStatus.loading) {
       return false;
     }
     // There must be some items refunded/adjusted (refund total > 0 or profit changed or quantities reduced)
@@ -64,10 +58,7 @@ class RefundInvoiceState extends Equatable {
   RefundInvoiceState copyWith({
     StateStatus? status,
     String? errMessage,
-    List<CustomerModel>? customers,
-    CustomerModel? selectedCustomer,
-    bool clearSelectedCustomer = false,
-    List<CreateInvoiceModel>? customerInvoices,
+    List<CreateInvoiceModel>? invoices,
     CreateInvoiceModel? selectedInvoice,
     bool clearSelectedInvoice = false,
     List<ItemsInvoice>? adjustedItems,
@@ -80,9 +71,7 @@ class RefundInvoiceState extends Equatable {
     return RefundInvoiceState(
       status: status ?? this.status,
       errMessage: errMessage ?? this.errMessage,
-      customers: customers ?? this.customers,
-      selectedCustomer: clearSelectedCustomer ? null : (selectedCustomer ?? this.selectedCustomer),
-      customerInvoices: customerInvoices ?? this.customerInvoices,
+      invoices: invoices ?? this.invoices,
       selectedInvoice: clearSelectedInvoice ? null : (selectedInvoice ?? this.selectedInvoice),
       adjustedItems: adjustedItems ?? this.adjustedItems,
       originalQuantities: originalQuantities ?? this.originalQuantities,
@@ -97,9 +86,7 @@ class RefundInvoiceState extends Equatable {
   List<Object?> get props => [
         status,
         errMessage,
-        customers,
-        selectedCustomer,
-        customerInvoices,
+        invoices,
         selectedInvoice,
         adjustedItems,
         originalQuantities,

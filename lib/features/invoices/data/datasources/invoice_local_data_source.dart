@@ -1,7 +1,6 @@
 import 'package:uuid/uuid.dart';
 
 import '../../../../core/enums/device_status.dart';
-import '../../../../core/enums/payment_type.dart';
 import '../../../../core/enums/transaction_type.dart';
 import '../../../../core/enums/user_type.dart';
 import '../../../../core/errors/exceptions.dart';
@@ -16,7 +15,7 @@ import '../models/get_invoice_models.dart';
 abstract class InvoiceLocalDataSource {
   GetInvoiceModels getInvoiceModels();
   int createInvoice(CreateInvoiceModel invoiceData);
-  List<CreateInvoiceModel> getCustomerInvoices(String customerUuid);
+  List<CreateInvoiceModel> getAllInvoices();
   int refundInvoice({
     required String invoiceUuid,
     required List<ItemsInvoice> adjustedItems,
@@ -45,31 +44,12 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
 
   @override
   GetInvoiceModels getInvoiceModels() {
-    final customersQuery = _store.customers.getAll();
     final storageItemsQuery = _store.storage.getAll();
-    if (customersQuery.isEmpty && storageItemsQuery.isEmpty) {
-      throw NoCustomersAndStorageItemsFoundException();
-    }
-    if (customersQuery.isEmpty) {
-      return GetInvoiceModels(
-        customers: [],
-        storageItems: storageItemsQuery,
-        warnings: [NoCustomersExeption()],
-      );
-    }
     if (storageItemsQuery.isEmpty) {
-      return GetInvoiceModels(
-        customers: customersQuery,
-        storageItems: [],
-        warnings: [NoStorageItemsExeption()],
-      );
+      throw NoStorageItemsExeption();
     }
 
-    return GetInvoiceModels(
-      customers: customersQuery,
-      storageItems: storageItemsQuery,
-      warnings: [],
-    );
+    return GetInvoiceModels(storageItems: storageItemsQuery, warnings: []);
   }
 
   @override
@@ -90,39 +70,7 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
         );
       }
 
-      final customer = invoiceData.customer.target;
-      final isLater = invoiceData.paymentType == PaymentType.later;
-
-      // Snapshot beginning balance for transaction record
-      final beginningBalance = customer?.netAmount ?? 0.0;
-
-      // Calculate amounts
-      final paidAmount =
-          isLater ? invoiceData.cashPaid : invoiceData.totalInvoice;
-
-      // The amount that will be added to the customer's debt
-      final remainingAmount =
-          isLater ? invoiceData.totalInvoice - invoiceData.cashPaid : 0.0;
-
-      double endBalance = beginningBalance;
-
-      // 3. Update customer balance
-      if (customer != null && isLater) {
-        // ✅ Correct: Increase receivableAmount directly
-        final newReceivable = customer.receivableAmount + remainingAmount;
-
-        final updatedCustomer = customer.copyWith(
-          receivableAmount: newReceivable,
-        );
-
-        _store.customers.put(updatedCustomer);
-
-        // Update endBalance to match the new state
-        endBalance = updatedCustomer.netAmount;
-      }
-
-      // 4. Calculate invoice profit
-      // Fixed: Use 0.0 for explicit double type
+      // 3. Calculate invoice profit
       final profit = invoiceData.items.fold<double>(0.0, (sum, item) {
         final storageItem = item.storageItem.target;
         if (storageItem == null) return sum;
@@ -130,7 +78,7 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
         return sum + ((item.sellPrice - storageItem.buyPrice) * item.quantity);
       });
 
-      // 5. Generate transaction note
+      // 4. Generate transaction note
       final note = invoiceData.items
           .map((item) {
             final itemName = item.storageItem.target?.itemName ?? '';
@@ -138,47 +86,35 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
           })
           .join('\n');
 
-      // 6. Create transaction
-      if (customer != null) {
-        _store.transactions.put(
-          TransactionModel.create(
-            uuid: const Uuid().v4(),
-            userUuid: customer.uuid,
-            userName: customer.name,
-            beginningBalance: beginningBalance,
-            paymentAmount: invoiceData.totalInvoice,
-            paidInvoiceAmount: paidAmount,
-            endBalance: endBalance,
-            invoiceProfit: profit,
-            transactionType: TransactionType.invoiceProfit,
-            userType: UserType.customer,
-            createdAt: DateTime.now(),
-            notes: note,
-          ),
-        );
-      }
+      // 5. Create transaction
+      _store.transactions.put(
+        TransactionModel.create(
+          uuid: const Uuid().v4(),
+          userUuid: '',
+          userName: 'Walk-in',
+          beginningBalance: 0,
+          paymentAmount: invoiceData.totalInvoice,
+          paidInvoiceAmount: invoiceData.totalInvoice,
+          endBalance: 0,
+          invoiceProfit: profit,
+          transactionType: TransactionType.invoiceProfit,
+          userType: UserType.customer,
+          createdAt: DateTime.now(),
+          notes: note,
+        ),
+      );
 
-      // 7. Save invoice
+      // 6. Save invoice
       return _store.invoices.put(invoiceData);
     });
   }
 
   @override
-  List<CreateInvoiceModel> getCustomerInvoices(String customerUuid) {
-    final builder = _store.invoices.query();
-    builder.link(
-      CreateInvoiceModel_.customer,
-      CustomerModel_.uuid.equals(customerUuid),
-    );
-
-    final query = builder.build();
-    final results = query.find();
-    query.close();
-
+  List<CreateInvoiceModel> getAllInvoices() {
+    final results = _store.invoices.getAll();
     if (results.isEmpty) {
       throw NoInvoicesFoundException();
     }
-
     return results;
   }
 
@@ -203,13 +139,7 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
         throw InvoiceNotFoundException();
       }
 
-      final customer = originalInvoice.customer.target;
-      if (customer == null) {
-        throw CustomerNotFoundException();
-      }
-
       final oldItems = originalInvoice.items.toList();
-      final isLater = originalInvoice.paymentType == PaymentType.later;
 
       // 2. Create map for quick lookup of adjusted items
       final adjustedItemsMap = <String, ItemsInvoice>{
@@ -274,52 +204,20 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
       // Profit difference: negative means we lost profit (items returned)
       final refundProfit = profitAdjusted - profitOriginal;
 
-      // 6. Update customer balance
-      final beginningBalance = customer.netAmount;
-      double endBalance = beginningBalance;
-
-      if (isLater) {
-        // Original later amount owed
-        final oldLaterAmount =
-            originalInvoice.totalInvoice - originalInvoice.cashPaid;
-
-        // New later amount owed after refund
-        final newLaterAmount = newTotal - newCashPaid;
-
-        // Difference: how much the debt decreased
-        final diffLaterAmount = oldLaterAmount - newLaterAmount;
-
-        // ✅ Correct: Decrease receivableAmount directly
-        final newReceivable = customer.receivableAmount - diffLaterAmount;
-
-        final updatedCustomer = customer.copyWith(
-          receivableAmount: newReceivable,
-        );
-
-        _store.customers.put(updatedCustomer);
-
-        // Update endBalance to match the new state exactly
-        endBalance = updatedCustomer.netAmount;
-      }
-
-      // 7. Calculate differences for transaction record
       final diffTotalInvoice = originalInvoice.totalInvoice - newTotal;
       final diffCashPaid = originalInvoice.cashPaid - newCashPaid;
 
-      // 8. Create transaction record for the refund
+      // 6. Create transaction record for the refund
       if (noteLines.isNotEmpty || diffTotalInvoice != 0) {
         _store.transactions.put(
           TransactionModel.create(
             uuid: const Uuid().v4(),
-            userUuid: customer.uuid,
-            userName: customer.name,
-            beginningBalance: beginningBalance,
-            // Negative because it's a refund (money going back)
+            userUuid: '',
+            userName: 'Walk-in',
+            beginningBalance: 0,
             paymentAmount: -diffTotalInvoice,
-            // Negative cash refunded to customer
             paidInvoiceAmount: -diffCashPaid,
-            endBalance: endBalance,
-            // Negative profit means loss from returned items
+            endBalance: 0,
             invoiceProfit: refundProfit,
             transactionType: TransactionType.invoiceProfit,
             userType: UserType.customer,
@@ -329,30 +227,26 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
         );
       }
 
-      // 9. Remove old invoice items
+      // 7. Remove old invoice items
       final oldItemIds =
           oldItems.map((e) => e.id ?? 0).where((id) => id > 0).toList();
       if (oldItemIds.isNotEmpty) {
         _store.invoiceItems.removeMany(oldItemIds);
       }
 
-      // 10. Save new/adjusted invoice items
+      // 8. Save new/adjusted invoice items
       _store.invoiceItems.putMany(adjustedItems);
 
-      // 11. Update the invoice entity
+      // 9. Update the invoice entity
       final updatedInvoice = CreateInvoiceModel.create(
         id: originalInvoice.id,
         uuid: originalInvoice.uuid,
         totalInvoice: newTotal,
         cashPaid: newCashPaid,
         laterPaid: newLaterPaid,
-        paymentType: originalInvoice.paymentType, // Preserve payment type
+        paymentType: originalInvoice.paymentType,
         invoiceDate: originalInvoice.invoiceDate,
-        // paymentIndex: originalInvoice.paymentIndex,
       );
-
-      // Set relations properly
-      updatedInvoice.customer.target = customer;
 
       // Clear old items and add new ones
       updatedInvoice.items.clear();
@@ -364,9 +258,10 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
 
   @override
   List<CreateInvoiceModel> getActiveSessions() {
-    final query = _store.invoices
-        .query(CreateInvoiceModel_.isSession.equals(true))
-        .build();
+    final query =
+        _store.invoices
+            .query(CreateInvoiceModel_.isSession.equals(true))
+            .build();
     final results = query.find();
     query.close();
     return results;
@@ -374,10 +269,14 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
 
   @override
   CreateInvoiceModel? getActiveSessionForDevice(int deviceId) {
-    final query = _store.invoices
-        .query(CreateInvoiceModel_.isSession.equals(true)
-            .and(CreateInvoiceModel_.device.equals(deviceId)))
-        .build();
+    final query =
+        _store.invoices
+            .query(
+              CreateInvoiceModel_.isSession
+                  .equals(true)
+                  .and(CreateInvoiceModel_.device.equals(deviceId)),
+            )
+            .build();
     final result = query.findFirst();
     query.close();
     return result;
@@ -402,9 +301,10 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
     required List<ItemsInvoice> items,
   }) {
     _store.store.runInTransaction(TxMode.write, () {
-      final query = _store.invoices
-          .query(CreateInvoiceModel_.uuid.equals(sessionUuid))
-          .build();
+      final query =
+          _store.invoices
+              .query(CreateInvoiceModel_.uuid.equals(sessionUuid))
+              .build();
       final invoice = query.findFirst();
       query.close();
 

@@ -4,7 +4,7 @@ import 'data/repositories/invoice_repository_impl.dart';
 import 'domain/repositories/invoice_repository.dart';
 import 'domain/usecases/create_invoice_usecase.dart';
 import 'domain/usecases/get_all_invoice_models_usecase.dart';
-import 'domain/usecases/get_customer_invoices_usecase.dart';
+import 'domain/usecases/get_all_invoices_usecase.dart';
 import 'domain/usecases/refund_invoice_usecase.dart';
 import 'domain/usecases/get_active_sessions_usecase.dart';
 import 'domain/usecases/get_active_session_for_device_usecase.dart';
@@ -30,8 +30,8 @@ initInvoicesDI() {
   sl.registerLazySingleton<CreateInvoiceUseCase>(
     () => CreateInvoiceUseCase(),
   );
-  sl.registerLazySingleton<GetCustomerInvoicesUseCase>(
-    () => GetCustomerInvoicesUseCase(),
+  sl.registerLazySingleton<GetAllInvoicesUseCase>(
+    () => GetAllInvoicesUseCase(),
   );
   sl.registerLazySingleton<RefundInvoiceUseCase>(
     () => RefundInvoiceUseCase(),
@@ -62,7 +62,7 @@ Future<void> resetInvoicesDI() async {
   await sl.resetLazySingleton<InvoiceRepository>();
   await sl.resetLazySingleton<GetAllInvoiceModelsUseCase>();
   await sl.resetLazySingleton<CreateInvoiceUseCase>();
-  await sl.resetLazySingleton<GetCustomerInvoicesUseCase>();
+  await sl.resetLazySingleton<GetAllInvoicesUseCase>();
   await sl.resetLazySingleton<RefundInvoiceUseCase>();
   await sl.resetLazySingleton<GetActiveSessionsUseCase>();
   await sl.resetLazySingleton<GetActiveSessionForDeviceUseCase>();

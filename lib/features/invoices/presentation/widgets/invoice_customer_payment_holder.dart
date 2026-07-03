@@ -151,24 +151,6 @@ class _IvoiceCustomerPaymentHolder extends StatelessWidget {
                 }
               },
             ),
-
-            BlocBuilder<InvoiceCubit, InvoiceState>(
-              buildWhen: (previous, current) {
-                return previous.paymentType != current.paymentType;
-              },
-              builder: (context, state) {
-                final cubit = InvoiceCubit.get(context);
-                return CustomTapsRow(
-                  itemsName:
-                      PaymentType.values.map((e) => e.localizedName).toList(),
-                  selectedIndex: state.paymentType.index,
-                  itemsCount: PaymentType.values.length,
-                  onTap: (index) {
-                    cubit.changePayType(PaymentType.values[index]);
-                  },
-                );
-              },
-            ),
           ],
         ),
       ),

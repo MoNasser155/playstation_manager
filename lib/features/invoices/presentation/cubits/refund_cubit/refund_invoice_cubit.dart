@@ -9,10 +9,8 @@ import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../../core/shared/di.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/custom_snack_bar.dart';
-import '../../../../customers/data/models/customer_model.dart';
 import '../../../data/models/create_invoice_model.dart';
-import '../../../domain/usecases/get_all_invoice_models_usecase.dart';
-import '../../../domain/usecases/get_customer_invoices_usecase.dart';
+import '../../../domain/usecases/get_all_invoices_usecase.dart';
 import '../../../domain/usecases/refund_invoice_usecase.dart';
 
 part 'refund_invoice_state.dart';
@@ -23,91 +21,48 @@ class RefundInvoiceCubit extends BaseCubit<RefundInvoiceState> {
   static RefundInvoiceCubit get(context) =>
       BlocProvider.of<RefundInvoiceCubit>(context);
 
-  final _getAllInvoiceModelsUseCase = sl<GetAllInvoiceModelsUseCase>();
-  final _getCustomerInvoicesUseCase = sl<GetCustomerInvoicesUseCase>();
+  final _getAllInvoicesUseCase = sl<GetAllInvoicesUseCase>();
   final _refundInvoiceUseCase = sl<RefundInvoiceUseCase>();
 
   final paidCashController = TextEditingController(text: '0');
 
   void init(
     BuildContext context, {
-    CustomerModel? customer,
     CreateInvoiceModel? invoice,
   }) {
     safeEmit(
       state.copyWith(status: StateStatus.loading, selectedInvoice: invoice),
     );
-    _loadAllCustomers(context, customer: customer, invoice: invoice);
+    _loadAllInvoices(context, invoice: invoice);
   }
 
-  Future<void> _loadAllCustomers(
+  Future<void> _loadAllInvoices(
     BuildContext context, {
-    CustomerModel? customer,
     CreateInvoiceModel? invoice,
   }) async {
-    final result = await _getAllInvoiceModelsUseCase();
-    result.fold(
-      (failure) {
-        CustomSnackBar.top(context: context, msg: failure.message);
-        safeEmit(state.copyWith(status: StateStatus.failure));
-      },
-      (invoiceModels) {
-        safeEmit(
-          state.copyWith(
-            status: StateStatus.success,
-            customers: invoiceModels.customers,
-          ),
-        );
-        if (customer != null && invoice != null) {
-          setCustomer(context, customer);
-          selectInvoice(invoice);
-        }
-      },
-    );
-  }
-
-  Future<void> setCustomer(BuildContext context, CustomerModel customer) async {
-    safeEmit(
-      state.copyWith(
-        selectedCustomer: customer,
-        clearSelectedInvoice: false,
-        adjustedItems: [],
-        originalQuantities: {},
-        originalPrices: {},
-        cashPaid: 0,
-        totalInvoice: 0,
-        totalRefundAmount: 0,
-      ),
-    );
-    paidCashController.clear();
-    _loadCustomerInvoices(context, customer.uuid);
-  }
-
-  Future<void> _loadCustomerInvoices(
-    BuildContext context,
-    String customerUuid,
-  ) async {
-    safeEmit(state.copyWith(status: StateStatus.loading, customerInvoices: []));
-    final result = await _getCustomerInvoicesUseCase(customerUuid);
+    final result = await _getAllInvoicesUseCase();
     result.fold(
       (failure) {
         // NoInvoicesFoundException is handled cleanly by displaying an empty list, not failing the cubit
         if (failure.message == LocaleKeys.noInvoicesFound) {
           safeEmit(
-            state.copyWith(status: StateStatus.success, customerInvoices: []),
+            state.copyWith(status: StateStatus.success, invoices: []),
           );
         } else {
           CustomSnackBar.top(context: context, msg: failure.message);
           safeEmit(state.copyWith(status: StateStatus.failure));
         }
       },
-      (invoices) {
+      (invoicesList) {
         safeEmit(
           state.copyWith(
             status: StateStatus.success,
-            customerInvoices: invoices,
+            invoices: invoicesList,
           ),
         );
+        if (invoice != null) {
+          selectInvoice(invoice);
+        }
       },
     );
   }
@@ -286,11 +241,8 @@ class RefundInvoiceCubit extends BaseCubit<RefundInvoiceState> {
 
   void _resetRefund(BuildContext context) {
     paidCashController.clear();
-    final previousCustomer = state.selectedCustomer;
-    safeEmit(RefundInvoiceState.initial().copyWith(customers: state.customers));
-    if (previousCustomer != null) {
-      setCustomer(context, previousCustomer);
-    }
+    safeEmit(RefundInvoiceState.initial());
+    _loadAllInvoices(context);
   }
 
   @override

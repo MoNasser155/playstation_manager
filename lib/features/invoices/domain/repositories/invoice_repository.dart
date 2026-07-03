@@ -8,9 +8,7 @@ import '../../../devices/data/models/device_model.dart';
 abstract class InvoiceRepository {
   Future<Either<Failure, GetInvoiceModels>> getInvoiceModels();
   Future<Either<Failure, int>> createInvoice(CreateInvoiceModel invoiceData);
-  Future<Either<Failure, List<CreateInvoiceModel>>> getCustomerInvoices(
-    String customerUuid,
-  );
+  Future<Either<Failure, List<CreateInvoiceModel>>> getAllInvoices();
   Future<Either<Failure, int>> refundInvoice({
     required String invoiceUuid,
     required List<ItemsInvoice> adjustedItems,

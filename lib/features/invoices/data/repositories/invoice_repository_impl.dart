@@ -29,11 +29,9 @@ class InvoiceRepositoryImpl with ErrorHandler implements InvoiceRepository {
   }
 
   @override
-  Future<Either<Failure, List<CreateInvoiceModel>>> getCustomerInvoices(
-    String customerUuid,
-  ) async {
+  Future<Either<Failure, List<CreateInvoiceModel>>> getAllInvoices() async {
     return wrapBoxOperationSync(
-      () => _invoiceLocalDataSource.getCustomerInvoices(customerUuid),
+      () => _invoiceLocalDataSource.getAllInvoices(),
     );
   }
 
