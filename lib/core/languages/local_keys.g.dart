@@ -745,4 +745,37 @@ abstract class LocaleKeys {
   static const String _hour = 'hour';
   static String get hour => _hour.tr();
 
+  static const String _playType = 'play_type';
+  static String get playType => _playType.tr();
+
+  static const String _twoPlayers = 'two_players';
+  static String get twoPlayers => _twoPlayers.tr();
+
+  static const String _multiPlayer = 'multi_player';
+  static String get multiPlayer => _multiPlayer.tr();
+
+  static const String _startTime = 'start_time';
+  static String get startTime => _startTime.tr();
+
+  static const String _endTime = 'end_time';
+  static String get endTime => _endTime.tr();
+
+  static const String _sessionDurationSummary = 'session_duration_summary';
+  static String get sessionDurationSummary => _sessionDurationSummary.tr();
+
+  static const String _sessionTimeCost = 'session_time_cost';
+  static String get sessionTimeCost => _sessionTimeCost.tr();
+
+  static const String _itemsBought = 'items_bought';
+  static String get itemsBought => _itemsBought.tr();
+
+  static const String _confirmEndSession = 'confirm_end_session';
+  static String get confirmEndSession => _confirmEndSession.tr();
+
+  static const String _twoPlayersHourlyRate = 'two_players_hourly_rate';
+  static String get twoPlayersHourlyRate => _twoPlayersHourlyRate.tr();
+
+  static const String _multiPlayerHourlyRate = 'multi_player_hourly_rate';
+  static String get multiPlayerHourlyRate => _multiPlayerHourlyRate.tr();
+
 }

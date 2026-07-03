@@ -13,7 +13,6 @@ class _IvoiceCustomerPaymentHolder extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadius.r16),
         ),
         child: Column(
-          spacing: AppSpacing.v12,
           children: [
             BlocBuilder<InvoiceCubit, InvoiceState>(
               buildWhen: (previous, current) {
@@ -52,7 +51,7 @@ class _IvoiceCustomerPaymentHolder extends StatelessWidget {
               },
               builder: (context, state) {
                 if (state.selectedDevice == null) {
-                  return const SizedBox.shrink();
+                  return const SizedBox();
                 }
 
                 final cubit = InvoiceCubit.get(context);
@@ -68,7 +67,8 @@ class _IvoiceCustomerPaymentHolder extends StatelessWidget {
                   }
 
                   return Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.all(AppPadding.pf12),
+                    margin: EdgeInsets.only(top: AppPadding.pf12),
                     decoration: BoxDecoration(
                       color: context.mapCard,
                       borderRadius: BorderRadius.circular(AppRadius.r8),
@@ -93,40 +93,47 @@ class _IvoiceCustomerPaymentHolder extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              LocaleKeys.sessionCost,
-                              style: context.textTheme.titleMedium,
-                            ),
-                            Text(
-                              "${state.sessionCost.toStringAsFixed(2)} ${LocaleKeys.egp}",
-                              style: context.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ],
-                        ),
                         gapH(4),
                         CustomButton(
                           title: LocaleKeys.endSession,
                           backgroundColor: context.colorScheme.error,
-                          onTap: () {
-                            cubit.endSession(context);
+                          onTap: () async {
+                            await cubit.endSession(context);
+                            if (context.mounted) {
+                              final result = await showDialog<bool>(
+                                context: context,
+                                barrierDismissible: false,
+                                builder:
+                                    (_) => BlocProvider.value(
+                                      value: cubit,
+                                      child: const EndSessionDialog(),
+                                    ),
+                              );
+                              if (result == true) {
+                                if (context.mounted) {
+                                  await cubit.confirmEndSession(context);
+                                }
+                              } else {
+                                cubit.cancelEndSession();
+                              }
+                            }
                           },
                         ),
                       ],
                     ),
                   );
                 } else if (device.status == DeviceStatus.available) {
-                  return CustomButton(
-                    title: LocaleKeys.startSession,
-                    backgroundColor: Colors.green,
-                    onTap: () {
-                      cubit.startSession(context);
-                    },
+                  return Column(
+                    children: [
+                      gapH(12),
+                      CustomButton(
+                        title: LocaleKeys.startSession,
+                        backgroundColor: Colors.green,
+                        onTap: () {
+                          cubit.startSession(context);
+                        },
+                      ),
+                    ],
                   );
                 } else if (device.status == DeviceStatus.maintenance) {
                   return Container(

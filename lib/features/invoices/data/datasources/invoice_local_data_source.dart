@@ -4,7 +4,7 @@ import '../../../../core/enums/device_status.dart';
 import '../../../../core/enums/transaction_type.dart';
 import '../../../../core/enums/user_type.dart';
 import '../../../../core/errors/exceptions.dart';
-import 'package:local_erp_system/objectbox.g.dart';
+import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
 import '../../../../core/objectbox/objectbox_store.dart';
 import '../../../../core/shared/di.dart';
 import '../../../devices/data/models/device_model.dart';

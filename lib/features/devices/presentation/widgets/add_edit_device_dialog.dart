@@ -48,8 +48,21 @@ class AddEditDeviceDialog extends StatelessWidget {
                 ),
                 gapH(20),
                 CustomTextField(
-                  hint: LocaleKeys.hourlyRate,
+                  hint: LocaleKeys.twoPlayersHourlyRate,
                   controller: cubit.hourlyRateController,
+                  prefix: const Icon(Icons.monetization_on_outlined),
+                  validate: Validations.validateEmpty,
+                  inputType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                  ],
+                ),
+                gapH(20),
+                CustomTextField(
+                  hint: LocaleKeys.multiPlayerHourlyRate,
+                  controller: cubit.multiPlayerHourlyRateController,
                   prefix: const Icon(Icons.monetization_on_outlined),
                   validate: Validations.validateEmpty,
                   inputType: const TextInputType.numberWithOptions(

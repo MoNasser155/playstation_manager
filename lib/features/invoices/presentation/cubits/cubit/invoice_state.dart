@@ -19,6 +19,11 @@ class InvoiceState extends Equatable {
   final double sessionCost;
   final bool isSessionActive;
 
+  // New fields for confirmation dialog & play type
+  final PlayType playType;
+  final DateTime? sessionEndTime;
+  final bool isEndingSession;
+
   const InvoiceState({
     required this.status,
     this.errMessage,
@@ -35,15 +40,15 @@ class InvoiceState extends Equatable {
     required this.sessionDuration,
     required this.sessionCost,
     required this.isSessionActive,
+    required this.playType,
+    this.sessionEndTime,
+    required this.isEndingSession,
   });
 
   factory InvoiceState.initial() {
     return InvoiceState(
       status: StateStatus.initial,
-      invoiceModels: GetInvoiceModels(
-        storageItems: [],
-        warnings: [],
-      ),
+      invoiceModels: GetInvoiceModels(storageItems: [], warnings: []),
       selectedStorageItem: null,
       invoiceUuid: const Uuid().v4(),
       invoiceList: [],
@@ -56,15 +61,27 @@ class InvoiceState extends Equatable {
       sessionDuration: Duration.zero,
       sessionCost: 0.0,
       isSessionActive: false,
+      playType: PlayType.twoPlayers,
+      sessionEndTime: null,
+      isEndingSession: false,
     );
   }
 
   bool get canAddItem => selectedStorageItem != null && currentInputTotal > 0;
 
   bool get canSaveInvoice =>
-      !isSessionActive &&
-      invoiceItems.isNotEmpty &&
-      totalInvoice > 0;
+      !isSessionActive && invoiceItems.isNotEmpty && totalInvoice > 0;
+
+  double get roundedSessionCost {
+    if (sessionCost <= 0) return 0.0;
+    final rounded = sessionCost.round();
+    final remainder = rounded % 5;
+    if (remainder <= 2) {
+      return (rounded - remainder).toDouble();
+    } else {
+      return (rounded + (5 - remainder)).toDouble();
+    }
+  }
 
   InvoiceState copyWith({
     StateStatus? status,
@@ -85,6 +102,10 @@ class InvoiceState extends Equatable {
     Duration? sessionDuration,
     double? sessionCost,
     bool? isSessionActive,
+    PlayType? playType,
+    DateTime? sessionEndTime,
+    bool clearSessionEndTime = false,
+    bool? isEndingSession,
   }) {
     return InvoiceState(
       status: status ?? this.status,
@@ -100,11 +121,19 @@ class InvoiceState extends Equatable {
       totalInvoice: totalInvoice ?? this.totalInvoice,
       currentInputTotal: currentInputTotal ?? this.currentInputTotal,
       devices: devices ?? this.devices,
-      selectedDevice: clearSelectedDevice ? null : selectedDevice ?? this.selectedDevice,
-      activeSessionInvoice: clearActiveSessionInvoice ? null : activeSessionInvoice ?? this.activeSessionInvoice,
+      selectedDevice:
+          clearSelectedDevice ? null : selectedDevice ?? this.selectedDevice,
+      activeSessionInvoice:
+          clearActiveSessionInvoice
+              ? null
+              : activeSessionInvoice ?? this.activeSessionInvoice,
       sessionDuration: sessionDuration ?? this.sessionDuration,
       sessionCost: sessionCost ?? this.sessionCost,
       isSessionActive: isSessionActive ?? this.isSessionActive,
+      playType: playType ?? this.playType,
+      sessionEndTime:
+          clearSessionEndTime ? null : sessionEndTime ?? this.sessionEndTime,
+      isEndingSession: isEndingSession ?? this.isEndingSession,
     );
   }
 
@@ -125,5 +154,8 @@ class InvoiceState extends Equatable {
     sessionDuration,
     sessionCost,
     isSessionActive,
+    playType,
+    sessionEndTime,
+    isEndingSession,
   ];
 }

@@ -248,6 +248,17 @@
   "device_already_exists": "اسم الجهاز موجود بالفعل",
   "session_started": "تم بدء الجلسة بنجاح",
   "session_ended": "تم إنهاء الجلسة بنجاح",
-  "hour": "ساعة"
+  "hour": "ساعة",
+  "play_type": "نوع اللعب",
+  "two_players": "لاعبان (2 يد تحكم)",
+  "multi_player": "أكثر من لاعبين",
+  "start_time": "وقت البداية",
+  "end_time": "وقت النهاية",
+  "session_duration_summary": "المدة",
+  "session_time_cost": "تكلفة وقت الجلسة",
+  "items_bought": "الطلبات المشتراة",
+  "confirm_end_session": "تأكيد إنهاء الجلسة",
+  "two_players_hourly_rate": "سعر الساعة للاعبين",
+  "multi_player_hourly_rate": "سعر الساعة لمتعدد اللاعبين"
 
 }

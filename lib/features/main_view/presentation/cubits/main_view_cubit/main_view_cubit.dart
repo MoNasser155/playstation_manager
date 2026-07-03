@@ -38,8 +38,8 @@ class MainViewCubit extends BaseCubit<MainViewState> {
   List<TapsModel> get taps => [
     TapsModel(title: LocaleKeys.home, icon: VectorIcons.home),
     TapsModel(title: LocaleKeys.invoices, icon: VectorIcons.receipt),
+    TapsModel(title: LocaleKeys.devices, icon: VectorIcons.gamepad),
     TapsModel(title: LocaleKeys.inventory, icon: VectorIcons.inventory),
-    TapsModel(title: LocaleKeys.devices, icon: VectorIcons.customer),
     TapsModel(title: LocaleKeys.transactions, icon: VectorIcons.transactions),
     TapsModel(title: LocaleKeys.profit, icon: VectorIcons.profit),
     TapsModel(
@@ -62,8 +62,8 @@ class MainViewCubit extends BaseCubit<MainViewState> {
               ? data[0] as DeviceModel?
               : null,
     ),
-    StorageScreen(),
     DevicesScreen(),
+    StorageScreen(),
     TransactionsScreen(),
     ProfitScreen(),
   ];

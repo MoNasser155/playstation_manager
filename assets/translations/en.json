@@ -248,6 +248,17 @@
   "device_already_exists": "Device name already exists",
   "session_started": "Session started successfully",
   "session_ended": "Session ended successfully",
-  "hour": "hour"
+  "hour": "hour",
+  "play_type": "Play Type",
+  "two_players": "2 Players (2 Controllers)",
+  "multi_player": "More than 2 Players",
+  "start_time": "Start Time",
+  "end_time": "End Time",
+  "session_duration_summary": "Duration",
+  "session_time_cost": "Session Time Cost",
+  "items_bought": "Items Bought",
+  "confirm_end_session": "Confirm End Session",
+  "two_players_hourly_rate": "2 Players Hourly Rate",
+  "multi_player_hourly_rate": "Multi Player Hourly Rate"
 
 }

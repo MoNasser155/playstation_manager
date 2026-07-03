@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:clock/clock.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../core/enums/device_status.dart';
+import '../../../../../core/enums/play_type.dart';
 import '../../../../../core/enums/state_status.dart';
 import '../../../../../core/errors/exceptions.dart';
 import '../../../../../core/languages/local_keys.g.dart';
@@ -113,6 +115,9 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
           invoiceItems: [],
           totalInvoice: 0.0,
           invoiceUuid: const Uuid().v4(),
+          playType: PlayType.twoPlayers,
+          clearSessionEndTime: true,
+          isEndingSession: false,
         ),
       );
       return;
@@ -131,19 +136,23 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
             invoiceItems: [],
             totalInvoice: 0.0,
             invoiceUuid: const Uuid().v4(),
+            playType: PlayType.twoPlayers,
+            clearSessionEndTime: true,
+            isEndingSession: false,
           ),
         );
       },
       (activeSession) {
         if (activeSession != null) {
           final items = activeSession.items.toList();
-          final start = activeSession.sessionStartDate ?? DateTime.now();
-          final duration = DateTime.now().difference(start);
+          final start = activeSession.sessionStartDate ?? clock.now();
+          final duration = clock.now().difference(start);
           final cost = (duration.inSeconds / 3600.0) * activeSession.hourlyRate;
           final itemsTotal = items.fold<double>(
             0.0,
             (s, e) => s + e.totalItemPrice,
           );
+          final restoredPlayType = PlayType.values[activeSession.playTypeIndex];
 
           safeEmit(
             state.copyWith(
@@ -154,7 +163,10 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
               isSessionActive: true,
               invoiceItems: items,
               invoiceUuid: activeSession.uuid,
-              totalInvoice: cost + itemsTotal,
+              totalInvoice: itemsTotal,
+              playType: restoredPlayType,
+              clearSessionEndTime: true,
+              isEndingSession: false,
             ),
           );
 
@@ -170,6 +182,9 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
               invoiceItems: [],
               totalInvoice: 0.0,
               invoiceUuid: const Uuid().v4(),
+              playType: PlayType.twoPlayers,
+              clearSessionEndTime: true,
+              isEndingSession: false,
             ),
           );
         }
@@ -177,17 +192,27 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     );
   }
 
+  void changePlayType(PlayType type) {
+    if (state.isSessionActive) return;
+    safeEmit(state.copyWith(playType: type));
+  }
+
   Future<void> startSession(BuildContext context) async {
     final device = state.selectedDevice;
     if (device == null || device.status != DeviceStatus.available) return;
 
+    final hourlyRate = state.playType == PlayType.twoPlayers
+        ? device.hourlyRate
+        : device.multiPlayerHourlyRate;
+
     final newInvoice = CreateInvoiceModel.create(
       uuid: const Uuid().v4(),
       totalInvoice: 0.0,
-      invoiceDate: DateTime.now(),
+      invoiceDate: clock.now(),
       isSession: true,
-      sessionStartDate: DateTime.now(),
-      hourlyRate: device.hourlyRate,
+      sessionStartDate: clock.now(),
+      hourlyRate: hourlyRate,
+      playType: state.playType,
     );
     newInvoice.device.target = device;
 
@@ -221,10 +246,10 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
   void _startSessionTimer() {
     _sessionTimer?.cancel();
     _sessionTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (state.isSessionActive && state.activeSessionInvoice != null) {
+      if (state.isSessionActive && state.activeSessionInvoice != null && !state.isEndingSession) {
         final start =
-            state.activeSessionInvoice!.sessionStartDate ?? DateTime.now();
-        final duration = DateTime.now().difference(start);
+            state.activeSessionInvoice!.sessionStartDate ?? clock.now();
+        final duration = clock.now().difference(start);
         final cost =
             (duration.inSeconds / 3600.0) *
             state.activeSessionInvoice!.hourlyRate;
@@ -237,9 +262,11 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
           state.copyWith(
             sessionDuration: duration,
             sessionCost: cost,
-            totalInvoice: cost + itemsTotal,
+            totalInvoice: itemsTotal,
           ),
         );
+      } else if (state.isEndingSession) {
+        // Timer paused while dialog is showing
       } else {
         timer.cancel();
       }
@@ -261,17 +288,47 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     if (device == null) return;
 
     _sessionTimer?.cancel();
+    safeEmit(
+      state.copyWith(
+        isEndingSession: true,
+        sessionEndTime: clock.now(),
+      ),
+    );
+  }
+
+  void cancelEndSession() {
+    safeEmit(
+      state.copyWith(
+        isEndingSession: false,
+        clearSessionEndTime: true,
+      ),
+    );
+    _startSessionTimer();
+  }
+
+  Future<void> confirmEndSession(BuildContext context) async {
+    if (!state.isSessionActive || state.activeSessionInvoice == null) return;
+    final device = state.selectedDevice;
+    if (device == null) return;
+
+    safeEmit(state.copyWith(status: StateStatus.loading));
+
     final activeInvoice = state.activeSessionInvoice!;
-    final total = state.totalInvoice;
+    final itemsTotal = state.invoiceItems.fold<double>(
+      0.0,
+      (s, e) => s + e.totalItemPrice,
+    );
+    final total = state.roundedSessionCost + itemsTotal;
 
     final completedInvoice = CreateInvoiceModel(
       id: activeInvoice.id,
       uuid: activeInvoice.uuid,
       totalInvoice: total,
-      invoiceDate: DateTime.now(),
+      invoiceDate: clock.now(),
       isSession: false,
       sessionStartDate: activeInvoice.sessionStartDate,
       hourlyRate: activeInvoice.hourlyRate,
+      playTypeIndex: activeInvoice.playTypeIndex,
     );
     completedInvoice.device.target = device;
     completedInvoice.items.addAll(state.invoiceItems);
@@ -283,6 +340,7 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
 
     result.fold(
       (failure) {
+        safeEmit(state.copyWith(status: StateStatus.failure));
         if (context.mounted) {
           CustomSnackBar.top(context: context, msg: failure.message);
         }
@@ -384,8 +442,7 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     }
 
     final total = updated.fold<double>(0, (sum, e) => sum + e.totalItemPrice);
-    final finalTotal =
-        state.isSessionActive ? (state.sessionCost + total) : total;
+    final finalTotal = total;
 
     sellPriceController.clear();
     quantityController.clear();
@@ -406,8 +463,7 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     final updated = List<ItemsInvoice>.from(state.invoiceItems)
       ..removeAt(index);
     final total = updated.fold<double>(0, (sum, e) => sum + e.totalItemPrice);
-    final finalTotal =
-        state.isSessionActive ? (state.sessionCost + total) : total;
+    final finalTotal = total;
 
     safeEmit(state.copyWith(invoiceItems: updated, totalInvoice: finalTotal));
     _persistActiveSessionItems();
@@ -419,7 +475,7 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     final invoice = CreateInvoiceModel.create(
       uuid: state.invoiceUuid,
       totalInvoice: state.totalInvoice,
-      invoiceDate: DateTime.now(),
+      invoiceDate: clock.now(),
     );
 
     // Link items

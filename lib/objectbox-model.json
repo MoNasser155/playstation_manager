@@ -66,7 +66,7 @@
     },
     {
       "id": "6:3415304222025532929",
-      "lastPropertyId": "12:1914880427519149473",
+      "lastPropertyId": "13:3457360220319903264",
       "name": "CreateInvoiceModel",
       "properties": [
         {
@@ -114,6 +114,11 @@
           "type": 11,
           "flags": 520,
           "relationTarget": "DeviceModel"
+        },
+        {
+          "id": "13:3457360220319903264",
+          "name": "playTypeIndex",
+          "type": 6
         }
       ],
       "relations": [
@@ -214,7 +219,7 @@
     },
     {
       "id": "10:7788442270770736492",
-      "lastPropertyId": "6:23527093261008010",
+      "lastPropertyId": "7:4834071033328230734",
       "name": "DeviceModel",
       "properties": [
         {
@@ -249,6 +254,11 @@
           "id": "6:23527093261008010",
           "name": "statusIndex",
           "type": 6
+        },
+        {
+          "id": "7:4834071033328230734",
+          "name": "multiPlayerHourlyRate",
+          "type": 8
         }
       ],
       "relations": []

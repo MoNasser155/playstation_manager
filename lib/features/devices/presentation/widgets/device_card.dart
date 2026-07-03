@@ -7,7 +7,6 @@ import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
 import '../../../../core/constants/app_values.dart';
 import '../../../../core/enums/device_status.dart';
-import '../../../../core/enums/device_type.dart';
 import '../../../../core/languages/local_keys.g.dart';
 import '../../../../core/utils/gaps.dart';
 import '../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';
@@ -80,33 +79,11 @@ class _DeviceCardState extends State<DeviceCard> {
     return "$hours:$minutes:$seconds";
   }
 
-  IconData _getDeviceIcon(DeviceType type) {
-    switch (type) {
-      case DeviceType.ps4:
-      case DeviceType.ps5:
-      case DeviceType.ps3:
-        return Icons.gamepad_rounded;
-      case DeviceType.vr:
-        return Icons.vrpano_rounded;
-      case DeviceType.other:
-        return Icons.videogame_asset_rounded;
-    }
-  }
-
-  Color _getStatusColor(DeviceStatus status) {
-    switch (status) {
-      case DeviceStatus.available:
-        return Colors.green;
-      case DeviceStatus.reserved:
-        return Colors.orange;
-      case DeviceStatus.maintenance:
-        return Colors.red;
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = _getStatusColor(widget.device.status);
+    final statusColor = widget.device.status.color;
 
     return InkWell(
       onTap: () {
@@ -135,7 +112,7 @@ class _DeviceCardState extends State<DeviceCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(
-                  _getDeviceIcon(widget.device.type),
+                  widget.device.type.icon,
                   size: 32.sp,
                   color: context.colorScheme.secondary,
                 ),

@@ -11,6 +11,7 @@ class DeviceModel {
   final String uuid;
   final String name;
   final double hourlyRate;
+  final double multiPlayerHourlyRate;
   int typeIndex;
   int statusIndex;
 
@@ -27,6 +28,7 @@ class DeviceModel {
     required this.uuid,
     required this.name,
     required this.hourlyRate,
+    required this.multiPlayerHourlyRate,
     required this.typeIndex,
     required this.statusIndex,
   });
@@ -36,6 +38,7 @@ class DeviceModel {
     required String uuid,
     required String name,
     required double hourlyRate,
+    required double multiPlayerHourlyRate,
     required DeviceType type,
     required DeviceStatus status,
   }) {
@@ -44,6 +47,7 @@ class DeviceModel {
       uuid: uuid,
       name: name,
       hourlyRate: hourlyRate,
+      multiPlayerHourlyRate: multiPlayerHourlyRate,
       typeIndex: type.index,
       statusIndex: status.index,
     );
@@ -52,6 +56,7 @@ class DeviceModel {
   DeviceModel copyWith({
     String? name,
     double? hourlyRate,
+    double? multiPlayerHourlyRate,
     DeviceType? type,
     DeviceStatus? status,
   }) {
@@ -60,6 +65,8 @@ class DeviceModel {
       uuid: uuid,
       name: name ?? this.name,
       hourlyRate: hourlyRate ?? this.hourlyRate,
+      multiPlayerHourlyRate:
+          multiPlayerHourlyRate ?? this.multiPlayerHourlyRate,
       typeIndex: type?.index ?? typeIndex,
       statusIndex: status?.index ?? statusIndex,
     );
@@ -69,6 +76,7 @@ class DeviceModel {
     uuid: '',
     name: '',
     hourlyRate: 0.0,
+    multiPlayerHourlyRate: 0.0,
     typeIndex: DeviceType.ps4.index,
     statusIndex: DeviceStatus.available.index,
   );

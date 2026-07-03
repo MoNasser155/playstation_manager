@@ -23,6 +23,7 @@ class AddDeviceCubit extends BaseCubit<AddDeviceState> {
 
   final nameController = TextEditingController();
   final hourlyRateController = TextEditingController();
+  final multiPlayerHourlyRateController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -30,6 +31,7 @@ class AddDeviceCubit extends BaseCubit<AddDeviceState> {
     if (device != null) {
       nameController.text = device.name;
       hourlyRateController.text = device.hourlyRate.toString();
+      multiPlayerHourlyRateController.text = device.multiPlayerHourlyRate.toString();
       safeEmit(state.copyWith(
         deviceType: device.type,
         deviceStatus: device.status,
@@ -51,6 +53,7 @@ class AddDeviceCubit extends BaseCubit<AddDeviceState> {
     }
 
     final double hourlyRate = double.tryParse(hourlyRateController.text) ?? 0.0;
+    final double multiPlayerHourlyRate = double.tryParse(multiPlayerHourlyRateController.text) ?? 0.0;
 
     safeEmit(state.copyWith(status: StateStatus.loading));
 
@@ -61,6 +64,7 @@ class AddDeviceCubit extends BaseCubit<AddDeviceState> {
         uuid: existingDevice.uuid,
         name: nameController.text.trim(),
         hourlyRate: hourlyRate,
+        multiPlayerHourlyRate: multiPlayerHourlyRate,
         typeIndex: state.deviceType.index,
         statusIndex: state.deviceStatus.index,
       );
@@ -81,6 +85,7 @@ class AddDeviceCubit extends BaseCubit<AddDeviceState> {
         uuid: const Uuid().v4(),
         name: nameController.text.trim(),
         hourlyRate: hourlyRate,
+        multiPlayerHourlyRate: multiPlayerHourlyRate,
         type: state.deviceType,
         status: state.deviceStatus,
       );
@@ -102,6 +107,7 @@ class AddDeviceCubit extends BaseCubit<AddDeviceState> {
   Future<void> close() {
     nameController.dispose();
     hourlyRateController.dispose();
+    multiPlayerHourlyRateController.dispose();
     formKey.currentState?.reset();
     return super.close();
   }

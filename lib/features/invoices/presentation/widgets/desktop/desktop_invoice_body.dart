@@ -5,7 +5,6 @@ import '../invoice_items_list/invoice_item_add_button.dart';
 import '../invoice_items_list/invoice_items_header_row.dart';
 import '../invoice_items_list/invoice_items_list.dart';
 import '../main_invoice_data_holder.dart';
-import '../invoice_save_button.dart';
 
 class DesktopInvoiceBody extends StatelessWidget {
   const DesktopInvoiceBody({super.key});
@@ -21,8 +20,6 @@ class DesktopInvoiceBody extends StatelessWidget {
         const InvoiceItemsList(),
         sliverGapHFix(8),
         const InvoiceItemAddButton(),
-        sliverGapHFix(20),
-        const InvoiceSaveButton(),
         sliverGapHFix(20),
       ],
     );

@@ -14,10 +14,10 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'features/devices/data/models/device_model.dart';
-import 'features/invoices/data/models/create_invoice_model.dart';
-import 'features/storage/data/models/storage_model.dart';
-import 'features/transactions/data/models/transaction_model.dart';
+import '../../features/devices/data/models/device_model.dart';
+import '../../features/invoices/data/models/create_invoice_model.dart';
+import '../../features/storage/data/models/storage_model.dart';
+import '../../features/transactions/data/models/transaction_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -96,7 +96,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
     id: const obx_int.IdUid(6, 3415304222025532929),
     name: 'CreateInvoiceModel',
-    lastPropertyId: const obx_int.IdUid(12, 1914880427519149473),
+    lastPropertyId: const obx_int.IdUid(13, 3457360220319903264),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -150,6 +150,12 @@ final _entities = <obx_int.ModelEntity>[
         indexId: const obx_int.IdUid(14, 270546992311053501),
         relationField: 'device',
         relationTarget: 'DeviceModel',
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(13, 3457360220319903264),
+        name: 'playTypeIndex',
+        type: 6,
+        flags: 0,
       ),
     ],
     relations: <obx_int.ModelRelation>[
@@ -266,7 +272,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
     id: const obx_int.IdUid(10, 7788442270770736492),
     name: 'DeviceModel',
-    lastPropertyId: const obx_int.IdUid(6, 23527093261008010),
+    lastPropertyId: const obx_int.IdUid(7, 4834071033328230734),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -304,6 +310,12 @@ final _entities = <obx_int.ModelEntity>[
         id: const obx_int.IdUid(6, 23527093261008010),
         name: 'statusIndex',
         type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 4834071033328230734),
+        name: 'multiPlayerHourlyRate',
+        type: 8,
         flags: 0,
       ),
     ],
@@ -534,7 +546,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
       },
       objectToFB: (CreateInvoiceModel object, fb.Builder fbb) {
         final uuidOffset = fbb.writeString(object.uuid);
-        fbb.startTable(13);
+        fbb.startTable(14);
         fbb.addInt64(0, object.id ?? 0);
         fbb.addOffset(1, uuidOffset);
         fbb.addFloat64(2, object.totalInvoice);
@@ -543,6 +555,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         fbb.addInt64(9, object.sessionStartDate?.millisecondsSinceEpoch);
         fbb.addFloat64(10, object.hourlyRate);
         fbb.addInt64(11, object.device.targetId);
+        fbb.addInt64(12, object.playTypeIndex);
         fbb.finish(fbb.endTable());
         return object.id ?? 0;
       },
@@ -586,6 +599,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
           24,
           0,
         );
+        final playTypeIndexParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          28,
+          0,
+        );
         final object = CreateInvoiceModel(
           id: idParam,
           uuid: uuidParam,
@@ -594,6 +613,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           isSession: isSessionParam,
           sessionStartDate: sessionStartDateParam,
           hourlyRate: hourlyRateParam,
+          playTypeIndex: playTypeIndexParam,
         );
         object.device.targetId = const fb.Int64Reader().vTableGet(
           buffer,
@@ -760,13 +780,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
       objectToFB: (DeviceModel object, fb.Builder fbb) {
         final uuidOffset = fbb.writeString(object.uuid);
         final nameOffset = fbb.writeString(object.name);
-        fbb.startTable(7);
+        fbb.startTable(8);
         fbb.addInt64(0, object.id ?? 0);
         fbb.addOffset(1, uuidOffset);
         fbb.addOffset(2, nameOffset);
         fbb.addFloat64(3, object.hourlyRate);
         fbb.addInt64(4, object.typeIndex);
         fbb.addInt64(5, object.statusIndex);
+        fbb.addFloat64(6, object.multiPlayerHourlyRate);
         fbb.finish(fbb.endTable());
         return object.id ?? 0;
       },
@@ -790,6 +811,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
           10,
           0,
         );
+        final multiPlayerHourlyRateParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          16,
+          0,
+        );
         final typeIndexParam = const fb.Int64Reader().vTableGet(
           buffer,
           rootOffset,
@@ -807,6 +834,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           uuid: uuidParam,
           name: nameParam,
           hourlyRate: hourlyRateParam,
+          multiPlayerHourlyRate: multiPlayerHourlyRateParam,
           typeIndex: typeIndexParam,
           statusIndex: statusIndexParam,
         );
@@ -912,6 +940,11 @@ class CreateInvoiceModel_ {
   /// See [CreateInvoiceModel.device].
   static final device = obx.QueryRelationToOne<CreateInvoiceModel, DeviceModel>(
     _entities[1].properties[7],
+  );
+
+  /// See [CreateInvoiceModel.playTypeIndex].
+  static final playTypeIndex = obx.QueryIntegerProperty<CreateInvoiceModel>(
+    _entities[1].properties[8],
   );
 
   /// see [CreateInvoiceModel.items]
@@ -1022,5 +1055,10 @@ class DeviceModel_ {
   /// See [DeviceModel.statusIndex].
   static final statusIndex = obx.QueryIntegerProperty<DeviceModel>(
     _entities[4].properties[5],
+  );
+
+  /// See [DeviceModel.multiPlayerHourlyRate].
+  static final multiPlayerHourlyRate = obx.QueryDoubleProperty<DeviceModel>(
+    _entities[4].properties[6],
   );
 }

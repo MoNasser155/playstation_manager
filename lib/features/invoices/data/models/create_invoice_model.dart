@@ -1,5 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
+import '../../../../core/enums/play_type.dart';
 import '../../../devices/data/models/device_model.dart';
 import '../../../storage/data/models/storage_model.dart';
 
@@ -16,6 +17,11 @@ class CreateInvoiceModel {
   @Property(type: PropertyType.date)
   final DateTime? sessionStartDate;
   final double hourlyRate;
+  int playTypeIndex;
+
+  @Transient()
+  PlayType get playType => PlayType.values[playTypeIndex];
+  set playType(PlayType val) => playTypeIndex = val.index;
 
   final device = ToOne<DeviceModel>();
   final items = ToMany<ItemsInvoice>();
@@ -28,6 +34,7 @@ class CreateInvoiceModel {
     this.isSession = false,
     this.sessionStartDate,
     this.hourlyRate = 0.0,
+    this.playTypeIndex = 0,
   });
 
   factory CreateInvoiceModel.create({
@@ -38,6 +45,7 @@ class CreateInvoiceModel {
     bool isSession = false,
     DateTime? sessionStartDate,
     double hourlyRate = 0.0,
+    PlayType playType = PlayType.twoPlayers,
   }) {
     return CreateInvoiceModel(
       id: id,
@@ -47,6 +55,7 @@ class CreateInvoiceModel {
       isSession: isSession,
       sessionStartDate: sessionStartDate,
       hourlyRate: hourlyRate,
+      playTypeIndex: playType.index,
     );
   }
 
@@ -57,6 +66,7 @@ class CreateInvoiceModel {
     isSession: false,
     sessionStartDate: null,
     hourlyRate: 0.0,
+    playTypeIndex: 0,
   );
 }
 

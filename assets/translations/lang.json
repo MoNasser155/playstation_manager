@@ -998,5 +998,49 @@
     "hour": {
         "en": "hour",
         "ar": "ساعة"
+    },
+    "playType": {
+        "en": "Play Type",
+        "ar": "نوع اللعب"
+    },
+    "twoPlayers": {
+        "en": "2 Players (2 Controllers)",
+        "ar": "لاعبان (2 يد تحكم)"
+    },
+    "multiPlayer": {
+        "en": "More than 2 Players",
+        "ar": "أكثر من لاعبين"
+    },
+    "startTime": {
+        "en": "Start Time",
+        "ar": "وقت البداية"
+    },
+    "endTime": {
+        "en": "End Time",
+        "ar": "وقت النهاية"
+    },
+    "sessionDurationSummary": {
+        "en": "Duration",
+        "ar": "المدة"
+    },
+    "sessionTimeCost": {
+        "en": "Session Time Cost",
+        "ar": "تكلفة وقت الجلسة"
+    },
+    "itemsBought": {
+        "en": "Items Bought",
+        "ar": "الطلبات المشتراة"
+    },
+    "confirmEndSession": {
+        "en": "Confirm End Session",
+        "ar": "تأكيد إنهاء الجلسة"
+    },
+    "twoPlayersHourlyRate": {
+        "en": "2 Players Hourly Rate",
+        "ar": "سعر الساعة للاعبين"
+    },
+    "multiPlayerHourlyRate": {
+        "en": "Multi Player Hourly Rate",
+        "ar": "سعر الساعة لمتعدد اللاعبين"
     }
 }

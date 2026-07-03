@@ -1,4 +1,4 @@
-import 'package:local_erp_system/objectbox.g.dart';
+import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
 import '../../../../core/objectbox/objectbox_store.dart';
 import '../../../../core/shared/di.dart';
 import '../models/transaction_model.dart';
