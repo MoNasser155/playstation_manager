@@ -3,20 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
 import '../../../../core/constants/app_values.dart';
-import '../../../../core/enums/device_status.dart';
 import '../../../../core/enums/play_type.dart';
 import '../../../../core/languages/local_keys.g.dart';
-import '../../../../core/utils/gaps.dart';
-import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/expanded_drop_down.dart';
 import '../../../devices/data/models/device_model.dart';
 import '../cubits/cubit/session_cubit.dart';
-import 'end_session_dialog.dart';
+import 'session_timer_and_actions.dart';
 
 part 'session_customer_payment_holder.dart';
 
 class MainSessionDataHolder extends StatelessWidget {
-  const MainSessionDataHolder({super.key});
+  const MainSessionDataHolder({super.key, this.showTimerAndActions = true});
+  final bool showTimerAndActions;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,9 @@ class MainSessionDataHolder extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: AppSpacing.h12,
         children: [
-          _SessionCustomerPaymentHolder(),
+          _SessionCustomerPaymentHolder(
+            showTimerAndActions: showTimerAndActions,
+          ),
 
           Expanded(
             child: Container(

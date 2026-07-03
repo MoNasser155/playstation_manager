@@ -7,6 +7,7 @@ import '../main_session_data_holder.dart';
 import '../session_items_list/session_item_add_button.dart';
 import '../session_items_list/session_items_header_row.dart';
 import '../session_items_list/session_items_list.dart';
+import '../session_timer_and_actions.dart';
 
 class DesktopSessionBody extends StatelessWidget {
   const DesktopSessionBody({super.key});
@@ -16,7 +17,7 @@ class DesktopSessionBody extends StatelessWidget {
     return Column(
       children: [
         gapHFix(20),
-        const MainSessionDataHolder(),
+        const MainSessionDataHolder(showTimerAndActions: false),
         Expanded(
           child: Row(
             children: [
@@ -33,6 +34,7 @@ class DesktopSessionBody extends StatelessWidget {
                     color: context.primaryContainer,
                     borderRadius: BorderRadius.circular(AppRadius.r12),
                   ),
+                  child: const SessionTimerAndActions(isDesktop: true),
                 ),
               ),
               Expanded(
