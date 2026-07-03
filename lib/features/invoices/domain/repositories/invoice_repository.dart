@@ -9,13 +9,7 @@ abstract class InvoiceRepository {
   Future<Either<Failure, GetInvoiceModels>> getInvoiceModels();
   Future<Either<Failure, int>> createInvoice(CreateInvoiceModel invoiceData);
   Future<Either<Failure, List<CreateInvoiceModel>>> getAllInvoices();
-  Future<Either<Failure, int>> refundInvoice({
-    required String invoiceUuid,
-    required List<ItemsInvoice> adjustedItems,
-    required double newTotal,
-    required double newCashPaid,
-    required double newLaterPaid,
-  });
+
   Future<Either<Failure, List<CreateInvoiceModel>>> getActiveSessions();
   Future<Either<Failure, CreateInvoiceModel?>> getActiveSessionForDevice(int deviceId);
   Future<Either<Failure, int>> startDeviceSession({

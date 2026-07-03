@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../core/enums/device_status.dart';
-import '../../../../../core/enums/payment_type.dart';
 import '../../../../../core/enums/state_status.dart';
 import '../../../../../core/errors/exceptions.dart';
 import '../../../../../core/languages/local_keys.g.dart';
@@ -38,14 +37,14 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
   final _getAllInvoiceModelsUsecase = sl<GetAllInvoiceModelsUseCase>();
   final _createInvoiceUseCase = sl<CreateInvoiceUseCase>();
   final _getAllDevicesUseCase = sl<GetAllDevicesUseCase>();
-  final _getActiveSessionForDeviceUseCase = sl<GetActiveSessionForDeviceUseCase>();
+  final _getActiveSessionForDeviceUseCase =
+      sl<GetActiveSessionForDeviceUseCase>();
   final _startDeviceSessionUseCase = sl<StartDeviceSessionUseCase>();
   final _updateSessionItemsUseCase = sl<UpdateSessionItemsUseCase>();
   final _endDeviceSessionUseCase = sl<EndDeviceSessionUseCase>();
 
   final sellPriceController = TextEditingController(text: '0');
   final quantityController = TextEditingController(text: '0');
-  final paidCashController = TextEditingController(text: '0');
 
   Timer? _sessionTimer;
 
@@ -96,35 +95,17 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
 
   Future<void> _getAllDevices() async {
     final result = await _getAllDevicesUseCase();
-    result.fold(
-      (_) {},
-      (devicesList) {
-        safeEmit(state.copyWith(devices: devicesList));
-      },
-    );
+    result.fold((_) {}, (devicesList) {
+      safeEmit(state.copyWith(devices: devicesList));
+    });
   }
 
   Future<void> selectDevice(DeviceModel? device) async {
     _sessionTimer?.cancel();
     if (device == null) {
-      safeEmit(state.copyWith(
-        clearSelectedDevice: true,
-        clearActiveSessionInvoice: true,
-        sessionDuration: Duration.zero,
-        sessionCost: 0.0,
-        isSessionActive: false,
-        invoiceItems: [],
-        totalInvoice: 0.0,
-        invoiceUuid: const Uuid().v4(),
-      ));
-      return;
-    }
-
-    final result = await _getActiveSessionForDeviceUseCase(device.id!);
-    result.fold(
-      (failure) {
-        safeEmit(state.copyWith(
-          selectedDevice: device,
+      safeEmit(
+        state.copyWith(
+          clearSelectedDevice: true,
           clearActiveSessionInvoice: true,
           sessionDuration: Duration.zero,
           sessionCost: 0.0,
@@ -132,30 +113,16 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
           invoiceItems: [],
           totalInvoice: 0.0,
           invoiceUuid: const Uuid().v4(),
-        ));
-      },
-      (activeSession) {
-        if (activeSession != null) {
-          final items = activeSession.items.toList();
-          final start = activeSession.sessionStartDate ?? DateTime.now();
-          final duration = DateTime.now().difference(start);
-          final cost = (duration.inSeconds / 3600.0) * activeSession.hourlyRate;
-          final itemsTotal = items.fold<double>(0.0, (s, e) => s + e.totalItemPrice);
+        ),
+      );
+      return;
+    }
 
-          safeEmit(state.copyWith(
-            selectedDevice: device,
-            activeSessionInvoice: activeSession,
-            sessionDuration: duration,
-            sessionCost: cost,
-            isSessionActive: true,
-            invoiceItems: items,
-            invoiceUuid: activeSession.uuid,
-            totalInvoice: cost + itemsTotal,
-          ));
-
-          _startSessionTimer();
-        } else {
-          safeEmit(state.copyWith(
+    final result = await _getActiveSessionForDeviceUseCase(device.id!);
+    result.fold(
+      (failure) {
+        safeEmit(
+          state.copyWith(
             selectedDevice: device,
             clearActiveSessionInvoice: true,
             sessionDuration: Duration.zero,
@@ -164,7 +131,47 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
             invoiceItems: [],
             totalInvoice: 0.0,
             invoiceUuid: const Uuid().v4(),
-          ));
+          ),
+        );
+      },
+      (activeSession) {
+        if (activeSession != null) {
+          final items = activeSession.items.toList();
+          final start = activeSession.sessionStartDate ?? DateTime.now();
+          final duration = DateTime.now().difference(start);
+          final cost = (duration.inSeconds / 3600.0) * activeSession.hourlyRate;
+          final itemsTotal = items.fold<double>(
+            0.0,
+            (s, e) => s + e.totalItemPrice,
+          );
+
+          safeEmit(
+            state.copyWith(
+              selectedDevice: device,
+              activeSessionInvoice: activeSession,
+              sessionDuration: duration,
+              sessionCost: cost,
+              isSessionActive: true,
+              invoiceItems: items,
+              invoiceUuid: activeSession.uuid,
+              totalInvoice: cost + itemsTotal,
+            ),
+          );
+
+          _startSessionTimer();
+        } else {
+          safeEmit(
+            state.copyWith(
+              selectedDevice: device,
+              clearActiveSessionInvoice: true,
+              sessionDuration: Duration.zero,
+              sessionCost: 0.0,
+              isSessionActive: false,
+              invoiceItems: [],
+              totalInvoice: 0.0,
+              invoiceUuid: const Uuid().v4(),
+            ),
+          );
         }
       },
     );
@@ -177,10 +184,7 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     final newInvoice = CreateInvoiceModel.create(
       uuid: const Uuid().v4(),
       totalInvoice: 0.0,
-      cashPaid: 0.0,
-      laterPaid: 0.0,
       invoiceDate: DateTime.now(),
-      paymentType: PaymentType.cash,
       isSession: true,
       sessionStartDate: DateTime.now(),
       hourlyRate: device.hourlyRate,
@@ -218,16 +222,24 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     _sessionTimer?.cancel();
     _sessionTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (state.isSessionActive && state.activeSessionInvoice != null) {
-        final start = state.activeSessionInvoice!.sessionStartDate ?? DateTime.now();
+        final start =
+            state.activeSessionInvoice!.sessionStartDate ?? DateTime.now();
         final duration = DateTime.now().difference(start);
-        final cost = (duration.inSeconds / 3600.0) * state.activeSessionInvoice!.hourlyRate;
-        final itemsTotal = state.invoiceItems.fold<double>(0.0, (s, e) => s + e.totalItemPrice);
+        final cost =
+            (duration.inSeconds / 3600.0) *
+            state.activeSessionInvoice!.hourlyRate;
+        final itemsTotal = state.invoiceItems.fold<double>(
+          0.0,
+          (s, e) => s + e.totalItemPrice,
+        );
 
-        safeEmit(state.copyWith(
-          sessionDuration: duration,
-          sessionCost: cost,
-          totalInvoice: cost + itemsTotal,
-        ));
+        safeEmit(
+          state.copyWith(
+            sessionDuration: duration,
+            sessionCost: cost,
+            totalInvoice: cost + itemsTotal,
+          ),
+        );
       } else {
         timer.cancel();
       }
@@ -256,10 +268,7 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
       id: activeInvoice.id,
       uuid: activeInvoice.uuid,
       totalInvoice: total,
-      cashPaid: total,
-      laterPaid: 0.0,
       invoiceDate: DateTime.now(),
-      paymentIndex: PaymentType.cash.index,
       isSession: false,
       sessionStartDate: activeInvoice.sessionStartDate,
       hourlyRate: activeInvoice.hourlyRate,
@@ -291,14 +300,6 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
         await selectDevice(null);
       },
     );
-  }
-
-
-  void changePayType(PaymentType paymentType) {
-    if (paymentType != state.paymentType) {
-      paidCashController.clear();
-      safeEmit(state.copyWith(paymentType: paymentType, cashPaid: 0));
-    }
   }
 
   void selectItem(StorageModel? item) {
@@ -383,7 +384,8 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     }
 
     final total = updated.fold<double>(0, (sum, e) => sum + e.totalItemPrice);
-    final finalTotal = state.isSessionActive ? (state.sessionCost + total) : total;
+    final finalTotal =
+        state.isSessionActive ? (state.sessionCost + total) : total;
 
     sellPriceController.clear();
     quantityController.clear();
@@ -404,33 +406,21 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     final updated = List<ItemsInvoice>.from(state.invoiceItems)
       ..removeAt(index);
     final total = updated.fold<double>(0, (sum, e) => sum + e.totalItemPrice);
-    final finalTotal = state.isSessionActive ? (state.sessionCost + total) : total;
-    
+    final finalTotal =
+        state.isSessionActive ? (state.sessionCost + total) : total;
+
     safeEmit(state.copyWith(invoiceItems: updated, totalInvoice: finalTotal));
     _persistActiveSessionItems();
-  }
-
-  void updateCashPaid() {
-    final paid = double.tryParse(paidCashController.text.trim()) ?? 0;
-    safeEmit(state.copyWith(cashPaid: paid));
   }
 
   Future<void> saveInvoice(BuildContext context) async {
     if (!state.canSaveInvoice) return;
 
-    final isPaidLater = state.paymentType == PaymentType.later;
-    final cashPaid = isPaidLater ? state.cashPaid : state.totalInvoice;
-    final laterPaid = isPaidLater ? state.laterPaid : 0.0;
-
     final invoice = CreateInvoiceModel.create(
       uuid: state.invoiceUuid,
       totalInvoice: state.totalInvoice,
-      cashPaid: cashPaid,
-      laterPaid: laterPaid,
       invoiceDate: DateTime.now(),
-      paymentType: state.paymentType,
     );
-
 
     // Link items
     invoice.items.addAll(state.invoiceItems);
@@ -455,12 +445,11 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
   }
 
   void _resetInvoice(BuildContext context) {
-    paidCashController.clear();
     sellPriceController.clear();
     quantityController.clear();
     _getAllInvoiceModels(context);
     _getAllDevices();
-    
+
     safeEmit(
       InvoiceState.initial().copyWith(
         invoiceModels: state.invoiceModels,
@@ -475,7 +464,6 @@ class InvoiceCubit extends BaseCubit<InvoiceState> {
     _sessionTimer?.cancel();
     sellPriceController.dispose();
     quantityController.dispose();
-    paidCashController.dispose();
     return super.close();
   }
 }

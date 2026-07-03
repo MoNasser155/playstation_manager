@@ -58,14 +58,7 @@ class CustomDetailsTransactionsHeader extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                LocaleKeys.total,
-                style: context.textTheme.headlineLarge,
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Text(
-                LocaleKeys.paid,
+                LocaleKeys.profit,
                 style: context.textTheme.headlineLarge,
               ),
             ),

@@ -53,7 +53,7 @@ class CustomTransactionsAppbar extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: Text(
-                          LocaleKeys.payment,
+                          LocaleKeys.profit,
                           style: context.textTheme.titleLarge,
                         ),
                       ),

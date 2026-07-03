@@ -1,7 +1,7 @@
 import '../../../../core/errors/exceptions.dart';
+import 'package:local_erp_system/objectbox.g.dart';
 import '../../../../core/objectbox/objectbox_store.dart';
 import '../../../../core/shared/di.dart';
-import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
 import '../models/device_model.dart';
 
 abstract class DeviceLocalDataSource {

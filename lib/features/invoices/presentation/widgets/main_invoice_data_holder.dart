@@ -5,12 +5,10 @@ import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
 import '../../../../core/constants/app_values.dart';
 import '../../../../core/enums/device_status.dart';
-import '../../../../core/enums/payment_type.dart';
 import '../../../../core/languages/local_keys.g.dart';
 import '../../../../core/utils/gaps.dart';
 import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/custom_sliver_padding.dart'; 
-import '../../../../core/widgets/custom_text_field.dart';
+import '../../../../core/widgets/custom_sliver_padding.dart';
 import '../../../../core/widgets/expanded_drop_down.dart';
 import '../../../devices/data/models/device_model.dart';
 import '../cubits/cubit/invoice_cubit.dart';
@@ -103,66 +101,6 @@ class MainInvoiceDataHolder extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),
-                  gapH(12),
-                  BlocBuilder<InvoiceCubit, InvoiceState>(
-                    buildWhen:
-                        (previous, current) =>
-                            previous.paymentType != current.paymentType ||
-                            previous.totalInvoice != current.totalInvoice ||
-                            previous.cashPaid != current.cashPaid,
-                    builder: (context, state) {
-                      final cubit = InvoiceCubit.get(context);
-                      return Visibility(
-                        visible: state.paymentType == PaymentType.later,
-                        child: Column(
-                          spacing: AppSpacing.v8,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomTextField(
-                              controller: cubit.paidCashController,
-                              inputType: TextInputType.number,
-                              hint: LocaleKeys.paidNow,
-                              onChange: (_) => cubit.updateCashPaid(),
-                              fillColor: context.mapCard,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppPadding.pf8,
-                                vertical: AppPadding.pf8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: context.mapCard,
-                                borderRadius: BorderRadius.circular(
-                                  AppRadius.r8,
-                                ),
-                                border: Border.all(
-                                  color: context.colorScheme.secondaryFixed,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    LocaleKeys.laterAmount,
-                                    style: context.textTheme.titleMedium,
-                                  ),
-                                  Text(
-                                    state.laterPaid.toStringAsFixed(2),
-                                    style: context.textTheme.titleMedium
-                                        ?.copyWith(
-                                          color: context.colorScheme.error,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
                   ),
                 ],
               ),

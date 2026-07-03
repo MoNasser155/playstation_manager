@@ -5,14 +5,12 @@ import 'domain/repositories/invoice_repository.dart';
 import 'domain/usecases/create_invoice_usecase.dart';
 import 'domain/usecases/get_all_invoice_models_usecase.dart';
 import 'domain/usecases/get_all_invoices_usecase.dart';
-import 'domain/usecases/refund_invoice_usecase.dart';
 import 'domain/usecases/get_active_sessions_usecase.dart';
 import 'domain/usecases/get_active_session_for_device_usecase.dart';
 import 'domain/usecases/start_device_session_usecase.dart';
 import 'domain/usecases/update_session_items_usecase.dart';
 import 'domain/usecases/end_device_session_usecase.dart';
 import 'presentation/cubits/cubit/invoice_cubit.dart';
-import 'presentation/cubits/refund_cubit/refund_invoice_cubit.dart';
 
 initInvoicesDI() {
   //data source
@@ -33,9 +31,6 @@ initInvoicesDI() {
   sl.registerLazySingleton<GetAllInvoicesUseCase>(
     () => GetAllInvoicesUseCase(),
   );
-  sl.registerLazySingleton<RefundInvoiceUseCase>(
-    () => RefundInvoiceUseCase(),
-  );
   sl.registerLazySingleton<GetActiveSessionsUseCase>(
     () => GetActiveSessionsUseCase(),
   );
@@ -54,7 +49,6 @@ initInvoicesDI() {
 
   //cubit
   sl.registerFactory<InvoiceCubit>(() => InvoiceCubit());
-  sl.registerFactory<RefundInvoiceCubit>(() => RefundInvoiceCubit());
 }
 
 Future<void> resetInvoicesDI() async {
@@ -63,7 +57,6 @@ Future<void> resetInvoicesDI() async {
   await sl.resetLazySingleton<GetAllInvoiceModelsUseCase>();
   await sl.resetLazySingleton<CreateInvoiceUseCase>();
   await sl.resetLazySingleton<GetAllInvoicesUseCase>();
-  await sl.resetLazySingleton<RefundInvoiceUseCase>();
   await sl.resetLazySingleton<GetActiveSessionsUseCase>();
   await sl.resetLazySingleton<GetActiveSessionForDeviceUseCase>();
   await sl.resetLazySingleton<StartDeviceSessionUseCase>();

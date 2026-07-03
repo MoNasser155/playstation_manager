@@ -9,12 +9,6 @@ class TransactionModel {
   int? id;
   @Unique()
   final String uuid;
-  final String userUuid;
-  final String? userName;
-  final double? beginningBalance;
-  final double paymentAmount;
-  final double? paidInvoiceAmount;
-  final double? endBalance;
   final double? invoiceProfit;
   @Property(type: PropertyType.date)
   final DateTime createdAt;
@@ -34,12 +28,6 @@ class TransactionModel {
   TransactionModel({
     this.id,
     required this.uuid,
-    required this.userUuid,
-    this.userName,
-    this.beginningBalance,
-    required this.paymentAmount,
-    this.paidInvoiceAmount,
-    this.endBalance,
     this.invoiceProfit,
     required this.transactionType,
     required this.userType,
@@ -51,12 +39,6 @@ class TransactionModel {
   factory TransactionModel.create({
     int? id,
     required String uuid,
-    required String userUuid,
-    String? userName,
-    double? beginningBalance,
-    required double paymentAmount,
-    double? paidInvoiceAmount,
-    double? endBalance,
     double? invoiceProfit,
     required TransactionType transactionType,
     required UserType userType,
@@ -67,12 +49,6 @@ class TransactionModel {
     return TransactionModel(
       id: id,
       uuid: uuid,
-      userUuid: userUuid,
-      userName: userName,
-      beginningBalance: beginningBalance,
-      paymentAmount: paymentAmount,
-      paidInvoiceAmount: paidInvoiceAmount,
-      endBalance: endBalance,
       invoiceProfit: invoiceProfit,
       transactionType: transactionType.index,
       userType: userType.index,
@@ -84,12 +60,6 @@ class TransactionModel {
 
   factory TransactionModel.initial() => TransactionModel(
     uuid: '',
-    userUuid: '',
-    userName: '',
-    beginningBalance: 0,
-    paymentAmount: 0,
-    paidInvoiceAmount: 0,
-    endBalance: 0,
     invoiceProfit: 0,
     transactionType: TransactionType.invoiceProfit.index,
     userType: UserType.customer.index,
