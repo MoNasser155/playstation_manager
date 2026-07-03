@@ -203,7 +203,7 @@ class EndSessionDialog extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: Text(
                                 LocaleKeys.itemName,
-                                style: const TextStyle(
+                                style: context.textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -308,8 +308,8 @@ class EndSessionDialog extends StatelessWidget {
                       ],
                     ),
                   ],
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: AppPadding.pf8),
                     child: Divider(),
                   ),
                   Row(

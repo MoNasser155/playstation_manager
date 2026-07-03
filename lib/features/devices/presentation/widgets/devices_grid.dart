@@ -45,7 +45,7 @@ class DevicesGrid extends StatelessWidget {
                           : 2,
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
-              childAspectRatio: 0.9,
+              childAspectRatio: 0.8,
             ),
             itemBuilder: (context, index) {
               final device = state.status.isLoading

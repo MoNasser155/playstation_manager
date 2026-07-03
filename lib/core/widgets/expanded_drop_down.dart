@@ -5,9 +5,9 @@ import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
 import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
 import '../constants/app_values.dart';
-import '../utils/gaps.dart';
 import '../languages/local_keys.g.dart';
 import '../theme/app_colors.dart';
+import '../utils/gaps.dart';
 import 'custom_text_field.dart';
 
 class ExpandedDropdown<T> extends StatefulWidget {
@@ -86,6 +86,7 @@ class _ExpandedDropdownState<T> extends State<ExpandedDropdown<T>> {
                 widget.itemLabelBuilder(item) == widget.selectedValue;
             return DropdownItem<T>(
               value: item,
+              intrinsicHeight: true,
               child: Container(
                 padding: EdgeInsets.symmetric(
                   vertical: AppPadding.p12,

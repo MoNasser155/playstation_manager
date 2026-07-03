@@ -8,12 +8,17 @@ import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 import '../../../../core/constants/app_values.dart';
 import '../../../../core/enums/device_status.dart';
 import '../../../../core/languages/local_keys.g.dart';
+import '../../../../core/shared/di.dart';
 import '../../../../core/utils/gaps.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';
+import '../../../sessions/presentation/cubits/cubit/session_cubit.dart';
+import '../../../sessions/presentation/widgets/end_session_dialog.dart';
 import '../../data/models/device_model.dart';
 import '../cubits/devices_cubit/devices_cubit.dart';
 import 'add_edit_device_dialog.dart';
 import 'custom_delete_device_dialog.dart';
+import 'start_session_dialog.dart';
 
 class DeviceCard extends StatefulWidget {
   const DeviceCard({super.key, required this.device});
@@ -134,9 +139,8 @@ class _DeviceCardState extends State<DeviceCard> {
             gapH(12),
             Text(
               widget.device.name.isEmpty ? '---' : widget.device.name,
-              style: context.textTheme.displayMedium?.copyWith(
+              style: context.textTheme.displayLarge?.copyWith(
                 fontWeight: FontWeight.w600,
-                fontSize: 16.sp,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -146,7 +150,6 @@ class _DeviceCardState extends State<DeviceCard> {
               '${widget.device.hourlyRate} ${LocaleKeys.egp}/${LocaleKeys.hour}',
               style: context.textTheme.titleMedium?.copyWith(
                 color: context.colorScheme.secondaryFixed,
-                fontSize: 13.sp,
               ),
             ),
             const Spacer(),
@@ -158,20 +161,73 @@ class _DeviceCardState extends State<DeviceCard> {
                     _updateTimer();
                     return Text(
                       _formatDuration(_elapsed),
-                      style: context.textTheme.headlineMedium?.copyWith(
+                      style: context.textTheme.displayLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Colors.orange,
-                        fontSize: 18.sp,
                       ),
                     );
                   },
                 ),
               ),
+              gapH(12),
             ],
-            gapH(8),
+            if (widget.device.status == DeviceStatus.available) ...[
+              CustomButton(
+                title: LocaleKeys.startSession,
+                backgroundColor: Colors.green,
+                buttonHeight: 32,
+                onTap: () async {
+                  final result = await showDialog<bool>(
+                    context: context,
+                    builder: (_) => StartSessionDialog(device: widget.device),
+                  );
+                  if (result == true) {
+                    if (context.mounted) {
+                      DevicesCubit.get(context).refresh();
+                    }
+                  }
+                },
+              ),
+              gapH(12),
+            ] else if (widget.device.status == DeviceStatus.reserved) ...[
+              CustomButton(
+                title: LocaleKeys.endSession,
+                backgroundColor: context.colorScheme.error,
+                buttonHeight: 32,
+                onTap: () async {
+                  final cubit = sl<SessionCubit>();
+                  await cubit.selectDevice(widget.device);
+                  if (context.mounted) {
+                    await cubit.endSession(context);
+                  }
+                  if (context.mounted) {
+                    final result = await showDialog<bool>(
+                      context: context,
+                      barrierDismissible: false,
+                      builder:
+                          (_) => BlocProvider.value(
+                            value: cubit,
+                            child: const EndSessionDialog(),
+                          ),
+                    );
+                    if (result == true) {
+                      if (context.mounted) {
+                        await cubit.confirmEndSession(context);
+                        if (context.mounted) {
+                          DevicesCubit.get(context).refresh();
+                        }
+                      }
+                    } else {
+                      cubit.cancelEndSession();
+                    }
+                  }
+                },
+              ),
+              gapH(12),
+            ],
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Spacer(),
                 InkWell(
                   onTap: () async {
                     final result = await showDialog<bool>(
@@ -185,12 +241,21 @@ class _DeviceCardState extends State<DeviceCard> {
                       }
                     }
                   },
-                  child: Icon(
-                    Icons.edit_rounded,
-                    color: context.colorScheme.primary,
-                    size: 20.sp,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: context.primaryContainer,
+                      borderRadius: BorderRadius.circular(AppRadius.r8),
+                      border: Border.all(color: context.colorScheme.primary),
+                    ),
+                    padding: EdgeInsets.all(4.r),
+                    child: Icon(
+                      Icons.edit_rounded,
+                      color: context.colorScheme.primary,
+                      size: AppSize.s24,
+                    ),
                   ),
                 ),
+                gapW(8),
                 InkWell(
                   onTap: () async {
                     final cubit = DevicesCubit.get(context);
@@ -208,10 +273,18 @@ class _DeviceCardState extends State<DeviceCard> {
                       cubit.refresh();
                     }
                   },
-                  child: Icon(
-                    Icons.delete_rounded,
-                    color: context.colorScheme.error,
-                    size: 20.sp,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: context.primaryContainer,
+                      borderRadius: BorderRadius.circular(AppRadius.r8),
+                      border: Border.all(color: context.colorScheme.error),
+                    ),
+                    padding: EdgeInsets.all(4.r),
+                    child: Icon(
+                      Icons.delete_rounded,
+                      color: context.colorScheme.error,
+                      size: AppSize.s24,
+                    ),
                   ),
                 ),
               ],
