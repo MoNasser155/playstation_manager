@@ -1,16 +1,16 @@
+import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../core/enums/device_status.dart';
 import '../../../../core/enums/transaction_type.dart';
 import '../../../../core/enums/user_type.dart';
 import '../../../../core/errors/exceptions.dart';
-import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
 import '../../../../core/objectbox/objectbox_store.dart';
 import '../../../../core/shared/di.dart';
 import '../../../devices/data/models/device_model.dart';
 import '../../../transactions/data/models/transaction_model.dart';
-import '../models/session_model.dart';
 import '../models/get_session_models.dart';
+import '../models/session_model.dart';
 
 abstract class SessionLocalDataSource {
   GetSessionModels getSessionModels();
@@ -108,9 +108,7 @@ class SessionLocalDataSourceImpl implements SessionLocalDataSource {
   @override
   List<SessionModel> getActiveSessions() {
     final query =
-        _store.sessions
-            .query(SessionModel_.isSession.equals(true))
-            .build();
+        _store.sessions.query(SessionModel_.isSession.equals(true)).build();
     final results = query.find();
     query.close();
     return results;
@@ -151,9 +149,7 @@ class SessionLocalDataSourceImpl implements SessionLocalDataSource {
   }) {
     _store.store.runInTransaction(TxMode.write, () {
       final query =
-          _store.sessions
-              .query(SessionModel_.uuid.equals(sessionUuid))
-              .build();
+          _store.sessions.query(SessionModel_.uuid.equals(sessionUuid)).build();
       final session = query.findFirst();
       query.close();
 

@@ -16,7 +16,7 @@ class DesktopSessionHeader extends StatelessWidget {
         Expanded(
           child: Text(
             device.name,
-            style: context.textTheme.titleLarge?.copyWith(
+            style: context.textTheme.displayLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
             maxLines: 1,
@@ -25,20 +25,17 @@ class DesktopSessionHeader extends StatelessWidget {
         ),
         Container(
           padding: EdgeInsets.symmetric(
-            horizontal: AppPadding.pf8,
-            vertical: 4,
+            horizontal: AppPadding.pf12,
+            vertical: AppPadding.pf4,
           ),
           decoration: BoxDecoration(
             color: device.status.color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(AppRadius.r12),
-            border: Border.all(
-              color: device.status.color,
-              width: 1,
-            ),
+            border: Border.all(color: device.status.color, width: 1),
           ),
           child: Text(
             device.status.localizedName,
-            style: context.textTheme.labelSmall?.copyWith(
+            style: context.textTheme.titleLarge?.copyWith(
               color: device.status.color,
               fontWeight: FontWeight.bold,
             ),

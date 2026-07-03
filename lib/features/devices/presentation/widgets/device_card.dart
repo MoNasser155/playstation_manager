@@ -13,7 +13,7 @@ import '../../../../core/utils/gaps.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';
 import '../../../sessions/presentation/cubits/cubit/session_cubit.dart';
-import '../../../sessions/presentation/widgets/end_session_dialog.dart';
+import '../../../sessions/presentation/widgets/end_session_dialog/end_session_dialog.dart';
 import '../../data/models/device_model.dart';
 import '../cubits/devices_cubit/devices_cubit.dart';
 import 'add_edit_device_dialog.dart';

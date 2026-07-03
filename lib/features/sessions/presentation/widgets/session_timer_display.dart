@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+
 import '../../../../core/utils/gaps.dart';
 
 class SessionTimerDisplay extends StatelessWidget {
-  const SessionTimerDisplay({
-    super.key,
-    required this.duration,
-    this.label,
-  });
+  const SessionTimerDisplay({super.key, required this.duration, this.label});
 
   final Duration duration;
   final String? label;
@@ -29,7 +26,7 @@ class SessionTimerDisplay extends StatelessWidget {
         if (label != null) ...[
           Text(
             label!,
-            style: context.textTheme.bodyMedium?.copyWith(
+            style: context.textTheme.displayLarge?.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
           ),
@@ -43,10 +40,10 @@ class SessionTimerDisplay extends StatelessWidget {
             child: Text(
               _formatDuration(duration),
               style: context.textTheme.headlineLarge?.copyWith(
-                fontSize: 96, // Large base size to allow stretching to container width
+                fontSize:
+                    96, // Large base size to allow stretching to container width
                 fontWeight: FontWeight.bold,
                 color: Colors.orange,
-                fontFamily: 'monospace',
               ),
             ),
           ),

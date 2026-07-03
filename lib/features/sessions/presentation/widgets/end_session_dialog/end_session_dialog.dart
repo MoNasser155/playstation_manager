@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
-import '../../../../core/constants/app_values.dart';
-import '../../../../core/languages/local_keys.g.dart';
-import '../../../../core/utils/gaps.dart';
-import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/custom_dialog.dart';
-import '../../data/models/session_model.dart';
-import '../cubits/cubit/session_cubit.dart';
-
-part 'end_session_dialog_widgets.dart';
+import '../../../../../core/utils/gaps.dart';
+import '../../../../../core/widgets/custom_dialog.dart';
+import '../../cubits/cubit/session_cubit.dart';
+import 'action_buttons.dart';
+import 'dialog_header.dart';
+import 'items_details_card.dart';
+import 'timing_details_card.dart';
+import 'totals_card.dart';
 
 class EndSessionDialog extends StatelessWidget {
   const EndSessionDialog({super.key});
@@ -41,30 +39,27 @@ class EndSessionDialog extends StatelessWidget {
         return CustomDialog(
           maxWidth: context.width * 0.5,
           children: [
-            const _DialogHeader(),
+            const DialogHeader(),
             gapH(16),
             const Divider(),
             gapH(12),
-            _TimingDetailsCard(
+            TimingDetailsCard(
               startTime: startTime,
               endTime: endTime,
               duration: duration,
               roundedCost: roundedCost,
               rawCost: rawCost,
             ),
-            if (items.isNotEmpty) ...[
-              gapH(16),
-              _ItemsDetailsCard(items: items),
-            ],
+            if (items.isNotEmpty) ...[gapH(16), ItemsDetailsCard(items: items)],
             gapH(16),
-            _TotalsCard(
+            TotalsCard(
               roundedCost: roundedCost,
               itemsTotal: itemsTotal,
               grandTotal: grandTotal,
               hasItems: items.isNotEmpty,
             ),
             gapH(20),
-            const _ActionButtons(),
+            const ActionButtons(),
           ],
         );
       },

@@ -9,7 +9,7 @@ import '../../../../core/utils/gaps.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../cubits/cubit/session_cubit.dart';
 import 'desktop_session_header.dart';
-import 'end_session_dialog.dart';
+import 'end_session_dialog/end_session_dialog.dart';
 import 'session_timer_display.dart';
 
 class DesktopSessionContent extends StatelessWidget {
@@ -28,7 +28,7 @@ class DesktopSessionContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DesktopSessionHeader(device: device),
-          const Divider(height: 32),
+          const Divider(height: 20),
           Expanded(
             child: Center(
               child: Builder(
@@ -57,9 +57,9 @@ class DesktopSessionContent extends StatelessWidget {
                         gapH(16),
                         Text(
                           LocaleKeys.maintenance,
-                          style: context.textTheme.titleMedium?.copyWith(
+                          style: context.textTheme.displayLarge?.copyWith(
                             color: context.colorScheme.error,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -71,7 +71,7 @@ class DesktopSessionContent extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(height: 32),
+          const Divider(height: 20),
           if (state.isSessionActive)
             CustomButton(
               title: LocaleKeys.endSession,
@@ -101,7 +101,6 @@ class DesktopSessionContent extends StatelessWidget {
           else if (device.status == DeviceStatus.available)
             CustomButton(
               title: LocaleKeys.startSession,
-              backgroundColor: Colors.green,
               onTap: () {
                 cubit.startSession(context);
               },

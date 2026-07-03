@@ -8,7 +8,7 @@ import '../../../../core/languages/local_keys.g.dart';
 import '../../../../core/utils/gaps.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../cubits/cubit/session_cubit.dart';
-import 'end_session_dialog.dart';
+import 'end_session_dialog/end_session_dialog.dart';
 
 class MobileSessionContent extends StatelessWidget {
   const MobileSessionContent({super.key, required this.state});

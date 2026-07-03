@@ -21,7 +21,8 @@ class SessionScreen extends StatelessWidget {
       key: ValueKey(context.locale.toString()),
       body: SafeArea(
         child: BlocProvider(
-          create: (context) => sl<SessionCubit>()..init(context, device: device),
+          create:
+              (context) => sl<SessionCubit>()..init(context, device: device),
           child: BlocBuilder<MainViewCubit, MainViewState>(
             buildWhen: (previous, current) => previous.mode != current.mode,
             builder: (context, state) {
