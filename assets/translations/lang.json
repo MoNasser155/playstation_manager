@@ -866,5 +866,137 @@
     "deletedSuccessfully":{
         "en":"Deleted successfully",
         "ar":"تم الحذف بنجاح"
+    },
+    "devices": {
+        "en": "Devices",
+        "ar": "الأجهزة"
+    },
+    "deviceType": {
+        "en": "Device Type",
+        "ar": "نوع الجهاز"
+    },
+    "hourlyRate": {
+        "en": "Hourly Rate",
+        "ar": "سعر الساعة"
+    },
+    "deviceStatus": {
+        "en": "Device Status",
+        "ar": "حالة الجهاز"
+    },
+    "addDevice": {
+        "en": "Add Device",
+        "ar": "إضافة جهاز"
+    },
+    "editDevice": {
+        "en": "Edit Device",
+        "ar": "تعديل جهاز"
+    },
+    "deleteDevice": {
+        "en": "Delete Device",
+        "ar": "حذف جهاز"
+    },
+    "available": {
+        "en": "Available",
+        "ar": "متاح"
+    },
+    "reserved": {
+        "en": "Reserved",
+        "ar": "محجوز"
+    },
+    "maintenance": {
+        "en": "Maintenance",
+        "ar": "صيانة"
+    },
+    "deviceName": {
+        "en": "Device Name",
+        "ar": "اسم الجهاز"
+    },
+    "ps4": {
+        "en": "PS4",
+        "ar": "بلايستيشن 4"
+    },
+    "ps5": {
+        "en": "PS5",
+        "ar": "بلايستيشن 5"
+    },
+    "ps3": {
+        "en": "PS3",
+        "ar": "بلايستيشن 3"
+    },
+    "vr": {
+        "en": "VR",
+        "ar": "واقع افتراضي"
+    },
+    "other": {
+        "en": "Other",
+        "ar": "آخر"
+    },
+    "noDevices": {
+        "en": "No Devices Found",
+        "ar": "لم يتم العثور على أجهزة"
+    },
+    "sessions": {
+        "en": "Sessions",
+        "ar": "الجلسات"
+    },
+    "startSession": {
+        "en": "Start Session",
+        "ar": "بدء الجلسة"
+    },
+    "endSession": {
+        "en": "End Session",
+        "ar": "إنهاء الجلسة"
+    },
+    "sessionDuration": {
+        "en": "Session Duration",
+        "ar": "مدة الجلسة"
+    },
+    "sessionCost": {
+        "en": "Session Cost",
+        "ar": "تكلفة الجلسة"
+    },
+    "itemsCost": {
+        "en": "Items Cost",
+        "ar": "تكلفة الطلبات"
+    },
+    "totalCost": {
+        "en": "Total Cost",
+        "ar": "التكلفة الإجمالية"
+    },
+    "selectDevice": {
+        "en": "Select Device",
+        "ar": "اختر الجهاز"
+    },
+    "noDevicesRegistered": {
+        "en": "No Devices Registered",
+        "ar": "لا توجد أجهزة مسجلة"
+    },
+    "noActiveSession": {
+        "en": "No active session for this device",
+        "ar": "لا توجد جلسة نشطة لهذا الجهاز"
+    },
+    "confirmDeleteDevice": {
+        "en": "Are you sure you want to delete this device?",
+        "ar": "هل أنت متأكد من حذف هذا الجهاز؟"
+    },
+    "cannotDeleteDevice": {
+        "en": "Cannot delete device",
+        "ar": "لا يمكن حذف الجهاز"
+    },
+    "deviceAlreadyExists": {
+        "en": "Device name already exists",
+        "ar": "اسم الجهاز موجود بالفعل"
+    },
+    "sessionStarted": {
+        "en": "Session started successfully",
+        "ar": "تم بدء الجلسة بنجاح"
+    },
+    "sessionEnded": {
+        "en": "Session ended successfully",
+        "ar": "تم إنهاء الجلسة بنجاح"
+    },
+    "hour": {
+        "en": "hour",
+        "ar": "ساعة"
     }
 }

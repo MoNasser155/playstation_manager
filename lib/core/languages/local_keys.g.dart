@@ -646,4 +646,103 @@ abstract class LocaleKeys {
   static const String _deletedSuccessfully = 'deleted_successfully';
   static String get deletedSuccessfully => _deletedSuccessfully.tr();
 
+  static const String _devices = 'devices';
+  static String get devices => _devices.tr();
+
+  static const String _deviceType = 'device_type';
+  static String get deviceType => _deviceType.tr();
+
+  static const String _hourlyRate = 'hourly_rate';
+  static String get hourlyRate => _hourlyRate.tr();
+
+  static const String _deviceStatus = 'device_status';
+  static String get deviceStatus => _deviceStatus.tr();
+
+  static const String _addDevice = 'add_device';
+  static String get addDevice => _addDevice.tr();
+
+  static const String _editDevice = 'edit_device';
+  static String get editDevice => _editDevice.tr();
+
+  static const String _deleteDevice = 'delete_device';
+  static String get deleteDevice => _deleteDevice.tr();
+
+  static const String _available = 'available';
+  static String get available => _available.tr();
+
+  static const String _reserved = 'reserved';
+  static String get reserved => _reserved.tr();
+
+  static const String _maintenance = 'maintenance';
+  static String get maintenance => _maintenance.tr();
+
+  static const String _deviceName = 'device_name';
+  static String get deviceName => _deviceName.tr();
+
+  static const String _ps4 = 'ps4';
+  static String get ps4 => _ps4.tr();
+
+  static const String _ps5 = 'ps5';
+  static String get ps5 => _ps5.tr();
+
+  static const String _ps3 = 'ps3';
+  static String get ps3 => _ps3.tr();
+
+  static const String _vr = 'vr';
+  static String get vr => _vr.tr();
+
+  static const String _other = 'other';
+  static String get other => _other.tr();
+
+  static const String _noDevices = 'no_devices';
+  static String get noDevices => _noDevices.tr();
+
+  static const String _sessions = 'sessions';
+  static String get sessions => _sessions.tr();
+
+  static const String _startSession = 'start_session';
+  static String get startSession => _startSession.tr();
+
+  static const String _endSession = 'end_session';
+  static String get endSession => _endSession.tr();
+
+  static const String _sessionDuration = 'session_duration';
+  static String get sessionDuration => _sessionDuration.tr();
+
+  static const String _sessionCost = 'session_cost';
+  static String get sessionCost => _sessionCost.tr();
+
+  static const String _itemsCost = 'items_cost';
+  static String get itemsCost => _itemsCost.tr();
+
+  static const String _totalCost = 'total_cost';
+  static String get totalCost => _totalCost.tr();
+
+  static const String _selectDevice = 'select_device';
+  static String get selectDevice => _selectDevice.tr();
+
+  static const String _noDevicesRegistered = 'no_devices_registered';
+  static String get noDevicesRegistered => _noDevicesRegistered.tr();
+
+  static const String _noActiveSession = 'no_active_session';
+  static String get noActiveSession => _noActiveSession.tr();
+
+  static const String _confirmDeleteDevice = 'confirm_delete_device';
+  static String get confirmDeleteDevice => _confirmDeleteDevice.tr();
+
+  static const String _cannotDeleteDevice = 'cannot_delete_device';
+  static String get cannotDeleteDevice => _cannotDeleteDevice.tr();
+
+  static const String _deviceAlreadyExists = 'device_already_exists';
+  static String get deviceAlreadyExists => _deviceAlreadyExists.tr();
+
+  static const String _sessionStarted = 'session_started';
+  static String get sessionStarted => _sessionStarted.tr();
+
+  static const String _sessionEnded = 'session_ended';
+  static String get sessionEnded => _sessionEnded.tr();
+
+  static const String _hour = 'hour';
+  static String get hour => _hour.tr();
+
 }

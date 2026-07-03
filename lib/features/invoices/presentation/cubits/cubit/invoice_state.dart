@@ -14,6 +14,14 @@ class InvoiceState extends Equatable {
   final double currentInputTotal;
   final double cashPaid; 
 
+  // Devices & Sessions fields
+  final List<DeviceModel> devices;
+  final DeviceModel? selectedDevice;
+  final CreateInvoiceModel? activeSessionInvoice;
+  final Duration sessionDuration;
+  final double sessionCost;
+  final bool isSessionActive;
+
   const InvoiceState({
     required this.status,
     this.errMessage,
@@ -27,6 +35,12 @@ class InvoiceState extends Equatable {
     required this.totalInvoice,
     required this.currentInputTotal,
     required this.cashPaid,
+    required this.devices,
+    this.selectedDevice,
+    this.activeSessionInvoice,
+    required this.sessionDuration,
+    required this.sessionCost,
+    required this.isSessionActive,
   });
 
   factory InvoiceState.initial() {
@@ -46,16 +60,21 @@ class InvoiceState extends Equatable {
       totalInvoice: 0,
       currentInputTotal: 0,
       cashPaid: 0,
+      devices: const [],
+      selectedDevice: null,
+      activeSessionInvoice: null,
+      sessionDuration: Duration.zero,
+      sessionCost: 0.0,
+      isSessionActive: false,
     );
   }
 
-  /// Amount not yet paid (only meaningful for "later" payment type)
   double get laterPaid => (totalInvoice - cashPaid).clamp(0, double.infinity);
 
   bool get canAddItem => selectedStorageItem != null && currentInputTotal > 0;
 
   bool get canSaveInvoice =>
-      selectedCustomer != null &&
+      !isSessionActive &&
       invoiceItems.isNotEmpty &&
       totalInvoice > 0 &&
       (paymentType == PaymentType.cash ||
@@ -75,6 +94,14 @@ class InvoiceState extends Equatable {
     double? totalInvoice,
     double? currentInputTotal,
     double? cashPaid,
+    List<DeviceModel>? devices,
+    DeviceModel? selectedDevice,
+    bool clearSelectedDevice = false,
+    CreateInvoiceModel? activeSessionInvoice,
+    bool clearActiveSessionInvoice = false,
+    Duration? sessionDuration,
+    double? sessionCost,
+    bool? isSessionActive,
   }) {
     return InvoiceState(
       status: status ?? this.status,
@@ -92,6 +119,12 @@ class InvoiceState extends Equatable {
       totalInvoice: totalInvoice ?? this.totalInvoice,
       currentInputTotal: currentInputTotal ?? this.currentInputTotal,
       cashPaid: cashPaid ?? this.cashPaid,
+      devices: devices ?? this.devices,
+      selectedDevice: clearSelectedDevice ? null : selectedDevice ?? this.selectedDevice,
+      activeSessionInvoice: clearActiveSessionInvoice ? null : activeSessionInvoice ?? this.activeSessionInvoice,
+      sessionDuration: sessionDuration ?? this.sessionDuration,
+      sessionCost: sessionCost ?? this.sessionCost,
+      isSessionActive: isSessionActive ?? this.isSessionActive,
     );
   }
 
@@ -109,5 +142,11 @@ class InvoiceState extends Equatable {
     totalInvoice,
     currentInputTotal,
     cashPaid,
+    devices,
+    selectedDevice,
+    activeSessionInvoice,
+    sessionDuration,
+    sessionCost,
+    isSessionActive,
   ];
 }

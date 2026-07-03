@@ -79,3 +79,11 @@ class ServerErrorException extends AppException {
   ServerErrorException() : super(LocaleKeys.serverError);
 }
 
+class NoDevicesException extends AppException {
+  NoDevicesException() : super(LocaleKeys.noDevices);
+}
+
+class DeviceNotFoundException extends AppException {
+  DeviceNotFoundException() : super(LocaleKeys.cannotDeleteDevice);
+}
+

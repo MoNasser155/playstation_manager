@@ -4,15 +4,16 @@ import 'package:local_erp_system/core/extentions/date_extensions.dart';
 import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
 import '../../../../core/constants/app_values.dart';
+import '../../../../core/enums/device_status.dart';
 import '../../../../core/enums/payment_type.dart';
 import '../../../../core/utils/gaps.dart';
 import '../../../../core/languages/local_keys.g.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_sliver_padding.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/expanded_drop_down.dart';
 import '../../../../core/widgets/row_taps/custom_taps_row.dart';
-import '../../../customers/data/models/customer_model.dart';
-import '../../../customers/presentation/widgets/custom_customers_body_appbar.dart';
+import '../../../devices/data/models/device_model.dart';
 import '../cubits/cubit/invoice_cubit.dart';
 
 part 'invoice_customer_payment_holder.dart';

@@ -12,6 +12,7 @@ import '../../../../../core/services/backup_service.dart';
 import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../customers/data/models/customer_model.dart';
 import '../../../../customers/presentation/screens/customers_screen.dart';
+import '../../../../devices/presentation/screens/devices_screen.dart';
 import '../../../../home/presentation/screens/home_screen.dart';
 import '../../../../invoices/data/models/create_invoice_model.dart';
 import '../../../../invoices/presentation/screens/invoice_screen.dart';
@@ -41,6 +42,7 @@ class MainViewCubit extends BaseCubit<MainViewState> {
     TapsModel(title: LocaleKeys.invoices, icon: VectorIcons.receipt),
     TapsModel(title: LocaleKeys.customers, icon: VectorIcons.customer),
     TapsModel(title: LocaleKeys.inventory, icon: VectorIcons.inventory),
+    TapsModel(title: LocaleKeys.devices, icon: VectorIcons.customer),
     TapsModel(title: LocaleKeys.transactions, icon: VectorIcons.transactions),
     TapsModel(title: LocaleKeys.profit, icon: VectorIcons.profit),
     TapsModel(
@@ -66,6 +68,7 @@ class MainViewCubit extends BaseCubit<MainViewState> {
     ),
     CustomersScreen(),
     StorageScreen(),
+    DevicesScreen(),
     TransactionsScreen(),
     ProfitScreen(),
   ];

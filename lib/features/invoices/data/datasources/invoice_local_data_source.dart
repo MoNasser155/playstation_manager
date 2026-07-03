@@ -1,5 +1,6 @@
 import 'package:uuid/uuid.dart';
 
+import '../../../../core/enums/device_status.dart';
 import '../../../../core/enums/payment_type.dart';
 import '../../../../core/enums/transaction_type.dart';
 import '../../../../core/enums/user_type.dart';
@@ -7,6 +8,7 @@ import '../../../../core/errors/exceptions.dart';
 import '../../../../core/objectbox/objectbox.g.dart';
 import '../../../../core/objectbox/objectbox_store.dart';
 import '../../../../core/shared/di.dart';
+import '../../../devices/data/models/device_model.dart';
 import '../../../transactions/data/models/transaction_model.dart';
 import '../models/create_invoice_model.dart';
 import '../models/get_invoice_models.dart';
@@ -21,6 +23,20 @@ abstract class InvoiceLocalDataSource {
     required double newTotal,
     required double newCashPaid,
     required double newLaterPaid,
+  });
+  List<CreateInvoiceModel> getActiveSessions();
+  CreateInvoiceModel? getActiveSessionForDevice(int deviceId);
+  int startDeviceSession({
+    required CreateInvoiceModel sessionInvoice,
+    required DeviceModel device,
+  });
+  void updateSessionItems({
+    required String sessionUuid,
+    required List<ItemsInvoice> items,
+  });
+  int endDeviceSession({
+    required CreateInvoiceModel completedInvoice,
+    required DeviceModel device,
   });
 }
 
@@ -343,6 +359,73 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
       updatedInvoice.items.addAll(adjustedItems);
 
       return _store.invoices.put(updatedInvoice);
+    });
+  }
+
+  @override
+  List<CreateInvoiceModel> getActiveSessions() {
+    final query = _store.invoices
+        .query(CreateInvoiceModel_.isSession.equals(true))
+        .build();
+    final results = query.find();
+    query.close();
+    return results;
+  }
+
+  @override
+  CreateInvoiceModel? getActiveSessionForDevice(int deviceId) {
+    final query = _store.invoices
+        .query(CreateInvoiceModel_.isSession.equals(true)
+            .and(CreateInvoiceModel_.device.equals(deviceId)))
+        .build();
+    final result = query.findFirst();
+    query.close();
+    return result;
+  }
+
+  @override
+  int startDeviceSession({
+    required CreateInvoiceModel sessionInvoice,
+    required DeviceModel device,
+  }) {
+    return _store.store.runInTransaction(TxMode.write, () {
+      final id = _store.invoices.put(sessionInvoice);
+      final updatedDevice = device.copyWith(status: DeviceStatus.reserved);
+      _store.devices.put(updatedDevice);
+      return id;
+    });
+  }
+
+  @override
+  void updateSessionItems({
+    required String sessionUuid,
+    required List<ItemsInvoice> items,
+  }) {
+    _store.store.runInTransaction(TxMode.write, () {
+      final query = _store.invoices
+          .query(CreateInvoiceModel_.uuid.equals(sessionUuid))
+          .build();
+      final invoice = query.findFirst();
+      query.close();
+
+      if (invoice != null) {
+        invoice.items.clear();
+        invoice.items.addAll(items);
+        _store.invoices.put(invoice);
+      }
+    });
+  }
+
+  @override
+  int endDeviceSession({
+    required CreateInvoiceModel completedInvoice,
+    required DeviceModel device,
+  }) {
+    return _store.store.runInTransaction(TxMode.write, () {
+      final id = _store.invoices.put(completedInvoice);
+      final updatedDevice = device.copyWith(status: DeviceStatus.available);
+      _store.devices.put(updatedDevice);
+      return id;
     });
   }
 }

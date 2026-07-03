@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/auth/di.dart';
 import '../../features/customers/di.dart';
+import '../../features/devices/di.dart';
 import '../../features/home/di.dart';
 import '../../features/invoices/di.dart';
 import '../../features/main_view/di.dart';
@@ -19,6 +20,7 @@ initDI() async {
   initMainViewDI();
   initStorageDI();
   initCustomersDI();
+  initDevicesDI();
   initInvoicesDI();
   initTransactionsDI();
   initProfitDI();

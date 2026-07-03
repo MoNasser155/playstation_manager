@@ -2,6 +2,7 @@ import 'package:objectbox/objectbox.dart';
 
 import '../../../../core/enums/payment_type.dart';
 import '../../../customers/data/models/customer_model.dart';
+import '../../../devices/data/models/device_model.dart';
 import '../../../storage/data/models/storage_model.dart';
 
 @Entity()
@@ -16,11 +17,16 @@ class CreateInvoiceModel {
   @Property(type: PropertyType.date)
   final DateTime invoiceDate;
   final int paymentIndex;
+  final bool isSession;
+  @Property(type: PropertyType.date)
+  final DateTime? sessionStartDate;
+  final double hourlyRate;
 
   @Transient()
   PaymentType get paymentType => PaymentType.values[paymentIndex];
 
   final customer = ToOne<CustomerModel>();
+  final device = ToOne<DeviceModel>();
   final items = ToMany<ItemsInvoice>();
 
   CreateInvoiceModel({
@@ -31,6 +37,9 @@ class CreateInvoiceModel {
     required this.laterPaid,
     required this.invoiceDate,
     required this.paymentIndex,
+    this.isSession = false,
+    this.sessionStartDate,
+    this.hourlyRate = 0.0,
   });
 
   factory CreateInvoiceModel.create({
@@ -41,6 +50,9 @@ class CreateInvoiceModel {
     required double laterPaid,
     required DateTime invoiceDate,
     required PaymentType paymentType,
+    bool isSession = false,
+    DateTime? sessionStartDate,
+    double hourlyRate = 0.0,
   }) {
     return CreateInvoiceModel(
       id: id,
@@ -50,6 +62,9 @@ class CreateInvoiceModel {
       laterPaid: laterPaid,
       invoiceDate: invoiceDate,
       paymentIndex: paymentType.index,
+      isSession: isSession,
+      sessionStartDate: sessionStartDate,
+      hourlyRate: hourlyRate,
     );
   }
 
@@ -60,6 +75,9 @@ class CreateInvoiceModel {
     laterPaid: 0,
     invoiceDate: DateTime.now(),
     paymentIndex: PaymentType.cash.index,
+    isSession: false,
+    sessionStartDate: null,
+    hourlyRate: 0.0,
   );
 }
 
