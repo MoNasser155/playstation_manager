@@ -33,6 +33,7 @@ dependencies:
   flutter_animate: ^4.5.2
   window_manager: ^0.5.1
   clock: ^1.1.2
+  lottie: ^3.3.3
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,11 @@ flutter_assets:
       package_parameter_enabled: false
       style: camelCase
 
+    - path: assets/lottie/
+      class_name: AppLottie
+      package_parameter_enabled: false
+      style: camelCase
+
     - path: assets/translations/
       class_name: AppTranslations
       package_parameter_enabled: false
@@ -79,6 +85,7 @@ flutter:
     - assets/fonts/
     - assets/icons/vec/
     - assets/images/
+    - assets/lottie/
     - assets/translations/
 
   fonts:

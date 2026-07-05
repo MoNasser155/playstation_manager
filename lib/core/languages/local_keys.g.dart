@@ -775,4 +775,10 @@ abstract class LocaleKeys {
   static const String _multiPlayerHourlyRate = 'multi_player_hourly_rate';
   static String get multiPlayerHourlyRate => _multiPlayerHourlyRate.tr();
 
+  static const String _controller = 'controller';
+  static String get controller => _controller.tr();
+
+  static const String _console = 'console';
+  static String get console => _console.tr();
+
 }

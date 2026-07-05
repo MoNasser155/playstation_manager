@@ -258,6 +258,8 @@
   "items_bought": "الطلبات المشتراة",
   "confirm_end_session": "تأكيد إنهاء الجلسة",
   "two_players_hourly_rate": "سعر الساعة للاعبين",
-  "multi_player_hourly_rate": "سعر الساعة لمتعدد اللاعبين"
+  "multi_player_hourly_rate": "سعر الساعة لمتعدد اللاعبين",
+  "controller": "كنترولر",
+  "console": "كونسول"
 
 }

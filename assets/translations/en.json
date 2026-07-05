@@ -258,6 +258,8 @@
   "items_bought": "Items Bought",
   "confirm_end_session": "Confirm End Session",
   "two_players_hourly_rate": "2 Players Hourly Rate",
-  "multi_player_hourly_rate": "Multi Player Hourly Rate"
+  "multi_player_hourly_rate": "Multi Player Hourly Rate",
+  "controller": "Controller",
+  "console": "Console"
 
 }

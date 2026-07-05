@@ -935,10 +935,6 @@
         "en": "No Devices Found",
         "ar": "لم يتم العثور على أجهزة"
     },
-    "sessions": {
-        "en": "Sessions",
-        "ar": "الجلسات"
-    },
     "startSession": {
         "en": "Start Session",
         "ar": "بدء الجلسة"
@@ -1042,5 +1038,13 @@
     "multiPlayerHourlyRate": {
         "en": "Multi Player Hourly Rate",
         "ar": "سعر الساعة لمتعدد اللاعبين"
+    },
+    "controller": {
+        "en": "Controller",
+        "ar": "كنترولر"
+    },
+    "console": {
+        "en": "Console",
+        "ar": "كونسول"
     }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
 import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_values.dart';
@@ -41,14 +42,11 @@ class AuthPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(AppRadius.r16),
                     ),
-                    child: Image.asset(
-                      AppImages.logo,
-                      width: context.width * .25,
-                    ),
+                    child: Lottie.asset(AppLottie.console),
                   ),
                   gapH(24),
                   Text(
-                    LocaleKeys.appName,
+                    LocaleKeys.console,
                     style: theme.textTheme.displayLarge?.copyWith(
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0,
