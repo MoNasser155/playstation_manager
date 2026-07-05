@@ -230,13 +230,11 @@ class AppTheme {
       indicatorColor: colorScheme.primary.withValues(alpha: 0.2),
 
       labelColor: colorScheme.primary,
-      unselectedLabelColor:
-          isDark ? AppColors.orange : AppColors.lightContainer,
-      labelStyle: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-
+      unselectedLabelColor: colorScheme.secondaryFixed,
+      labelStyle: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
       unselectedLabelStyle: TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.normal,
+        fontSize: 18.sp,
+        fontWeight: FontWeight.w400,
       ),
       dividerColor: Colors.transparent,
       indicator: BoxDecoration(

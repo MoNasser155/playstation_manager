@@ -7,6 +7,9 @@ class SessionState extends Equatable {
   final StorageModel? selectedStorageItem;
   final String sessionUuid;
   final List<SessionModel> sessionList;
+  /// Separate status for the sessions-history tab (loading / success / failure)
+  final StateStatus sessionsListStatus;
+  final int currentTapIndex;
   final List<SessionItem> sessionItems;
   final double totalSession;
   final double currentInputTotal;
@@ -31,6 +34,8 @@ class SessionState extends Equatable {
     this.selectedStorageItem,
     required this.sessionUuid,
     required this.sessionList,
+    required this.sessionsListStatus,
+    required this.currentTapIndex,
     required this.sessionItems,
     required this.totalSession,
     required this.currentInputTotal,
@@ -52,6 +57,8 @@ class SessionState extends Equatable {
       selectedStorageItem: null,
       sessionUuid: const Uuid().v4(),
       sessionList: [],
+      sessionsListStatus: StateStatus.initial,
+      currentTapIndex: 0,
       sessionItems: [],
       totalSession: 0,
       currentInputTotal: 0,
@@ -91,6 +98,8 @@ class SessionState extends Equatable {
     bool clearSelectedStorageItem = false,
     String? sessionUuid,
     List<SessionModel>? sessionList,
+    StateStatus? sessionsListStatus,
+    int? currentTapIndex,
     List<SessionItem>? sessionItems,
     double? totalSession,
     double? currentInputTotal,
@@ -117,6 +126,8 @@ class SessionState extends Equatable {
               : selectedStorageItem ?? this.selectedStorageItem,
       sessionUuid: sessionUuid ?? this.sessionUuid,
       sessionList: sessionList ?? this.sessionList,
+      sessionsListStatus: sessionsListStatus ?? this.sessionsListStatus,
+      currentTapIndex: currentTapIndex ?? this.currentTapIndex,
       sessionItems: sessionItems ?? this.sessionItems,
       totalSession: totalSession ?? this.totalSession,
       currentInputTotal: currentInputTotal ?? this.currentInputTotal,
@@ -145,6 +156,8 @@ class SessionState extends Equatable {
     selectedStorageItem,
     sessionUuid,
     sessionList,
+    sessionsListStatus,
+    currentTapIndex,
     sessionItems,
     totalSession,
     currentInputTotal,

@@ -9,6 +9,7 @@ import '../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.d
 import '../cubits/cubit/session_cubit.dart';
 import '../widgets/desktop/desktop_session_body.dart';
 import '../widgets/mobile/mobile_session_body.dart';
+import '../widgets/session_tab_bar_wrapper.dart';
 import '../widgets/tablet/tablet_session_body.dart';
 
 class SessionScreen extends StatelessWidget {
@@ -17,24 +18,38 @@ class SessionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: ValueKey(context.locale.toString()),
-      body: SafeArea(
-        child: BlocProvider(
-          create:
-              (context) => sl<SessionCubit>()..init(context, device: device),
-          child: BlocBuilder<MainViewCubit, MainViewState>(
-            buildWhen: (previous, current) => previous.mode != current.mode,
-            builder: (context, state) {
-              switch (state.mode) {
-                case MainViewMode.mobile:
-                  return const MobileSessionBody();
-                case MainViewMode.tablet:
-                  return const TabletSessionBody();
-                case MainViewMode.desktop:
-                  return const DesktopSessionBody();
-              }
-            },
+    return BlocProvider(
+      create: (context) => sl<SessionCubit>()..init(context, device: device),
+      child: Scaffold(
+        key: ValueKey(context.locale.toString()),
+        body: SafeArea(
+          child: Column(
+            children: [
+              BlocBuilder<SessionCubit, SessionState>(
+                buildWhen:
+                    (previous, current) =>
+                        previous.currentTapIndex != current.currentTapIndex,
+                builder: (context, state) {
+                  return SessionTabBarWrapper();
+                },
+              ),
+              Expanded(
+                child: BlocBuilder<MainViewCubit, MainViewState>(
+                  buildWhen:
+                      (previous, current) => previous.mode != current.mode,
+                  builder: (context, state) {
+                    switch (state.mode) {
+                      case MainViewMode.mobile:
+                        return const MobileSessionBody();
+                      case MainViewMode.tablet:
+                        return const TabletSessionBody();
+                      case MainViewMode.desktop:
+                        return const DesktopSessionBody();
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),

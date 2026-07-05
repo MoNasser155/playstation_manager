@@ -24,6 +24,7 @@ import '../../../domain/usecases/create_session_usecase.dart';
 import '../../../domain/usecases/end_device_session_usecase.dart';
 import '../../../domain/usecases/get_active_session_for_device_usecase.dart';
 import '../../../domain/usecases/get_all_session_models_usecase.dart';
+import '../../../domain/usecases/get_all_sessions_usecase.dart';
 import '../../../domain/usecases/start_device_session_usecase.dart';
 import '../../../domain/usecases/update_session_items_usecase.dart';
 
@@ -39,6 +40,7 @@ class SessionCubit extends BaseCubit<SessionState> {
   final _getAllSessionModelsUsecase = sl<GetAllSessionModelsUseCase>();
   final _createSessionUseCase = sl<CreateSessionUseCase>();
   final _getAllDevicesUseCase = sl<GetAllDevicesUseCase>();
+  final _getAllSessionsUseCase = sl<GetAllSessionsUseCase>();
   final _getActiveSessionForDeviceUseCase =
       sl<GetActiveSessionForDeviceUseCase>();
   final _startDeviceSessionUseCase = sl<StartDeviceSessionUseCase>();
@@ -69,6 +71,34 @@ class SessionCubit extends BaseCubit<SessionState> {
 
   void refresh(BuildContext context) {
     _resetSession(context);
+  }
+
+  void changeCurrentTapIndex(int index) {
+    if (index != state.currentTapIndex) {
+      safeEmit(state.copyWith(currentTapIndex: index));
+      if (index == 1) {
+        loadSessionsList();
+      }
+    }
+  }
+
+  /// Called when the user taps the "Sessions" tab.
+  Future<void> loadSessionsList() async {
+    safeEmit(state.copyWith(sessionsListStatus: StateStatus.loading));
+    final result = await _getAllSessionsUseCase();
+    result.fold(
+      (_) {
+        safeEmit(state.copyWith(sessionsListStatus: StateStatus.failure));
+      },
+      (sessions) {
+        safeEmit(
+          state.copyWith(
+            sessionList: sessions,
+            sessionsListStatus: StateStatus.success,
+          ),
+        );
+      },
+    );
   }
 
   Future<void> _getAllSessionModels(BuildContext context) async {
