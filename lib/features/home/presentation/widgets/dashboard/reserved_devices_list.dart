@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
 import 'package:local_erp_system/core/extentions/theme_extensions.dart';
@@ -39,6 +40,9 @@ class ReservedDevicesList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppRadius.r16),
               ),
               child: CustomScrollView(
+                physics: const AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics(),
+                ),
                 slivers: [
                   if (sessions.isEmpty)
                     SliverEmptyBody(title: LocaleKeys.noReservedDevices)
@@ -131,17 +135,17 @@ class _TickingTimer extends StatefulWidget {
 
 class _TickingTimerState extends State<_TickingTimer> {
   late Timer _timer;
-  late Duration _elapsed;
+  late final ValueNotifier<Duration> _elapsedNotifier;
 
   @override
   void initState() {
     super.initState();
-    _elapsed = DateTime.now().difference(widget.startTime);
+    final initialElapsed = clock.now().difference(widget.startTime);
+    _elapsedNotifier = ValueNotifier<Duration>(initialElapsed);
+
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (mounted) {
-        setState(() {
-          _elapsed = DateTime.now().difference(widget.startTime);
-        });
+        _elapsedNotifier.value = clock.now().difference(widget.startTime);
       }
     });
   }
@@ -149,6 +153,7 @@ class _TickingTimerState extends State<_TickingTimer> {
   @override
   void dispose() {
     _timer.cancel();
+    _elapsedNotifier.dispose();
     super.dispose();
   }
 
@@ -162,12 +167,17 @@ class _TickingTimerState extends State<_TickingTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      _formatDuration(_elapsed),
-      style: context.textTheme.headlineMedium?.copyWith(
-        fontWeight: FontWeight.bold,
-        color: Colors.orange,
-      ),
+    return ValueListenableBuilder<Duration>(
+      valueListenable: _elapsedNotifier,
+      builder: (context, elapsed, _) {
+        return Text(
+          _formatDuration(elapsed),
+          style: context.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: Colors.orange,
+          ),
+        );
+      },
     );
   }
 }

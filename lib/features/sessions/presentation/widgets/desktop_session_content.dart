@@ -21,7 +21,6 @@ class DesktopSessionContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = SessionCubit.get(context);
     final device = state.selectedDevice!;
-
     return Padding(
       padding: EdgeInsets.all(AppPadding.pf4),
       child: Column(
@@ -36,6 +35,7 @@ class DesktopSessionContent extends StatelessWidget {
                   if (state.isSessionActive) {
                     return SessionTimerDisplay(
                       duration: state.sessionDuration,
+                      startTime: state.activeSession?.sessionStartDate,
                       label: LocaleKeys.sessionDuration,
                     );
                   } else if (device.status == DeviceStatus.available) {

@@ -15,9 +15,7 @@ class SessionTimerAndActions extends StatelessWidget {
     return BlocBuilder<SessionCubit, SessionState>(
       buildWhen: (previous, current) {
         return previous.selectedDevice != current.selectedDevice ||
-            previous.isSessionActive != current.isSessionActive ||
-            previous.sessionDuration != current.sessionDuration ||
-            previous.sessionCost != current.sessionCost;
+            previous.isSessionActive != current.isSessionActive;
       },
       builder: (context, state) {
         if (state.selectedDevice == null) {
@@ -36,4 +34,3 @@ class SessionTimerAndActions extends StatelessWidget {
     );
   }
 }
-

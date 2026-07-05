@@ -38,6 +38,9 @@ class LatestTransactionsList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppRadius.r16),
               ),
               child: CustomScrollView(
+                physics: const AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics(),
+                ),
                 slivers: [
                   if (transactions.isEmpty)
                     SliverEmptyBody(title: LocaleKeys.noTransactionsYet)

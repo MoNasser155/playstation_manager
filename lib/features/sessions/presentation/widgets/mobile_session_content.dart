@@ -9,19 +9,12 @@ import '../../../../core/utils/gaps.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../cubits/cubit/session_cubit.dart';
 import 'end_session_dialog/end_session_dialog.dart';
+import 'session_timer_display.dart';
 
 class MobileSessionContent extends StatelessWidget {
   const MobileSessionContent({super.key, required this.state});
 
   final SessionState state;
-
-  String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final hours = twoDigits(duration.inHours);
-    final minutes = twoDigits(duration.inMinutes.remainder(60));
-    final seconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$hours:$minutes:$seconds";
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +40,9 @@ class MobileSessionContent extends StatelessWidget {
                   LocaleKeys.sessionDuration,
                   style: context.textTheme.titleMedium,
                 ),
-                Text(
-                  _formatDuration(state.sessionDuration),
+                SessionTimerText(
+                  duration: state.sessionDuration,
+                  startTime: state.activeSession?.sessionStartDate,
                   style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.orange,
