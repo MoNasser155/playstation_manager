@@ -15,8 +15,8 @@ import 'features/auth/presentation/pages/pending_page.dart';
 import 'features/auth/presentation/pages/splash_loading_screen.dart';
 import 'features/main_view/presentation/screens/responsive_main_view_screen.dart';
 
-class AppName extends StatelessWidget {
-  const AppName({super.key});
+class ConsoleApp extends StatelessWidget {
+  const ConsoleApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +50,7 @@ class AppName extends StatelessWidget {
     );
   }
 }
+
 class AppGate extends StatelessWidget {
   const AppGate({super.key});
 

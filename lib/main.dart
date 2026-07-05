@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'app_name.dart';
+import 'console_app.dart';
 import 'core/constants/app_constants.dart';
 import 'core/languages/languages.dart';
 // import 'core/services/backup_service.dart';
@@ -39,13 +39,12 @@ void main(List<String> args) async {
     await windowManager.focus();
   });
 
-
   runApp(
     EasyLocalization(
       supportedLocales: Languages.suppoerLocales,
       path: AppConstants.translationPath,
       startLocale: Languages.english.locale,
-      child: const AppName(),
+      child: const ConsoleApp(),
     ),
   );
 }
