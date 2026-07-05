@@ -13,7 +13,8 @@ part 'transactions_state.dart';
 class TransactionsCubit extends BaseCubit<TransactionsState> {
   TransactionsCubit() : super(TransactionsState.initial());
 
-  static TransactionsCubit get(context) => BlocProvider.of<TransactionsCubit>(context);
+  static TransactionsCubit get(context) =>
+      BlocProvider.of<TransactionsCubit>(context);
 
   final _getAllTransactionsUsecase = sl<GetAllTransactionsUseCase>();
 
@@ -29,11 +30,11 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
     }
   }
 
-  Future<void> _getAllTransactions() async {
+  Future<void> _getAllTransactions({DateTime? from, DateTime? to}) async {
     safeEmit(state.copyWith(status: StateStatus.loading));
     final result = await _getAllTransactionsUsecase.call(
-      from: state.fromDate,
-      to: state.toDate,
+      from: from ?? state.fromDate,
+      to: to ?? state.toDate,
     );
     result.fold(
       (failure) {
@@ -79,7 +80,7 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
     final from = DateTime(year, oneBasedMonth, 1, 0, 0, 0);
     final to = DateTime(year, oneBasedMonth + 1, 0, 23, 59, 59);
     safeEmit(state.copyWith(fromDate: from, toDate: to, selectedMonth: month));
-    _getAllTransactions();
+    _getAllTransactions(from: from, to: to);
   }
 
   void onDateRangeChanged(DateTime from, DateTime to) {
@@ -92,7 +93,7 @@ class TransactionsCubit extends BaseCubit<TransactionsState> {
         selectedMonth: -1,
       ),
     );
-    _getAllTransactions();
+    _getAllTransactions(from: normalizedFrom, to: normalizedTo);
   }
 
   List<String> get monthNames => [

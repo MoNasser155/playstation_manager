@@ -1,4 +1,5 @@
 import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
+
 import '../../../../core/objectbox/objectbox_store.dart';
 import '../../../../core/shared/di.dart';
 import '../models/transaction_model.dart';
@@ -14,12 +15,6 @@ class TransactionsLocalDataSourceImpl implements TransactionsLocalDataSource {
 
   @override
   List<TransactionModel> getAllTransactions({DateTime? from, DateTime? to}) {
-    final builder = _store.transactions.query();
-
-    if (from != null) {
-      builder.order(TransactionModel_.createdAt, flags: Order.descending);
-    }
-
     Condition<TransactionModel>? condition;
     if (from != null) {
       condition = TransactionModel_.createdAt.greaterOrEqual(
@@ -32,6 +27,13 @@ class TransactionsLocalDataSourceImpl implements TransactionsLocalDataSource {
       );
       condition = condition != null ? condition & toCond : toCond;
     }
+
+    final builder =
+        condition != null
+            ? _store.transactions.query(condition)
+            : _store.transactions.query();
+
+    builder.order(TransactionModel_.createdAt, flags: Order.descending);
 
     final query = builder.build();
     final transactions = query.find();

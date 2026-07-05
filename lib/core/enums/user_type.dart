@@ -11,5 +11,4 @@ enum UserType {
   }
 
   bool get isCustomer => this == UserType.customer;
-  bool get isSupplier => false;
 }
