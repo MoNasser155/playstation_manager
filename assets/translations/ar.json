@@ -260,6 +260,16 @@
   "two_players_hourly_rate": "سعر الساعة للاعبين",
   "multi_player_hourly_rate": "سعر الساعة لمتعدد اللاعبين",
   "controller": "كنترولر",
-  "console": "كونسول"
+  "console": "كونسول",
+  "today_income": "دخل اليوم",
+  "compared_to_yesterday": "مقارنة بالأمس",
+  "quick_access": "الوصول السريع",
+  "devices_status": "حالة الأجهزة",
+  "current_reserved_devices": "الأجهزة المحجوزة حالياً",
+  "no_reserved_devices": "لا توجد أجهزة محجوزة",
+  "latest_today_transactions": "أحدث المعاملات اليوم",
+  "no_transactions_yet": "لا توجد معاملات حتى الآن",
+  "price_per_hour": "السعر لكل ساعة",
+  "price_per_hour_hint": "ج/س"
 
 }

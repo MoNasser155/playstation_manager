@@ -1046,5 +1046,45 @@
     "console": {
         "en": "Console",
         "ar": "كونسول"
+    },
+    "todayIncome":{
+        "en":"Today income",
+        "ar":"دخل اليوم"
+    },
+    "comparedToYesterday":{
+        "en":"Compared To Yesterday",
+        "ar":"مقارنة بالأمس"
+    },
+    "quickAccess":{
+        "en":"Quick Access",
+        "ar":"الوصول السريع"
+    },
+    "devicesStatus":{
+        "en":"Devices Status",
+        "ar":"حالة الأجهزة"
+    },
+    "currentReservedDevices":{
+        "en":"Current Reserved Devices",
+        "ar":"الأجهزة المحجوزة حالياً"
+    },
+    "noReservedDevices":{
+        "en":"No Reserved Devices",
+        "ar":"لا توجد أجهزة محجوزة"
+    },
+    "latestTodayTransactions":{
+        "en":"Latest Today Transactions",
+        "ar":"أحدث المعاملات اليوم"
+    },
+    "noTransactionsYet":{
+        "en":"No Transactions Yet",
+        "ar":"لا توجد معاملات حتى الآن"
+    },
+    "pricePerHour":{
+        "en":"Price Per Hour",
+        "ar":"السعر لكل ساعة"
+    },
+    "pricePerHourHint":{
+        "en":"EGP/hr",
+        "ar":"ج/س"
     }
 }

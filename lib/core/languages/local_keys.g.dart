@@ -781,4 +781,34 @@ abstract class LocaleKeys {
   static const String _console = 'console';
   static String get console => _console.tr();
 
+  static const String _todayIncome = 'today_income';
+  static String get todayIncome => _todayIncome.tr();
+
+  static const String _comparedToYesterday = 'compared_to_yesterday';
+  static String get comparedToYesterday => _comparedToYesterday.tr();
+
+  static const String _quickAccess = 'quick_access';
+  static String get quickAccess => _quickAccess.tr();
+
+  static const String _devicesStatus = 'devices_status';
+  static String get devicesStatus => _devicesStatus.tr();
+
+  static const String _currentReservedDevices = 'current_reserved_devices';
+  static String get currentReservedDevices => _currentReservedDevices.tr();
+
+  static const String _noReservedDevices = 'no_reserved_devices';
+  static String get noReservedDevices => _noReservedDevices.tr();
+
+  static const String _latestTodayTransactions = 'latest_today_transactions';
+  static String get latestTodayTransactions => _latestTodayTransactions.tr();
+
+  static const String _noTransactionsYet = 'no_transactions_yet';
+  static String get noTransactionsYet => _noTransactionsYet.tr();
+
+  static const String _pricePerHour = 'price_per_hour';
+  static String get pricePerHour => _pricePerHour.tr();
+
+  static const String _pricePerHourHint = 'price_per_hour_hint';
+  static String get pricePerHourHint => _pricePerHourHint.tr();
+
 }

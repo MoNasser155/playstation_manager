@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:local_erp_system/core/extentions/theme_extensions.dart';
 
@@ -13,7 +12,7 @@ class SliverEmptyBody extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: context.textTheme.headlineMedium?.copyWith(
+          style: context.textTheme.displayLarge?.copyWith(
             color: context.colorScheme.secondaryFixed,
           ),
         ),

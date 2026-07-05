@@ -13,50 +13,41 @@ class HomeTapsGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<HomeCards> cards = HomeCards.values;
     return CustomSliverPadding(
-      sliver: SliverFillRemaining(
-        child: Column(
-          children: [
-            Expanded(
-              child: GridView.builder(
-                key: ValueKey('${context.locale.toString()} ${context.theme}'),
-                itemCount: cards.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 3,
-                ),
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      cards[index].function(context);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(AppPadding.pf12),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: context.primaryContainer,
-                        borderRadius: BorderRadius.circular(AppRadius.r12),
-                      ),
-                      child: Row(
-                        spacing: AppSpacing.h16,
-                        children: [
-                          cards[index].getIcon(context),
-                          Text(
-                            cards[index].localizedName,
-                            style: context.textTheme.displayLarge?.copyWith(
-                              color: context.colorScheme.onPrimary,
-                            ),
-                          ),
-                        ],
-                      ),
+      sliver: SliverGrid(
+        key: ValueKey('${context.locale.toString()} ${context.theme}'),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          childAspectRatio: 3,
+        ),
+        delegate: SliverChildBuilderDelegate((context, index) {
+          return InkWell(
+            onTap: () {
+              cards[index].function(context);
+            },
+            child: Container(
+              padding: EdgeInsets.all(AppPadding.pf12),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: context.primaryContainer,
+                borderRadius: BorderRadius.circular(AppRadius.r12),
+              ),
+              child: Row(
+                spacing: AppSpacing.h16,
+                children: [
+                  cards[index].getIcon(context),
+                  Text(
+                    cards[index].localizedName,
+                    style: context.textTheme.displayLarge?.copyWith(
+                      color: context.colorScheme.onPrimary,
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          );
+        }, childCount: cards.length),
       ),
     );
   }

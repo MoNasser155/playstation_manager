@@ -260,6 +260,16 @@
   "two_players_hourly_rate": "2 Players Hourly Rate",
   "multi_player_hourly_rate": "Multi Player Hourly Rate",
   "controller": "Controller",
-  "console": "Console"
+  "console": "Console",
+  "today_income": "Today income",
+  "compared_to_yesterday": "Compared To Yesterday",
+  "quick_access": "Quick Access",
+  "devices_status": "Devices Status",
+  "current_reserved_devices": "Current Reserved Devices",
+  "no_reserved_devices": "No Reserved Devices",
+  "latest_today_transactions": "Latest Today Transactions",
+  "no_transactions_yet": "No Transactions Yet",
+  "price_per_hour": "Price Per Hour",
+  "price_per_hour_hint": "EGP/hr"
 
 }
