@@ -56,6 +56,7 @@ class StartSessionDialog extends StatelessWidget {
                     child: CustomButton(
                       buttonHeight: 40,
                       title: LocaleKeys.cancel,
+                      textColor: context.colorScheme.onPrimary,
                       backgroundColor: context.mapCard,
                       borderColor: context.colorScheme.primary,
                       onTap: () {
@@ -67,8 +68,6 @@ class StartSessionDialog extends StatelessWidget {
                     child: CustomButton(
                       title: LocaleKeys.startSession,
                       buttonHeight: 40,
-                      textColor: context.colorScheme.onPrimary,
-                      backgroundColor: Colors.green,
                       onTap: () async {
                         await cubit.startSession(context);
                         if (context.mounted) {

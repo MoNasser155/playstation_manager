@@ -128,7 +128,7 @@ class _DeviceCardState extends State<DeviceCard> {
                   ),
                   child: Text(
                     widget.device.status.localizedName,
-                    style: context.textTheme.bodySmall?.copyWith(
+                    style: context.textTheme.titleMedium?.copyWith(
                       color: statusColor,
                       fontWeight: FontWeight.bold,
                     ),
@@ -174,7 +174,7 @@ class _DeviceCardState extends State<DeviceCard> {
             if (widget.device.status == DeviceStatus.available) ...[
               CustomButton(
                 title: LocaleKeys.startSession,
-                backgroundColor: Colors.green,
+
                 buttonHeight: 32,
                 onTap: () async {
                   final result = await showDialog<bool>(

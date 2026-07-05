@@ -182,12 +182,12 @@ class SessionLocalDataSourceImpl implements SessionLocalDataSource {
         );
       }
 
-      // 3. Calculate session time cost
-      final start =
-          completedSession.sessionStartDate ?? completedSession.sessionDate;
-      final duration = completedSession.sessionDate.difference(start);
-      final sessionCost =
-          (duration.inSeconds / 3600.0) * completedSession.hourlyRate;
+      // 3. Calculate session time cost using the totalSession from session cubit as a reference
+      final itemsTotal = completedSession.items.fold<double>(
+        0.0,
+        (sum, item) => sum + item.totalItemPrice,
+      );
+      final sessionCost = completedSession.totalSession - itemsTotal;
 
       // 4. Calculate items profit
       final itemsProfit = completedSession.items.fold<double>(0.0, (sum, item) {
