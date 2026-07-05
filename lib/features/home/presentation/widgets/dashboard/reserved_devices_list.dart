@@ -10,6 +10,8 @@ import 'package:local_erp_system/core/widgets/sliver_empty_body.dart';
 import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/gaps.dart';
+import '../../../../devices/data/models/device_model.dart';
+import '../../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';
 import '../../../../sessions/data/models/session_model.dart';
 
 class ReservedDevicesList extends StatelessWidget {
@@ -74,51 +76,64 @@ class _ReservedDeviceCard extends StatelessWidget {
     final deviceName = session.device.target?.name;
     final start = session.sessionStartDate ?? session.sessionDate;
 
-    return Container(
-      padding: EdgeInsets.all(AppPadding.pf8),
-      decoration: BoxDecoration(
-        color: context.colorScheme.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(AppRadius.r12),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${LocaleKeys.deviceName}:  $deviceName",
-                  style: context.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: context.colorScheme.onPrimary,
+    return InkWell(
+      onTap: () {
+        if (session.device.target?.uuid.isEmpty ?? false) {
+          return;
+        }
+        // Navigate to Sessions tab and select this device
+        final mainViewCubit = MainViewCubit.get(context);
+        mainViewCubit.setSelectedTap(
+          1,
+          send: [session.device.target ?? DeviceModel.initial()],
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.all(AppPadding.pf8),
+        decoration: BoxDecoration(
+          color: context.colorScheme.surfaceContainerLowest,
+          borderRadius: BorderRadius.circular(AppRadius.r12),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${LocaleKeys.deviceName}:  $deviceName",
+                    style: context.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: context.colorScheme.onPrimary,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                gapHFix(6),
+                  gapHFix(6),
+                  Text(
+                    "${LocaleKeys.pricePerHour}: ${session.hourlyRate.toStringAsFixed(0)} ${LocaleKeys.pricePerHourHint}",
+                    style: context.textTheme.titleMedium?.copyWith(
+                      color: context.colorScheme.secondaryFixed,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                _TickingTimer(startTime: start),
                 Text(
-                  "${LocaleKeys.pricePerHour}: ${session.hourlyRate.toStringAsFixed(0)} ${LocaleKeys.pricePerHourHint}",
+                  LocaleKeys.reserved,
                   style: context.textTheme.titleMedium?.copyWith(
-                    color: context.colorScheme.secondaryFixed,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.orange,
                   ),
                 ),
               ],
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              _TickingTimer(startTime: start),
-              Text(
-                LocaleKeys.reserved,
-                style: context.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.orange,
-                ),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
