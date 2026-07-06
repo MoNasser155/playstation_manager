@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
-import 'package:local_erp_system/features/storage/presentation/widgets/add_storage_item/custom_add_new_storage_item.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/features/storage/presentation/widgets/add_storage_item/custom_add_new_storage_item.dart';
 
 import '../../features/home/presentation/screens/settings_screen.dart';
 import '../../features/main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';

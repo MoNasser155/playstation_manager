@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/core/extentions/date_extensions.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
-import 'package:local_erp_system/core/languages/local_keys.g.dart';
-import 'package:local_erp_system/features/transactions/data/models/transaction_model.dart';
+import 'package:playstation_manager/core/extentions/date_extensions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/languages/local_keys.g.dart';
+import 'package:playstation_manager/features/transactions/data/models/transaction_model.dart';
 
 import '../../../../core/constants/app_values.dart';
 import '../../../../core/utils/gaps.dart';

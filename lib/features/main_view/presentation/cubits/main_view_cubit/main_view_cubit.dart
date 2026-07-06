@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/features/devices/data/models/device_model.dart';
+import 'package:playstation_manager/features/devices/data/models/device_model.dart';
 
 import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/app_constants.dart';
@@ -13,8 +13,8 @@ import '../../../../../core/services/backup_service.dart';
 import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../devices/presentation/screens/devices_screen.dart';
 import '../../../../home/presentation/screens/home_screen.dart';
-import '../../../../sessions/presentation/screens/session_screen.dart';
 import '../../../../profit/presentation/screens/profit_screen.dart';
+import '../../../../sessions/presentation/screens/session_screen.dart';
 import '../../../../storage/presentation/screens/storage_screen.dart';
 import '../../../../transactions/presentation/screens/transactions_screen.dart';
 import '../../../data/models/taps_model.dart';

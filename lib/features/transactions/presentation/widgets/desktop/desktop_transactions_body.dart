@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/core/widgets/custom_skeletonizer.dart';
+import 'package:playstation_manager/core/widgets/custom_skeletonizer.dart';
 
 import '../../../../../core/utils/gaps.dart';
 import '../../cubits/transactions_cubit/transactions_cubit.dart';

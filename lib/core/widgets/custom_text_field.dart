@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
 
 import '../theme/app_colors.dart';
 

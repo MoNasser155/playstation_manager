@@ -1,7 +1,8 @@
 import 'dart:io';
 
+import 'package:playstation_manager/core/objectbox/objectbox.g.dart';
+
 import '../../../../core/errors/exceptions.dart';
-import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
 import '../../../../core/objectbox/objectbox_store.dart';
 import '../../../../core/shared/di.dart';
 import '../models/storage_details_model.dart';

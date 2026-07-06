@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
 
 import '../utils/gaps.dart';
 import 'custom_text_field.dart';

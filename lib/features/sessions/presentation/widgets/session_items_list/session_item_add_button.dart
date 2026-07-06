@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/features/sessions/presentation/widgets/session_items_list/session_items_total_row.dart';
+import 'package:playstation_manager/features/sessions/presentation/widgets/session_items_list/session_items_total_row.dart';
 
 import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/languages/local_keys.g.dart';
-import '../../../../../core/widgets/custom_sliver_padding.dart';
 import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/custom_sliver_padding.dart';
 import '../../cubits/cubit/session_cubit.dart';
 
 class SessionItemAddButton extends StatelessWidget {

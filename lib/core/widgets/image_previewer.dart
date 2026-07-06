@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_erp_system/core/constants/app_values.dart';
-import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
-import 'package:local_erp_system/core/utils/gaps.dart';
-import 'package:local_erp_system/core/widgets/custom_dialog.dart';
+import 'package:playstation_manager/core/constants/app_values.dart';
+import 'package:playstation_manager/core/extentions/media_query_extenstions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/utils/gaps.dart';
+import 'package:playstation_manager/core/widgets/custom_dialog.dart';
 
 import '../languages/local_keys.g.dart';
 

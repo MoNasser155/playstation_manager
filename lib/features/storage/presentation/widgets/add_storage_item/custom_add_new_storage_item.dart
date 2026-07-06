@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
-import 'package:local_erp_system/core/widgets/row_taps/custom_taps_row.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/widgets/row_taps/custom_taps_row.dart';
 
 import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/enums/add_storage_item_enum.dart';
 import '../../../../../core/enums/state_status.dart';
 import '../../../../../core/enums/storage_item_type.dart';
-import '../../../../../core/utils/gaps.dart';
 import '../../../../../core/languages/local_keys.g.dart';
 import '../../../../../core/shared/di.dart';
+import '../../../../../core/utils/gaps.dart';
 import '../../../../../core/utils/navigator_helper.dart';
 import '../../../../../core/utils/validations.dart';
 import '../../../../../core/widgets/custom_button.dart';
@@ -28,7 +28,6 @@ part 'item_image_picker.dart';
 part 'prices_fields.dart';
 part 'quantity_and_unit_fields.dart';
 part 'storage_item_dropdown.dart';
-
 
 class AddStorageItemProvider extends StatelessWidget {
   const AddStorageItemProvider({super.key, this.item});

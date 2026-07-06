@@ -1,4 +1,4 @@
-import 'package:local_erp_system/core/shared/di.dart';
+import 'package:playstation_manager/core/shared/di.dart';
 
 import 'data/datasources/transactions_local_data_source.dart';
 import 'data/repositories/transactions_repository_impl.dart';

@@ -1,5 +1,5 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:local_erp_system/core/shared/di.dart';
+import 'package:playstation_manager/core/shared/di.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../data/models/storage_details_model.dart';

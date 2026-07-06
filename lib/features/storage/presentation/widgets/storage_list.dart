@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
+import 'package:playstation_manager/core/extentions/media_query_extenstions.dart';
 
 import '../../../../core/languages/local_keys.g.dart';
 import '../../../../core/widgets/custom_sliver_padding.dart';

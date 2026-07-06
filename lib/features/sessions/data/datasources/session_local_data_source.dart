@@ -1,4 +1,4 @@
-import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
+import 'package:playstation_manager/core/objectbox/objectbox.g.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../core/enums/device_status.dart';

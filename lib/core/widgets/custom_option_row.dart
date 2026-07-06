@@ -1,7 +1,5 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
 
 import '../shared/models/option_row_model.dart';
 
@@ -21,9 +19,11 @@ class CustomOptionRow extends StatelessWidget {
             Expanded(
               child: Text(
                 optionRowModel.title,
-                style: style ?? context.textTheme.bodyMedium!.copyWith(
-                  color: context.colorScheme.onPrimary,
-                ),
+                style:
+                    style ??
+                    context.textTheme.bodyMedium!.copyWith(
+                      color: context.colorScheme.onPrimary,
+                    ),
               ),
             ),
             optionRowModel.suffix ??

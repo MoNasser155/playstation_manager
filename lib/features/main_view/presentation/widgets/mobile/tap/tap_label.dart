@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
 
 class TabLabel extends StatelessWidget {
   const TabLabel({super.key, required this.label, required this.isSelected});

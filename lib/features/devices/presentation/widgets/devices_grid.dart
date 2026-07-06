@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
+import 'package:playstation_manager/core/extentions/media_query_extenstions.dart';
 
 import '../../../../core/languages/local_keys.g.dart';
 import '../../../../core/widgets/custom_sliver_padding.dart';
@@ -17,18 +17,20 @@ class DevicesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomSliverPadding(
       sliver: BlocBuilder<DevicesCubit, DevicesState>(
-        buildWhen: (previous, current) =>
-            current.devices != previous.devices ||
-            previous.filteredDevices != current.filteredDevices ||
-            current.status != previous.status,
+        buildWhen:
+            (previous, current) =>
+                current.devices != previous.devices ||
+                previous.filteredDevices != current.filteredDevices ||
+                current.status != previous.status,
         builder: (context, state) {
           final isApplyFilter =
               DevicesCubit.get(context).searchController.text.isNotEmpty;
-          final length = state.status.isLoading
-              ? 8
-              : (isApplyFilter
-                  ? state.filteredDevices.length
-                  : state.devices.length);
+          final length =
+              state.status.isLoading
+                  ? 8
+                  : (isApplyFilter
+                      ? state.filteredDevices.length
+                      : state.devices.length);
 
           if (length == 0 && !state.status.isLoading) {
             return SliverEmptyBody(title: LocaleKeys.noDevices);
@@ -36,23 +38,25 @@ class DevicesGrid extends StatelessWidget {
 
           return SliverGrid.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: context.width > 1000
-                  ? 5
-                  : context.width > 800
+              crossAxisCount:
+                  context.width > 1000
+                      ? 5
+                      : context.width > 800
                       ? 4
                       : context.width > 600
-                          ? 3
-                          : 2,
+                      ? 3
+                      : 2,
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
               childAspectRatio: 0.8,
             ),
             itemBuilder: (context, index) {
-              final device = state.status.isLoading
-                  ? DeviceModel.initial()
-                  : (isApplyFilter
-                      ? state.filteredDevices[index]
-                      : state.devices[index]);
+              final device =
+                  state.status.isLoading
+                      ? DeviceModel.initial()
+                      : (isApplyFilter
+                          ? state.filteredDevices[index]
+                          : state.devices[index]);
               return DeviceCard(device: device);
             },
             itemCount: length,

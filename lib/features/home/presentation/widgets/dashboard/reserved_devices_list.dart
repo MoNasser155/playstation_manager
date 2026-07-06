@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
-import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
-import 'package:local_erp_system/core/languages/local_keys.g.dart';
-import 'package:local_erp_system/core/widgets/sliver_empty_body.dart';
+import 'package:playstation_manager/core/extentions/media_query_extenstions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/languages/local_keys.g.dart';
+import 'package:playstation_manager/core/widgets/sliver_empty_body.dart';
 
 import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/theme/app_colors.dart';

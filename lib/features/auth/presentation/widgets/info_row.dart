@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
-import 'package:local_erp_system/core/widgets/custom_snack_bar.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/widgets/custom_snack_bar.dart';
 
 import '../../../../core/languages/local_keys.g.dart';
 import '../../../../core/theme/app_colors.dart';

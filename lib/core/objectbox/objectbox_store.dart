@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:playstation_manager/core/objectbox/objectbox.g.dart';
 
 import '../../features/devices/data/models/device_model.dart';
 import '../../features/sessions/data/models/session_model.dart';
 import '../../features/storage/data/models/storage_model.dart';
 import '../../features/transactions/data/models/transaction_model.dart';
-import 'package:local_erp_system/core/objectbox/objectbox.g.dart';
 
 class ObjectBoxStore {
   static ObjectBoxStore? _instance;

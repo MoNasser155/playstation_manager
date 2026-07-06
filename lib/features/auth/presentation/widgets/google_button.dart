@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:local_erp_system/core/widgets/vector_icon.dart';
+import 'package:playstation_manager/core/widgets/vector_icon.dart';
 
 import '../../../../core/constants/app_assets.dart';
 import '../../../../core/languages/local_keys.g.dart';

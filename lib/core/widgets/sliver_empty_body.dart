@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
 
 class SliverEmptyBody extends StatelessWidget {
   final String title;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
-import 'package:local_erp_system/core/utils/validations.dart';
+import 'package:playstation_manager/core/extentions/media_query_extenstions.dart';
+import 'package:playstation_manager/core/utils/validations.dart';
 
 import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/languages/local_keys.g.dart';

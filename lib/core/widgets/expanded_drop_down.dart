@@ -1,8 +1,8 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_erp_system/core/extentions/media_query_extenstions.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/extentions/media_query_extenstions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
 
 import '../constants/app_values.dart';
 import '../languages/local_keys.g.dart';

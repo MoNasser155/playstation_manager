@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/features/sessions/presentation/widgets/sessions_list_view.dart';
+import 'package:playstation_manager/features/sessions/presentation/widgets/sessions_list_view.dart';
 
 import '../../../../../core/utils/gaps.dart';
 import '../../cubits/cubit/session_cubit.dart';

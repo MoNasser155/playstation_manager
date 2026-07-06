@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
-import 'package:local_erp_system/core/widgets/custom_sliver_padding.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/widgets/custom_sliver_padding.dart';
 
 import '../../../../core/constants/app_values.dart';
 import '../../../../core/extentions/date_extensions.dart';

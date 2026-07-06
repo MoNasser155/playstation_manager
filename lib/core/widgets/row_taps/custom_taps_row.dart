@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:local_erp_system/core/extentions/theme_extensions.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
 
 import '../../constants/app_values.dart';
 import '../../languages/languages.dart';
@@ -121,8 +121,14 @@ class _CustomTapsRowState extends State<CustomTapsRow>
                   (index) => Expanded(
                     child: InkWell(
                       borderRadius: BorderRadius.circular(AppRadius.r12),
-                      onTap: widget.onTap != null ? () => widget.onTap!(index) : null,
-                      onDoubleTap: widget.onDoubleTap != null ? () => widget.onDoubleTap!(index) : null,
+                      onTap:
+                          widget.onTap != null
+                              ? () => widget.onTap!(index)
+                              : null,
+                      onDoubleTap:
+                          widget.onDoubleTap != null
+                              ? () => widget.onDoubleTap!(index)
+                              : null,
                       child: Container(
                         alignment: Alignment.center,
                         child: AnimatedDefaultTextStyle(
