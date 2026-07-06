@@ -93,8 +93,8 @@ class _CustomBarChartState extends State<CustomBarChart>
         builder: (context, constraints) {
           final double width = constraints.maxWidth;
           const double height = 220.0;
-          const double leftPadding = 45.0;
-          const double rightPadding = 15.0;
+          final double leftPadding = widget.isArabic ? 15.0 : 45.0;
+          final double rightPadding = widget.isArabic ? 45.0 : 15.0;
           const double topPadding = 25.0;
           const double bottomPadding = 30.0;
 
@@ -107,7 +107,14 @@ class _CustomBarChartState extends State<CustomBarChart>
             int hoveredIdx = -1;
             for (int i = 0; i < numBars; i++) {
               final double barX =
-                  leftPadding + i * barSpacing + (barSpacing - barWidth) / 2;
+                  widget.isArabic
+                      ? (width -
+                          rightPadding -
+                          (i + 1) * barSpacing +
+                          (barSpacing - barWidth) / 2)
+                      : (leftPadding +
+                          i * barSpacing +
+                          (barSpacing - barWidth) / 2);
               final double xMin = barX - (barWidth * 0.25);
               final double xMax = barX + barWidth + (barWidth * 0.25);
 
@@ -257,7 +264,12 @@ class _BarChartPainter extends CustomPainter {
       final double barHeight =
           (d.sessionCount / maxCount) * chartHeight * animation.value;
       final double barX =
-          leftPadding + i * barSpacing + (barSpacing - barWidth) / 2;
+          isArabic
+              ? (size.width -
+                  rightPadding -
+                  (i + 1) * barSpacing +
+                  (barSpacing - barWidth) / 2)
+              : (leftPadding + i * barSpacing + (barSpacing - barWidth) / 2);
       final double barY = chartBottom - barHeight;
 
       final isHovered = hoveredIndex == i;
@@ -320,7 +332,14 @@ class _BarChartPainter extends CustomPainter {
       final d = devices[hoveredIndex];
       final double barHeight = (d.sessionCount / maxCount) * chartHeight;
       final double barX =
-          leftPadding + hoveredIndex * barSpacing + (barSpacing - barWidth) / 2;
+          isArabic
+              ? (size.width -
+                  rightPadding -
+                  (hoveredIndex + 1) * barSpacing +
+                  (barSpacing - barWidth) / 2)
+              : (leftPadding +
+                  hoveredIndex * barSpacing +
+                  (barSpacing - barWidth) / 2);
       final double barY = chartBottom - barHeight;
 
       final tooltipTextPainter = TextPainter(

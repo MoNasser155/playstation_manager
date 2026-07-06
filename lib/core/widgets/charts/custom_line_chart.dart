@@ -94,8 +94,8 @@ class _CustomLineChartState extends State<CustomLineChart>
         builder: (context, constraints) {
           final double width = constraints.maxWidth;
           const double height = 220.0;
-          const double leftPadding = 55.0;
-          const double rightPadding = 20.0;
+          final double leftPadding = widget.isArabic ? 20.0 : 55.0;
+          final double rightPadding = widget.isArabic ? 55.0 : 20.0;
           const double topPadding = 25.0;
           const double bottomPadding = 30.0;
 
@@ -105,9 +105,14 @@ class _CustomLineChartState extends State<CustomLineChart>
               numPoints > 1 ? chartWidth / (numPoints - 1) : chartWidth;
 
           void updateHover(Offset localPos) {
-            final int index = ((localPos.dx - leftPadding) / spacing)
-                .round()
-                .clamp(0, numPoints - 1);
+            final double relativeX =
+                widget.isArabic
+                    ? (width - rightPadding - localPos.dx)
+                    : (localPos.dx - leftPadding);
+            final int index = (relativeX / spacing).round().clamp(
+              0,
+              numPoints - 1,
+            );
             if (index != _hoveredIndex) {
               setState(() {
                 _hoveredIndex = index;
@@ -258,7 +263,10 @@ class _LineChartPainter extends CustomPainter {
     final List<Offset> points = [];
 
     for (int i = 0; i < numPoints; i++) {
-      final double xPos = leftPadding + i * spacing;
+      final double xPos =
+          isArabic
+              ? (size.width - rightPadding - i * spacing)
+              : (leftPadding + i * spacing);
       final double yPos =
           chartBottom - (values[i] / maxValue) * chartHeight * animation.value;
       points.add(Offset(xPos, yPos));
