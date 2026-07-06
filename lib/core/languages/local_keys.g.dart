@@ -793,11 +793,11 @@ abstract class LocaleKeys {
   static const String _devicesStatus = 'devices_status';
   static String get devicesStatus => _devicesStatus.tr();
 
-  static const String _currentReservedDevices = 'current_reserved_devices';
-  static String get currentReservedDevices => _currentReservedDevices.tr();
+  static const String _currentRunningSessions = 'current_running_sessions';
+  static String get currentRunningSessions => _currentRunningSessions.tr();
 
-  static const String _noReservedDevices = 'no_reserved_devices';
-  static String get noReservedDevices => _noReservedDevices.tr();
+  static const String _noRunningSessions = 'no_running_sessions';
+  static String get noRunningSessions => _noRunningSessions.tr();
 
   static const String _latestTodayTransactions = 'latest_today_transactions';
   static String get latestTodayTransactions => _latestTodayTransactions.tr();

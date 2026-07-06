@@ -52,11 +52,11 @@ class DesktopHomeBody extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: ProfitWidget(profit: profit)),
-                      gapWFix(12),
                       Expanded(
                         child: DeviceStatusSummaryWidget(devices: devices),
                       ),
+                      gapWFix(12),
+                      Expanded(child: ProfitWidget(profit: profit)),
                     ],
                   ),
                 ),

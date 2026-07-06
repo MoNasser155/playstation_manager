@@ -15,6 +15,7 @@ class CustomSectionHeader extends StatelessWidget {
     this.applyPadding = false,
     this.trailingWidget,
     this.subtitle,
+    this.titleStyle,
   });
   final String title;
   final String? detailsTitle;
@@ -23,6 +24,7 @@ class CustomSectionHeader extends StatelessWidget {
   final bool applyPadding;
   final Widget? trailingWidget;
   final String? subtitle;
+  final TextStyle? titleStyle;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,31 +39,36 @@ class CustomSectionHeader extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: context.textTheme.headlineMedium!.copyWith(),
+                  style:
+                      titleStyle ??
+                      context.textTheme.displayMedium?.copyWith(
+                        color: context.colorScheme.secondaryFixed,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
               ),
               isViewAll == true
                   ? InkWell(
-                      onTap: onTap,
-                      child: Row(
-                        children: [
-                          Text(
-                            detailsTitle ?? LocaleKeys.viewAll,
-                            style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.colorScheme.primary,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          gapW(2),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 16,
-                            fontWeight: FontWeight.w700,
+                    onTap: onTap,
+                    child: Row(
+                      children: [
+                        Text(
+                          detailsTitle ?? LocaleKeys.viewAll,
+                          style: context.textTheme.bodyMedium!.copyWith(
                             color: context.colorScheme.primary,
+                            fontWeight: FontWeight.w700,
                           ),
-                        ],
-                      ),
-                    )
+                        ),
+                        gapW(2),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 12,
+                          fontWeight: FontWeight.w700,
+                          color: context.colorScheme.primary,
+                        ),
+                      ],
+                    ),
+                  )
                   : trailingWidget ?? const SizedBox(),
             ],
           ),

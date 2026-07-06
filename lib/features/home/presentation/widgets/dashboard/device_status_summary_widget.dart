@@ -5,7 +5,9 @@ import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/enums/device_status.dart';
 import '../../../../../core/languages/local_keys.g.dart';
 import '../../../../../core/utils/gaps.dart';
+import '../../../../../core/widgets/custom_section_title.dart';
 import '../../../../devices/data/models/device_model.dart';
+import '../../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';
 
 class DeviceStatusSummaryWidget extends StatelessWidget {
   final List<DeviceModel> devices;
@@ -37,12 +39,13 @@ class DeviceStatusSummaryWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '${LocaleKeys.devicesStatus}:  ${devices.length}',
-            style: context.textTheme.titleMedium?.copyWith(
-              color: context.colorScheme.secondaryFixed,
-              fontWeight: FontWeight.w600,
-            ),
+          CustomSectionHeader(
+            title: ' ${LocaleKeys.devicesStatus}: ${devices.length}',
+            isViewAll: true,
+            onTap: () {
+              final cubit = MainViewCubit.get(context);
+              cubit.setSelectedTap(2);
+            },
           ),
           gapH(16),
           Expanded(

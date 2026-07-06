@@ -10,6 +10,7 @@ import 'package:playstation_manager/core/widgets/sliver_empty_body.dart';
 import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/gaps.dart';
+import '../../../../../core/widgets/custom_section_title.dart';
 import '../../../../devices/data/models/device_model.dart';
 import '../../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';
 import '../../../../sessions/data/models/session_model.dart';
@@ -26,12 +27,13 @@ class ReservedDevicesList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            LocaleKeys.currentReservedDevices,
-            style: context.textTheme.titleMedium?.copyWith(
-              color: context.colorScheme.secondaryFixed,
-              fontWeight: FontWeight.w600,
-            ),
+          CustomSectionHeader(
+            title: LocaleKeys.currentRunningSessions,
+            isViewAll: true,
+            onTap: () {
+              final cubit = MainViewCubit.get(context);
+              cubit.setSelectedTap(1);
+            },
           ),
           gapH(12),
           Expanded(
@@ -47,7 +49,7 @@ class ReservedDevicesList extends StatelessWidget {
                 ),
                 slivers: [
                   if (sessions.isEmpty)
-                    SliverEmptyBody(title: LocaleKeys.noReservedDevices)
+                    SliverEmptyBody(title: LocaleKeys.noRunningSessions)
                   else
                     SliverList.separated(
                       itemCount: sessions.length,

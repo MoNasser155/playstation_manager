@@ -1063,13 +1063,13 @@
         "en":"Devices Status",
         "ar":"حالة الأجهزة"
     },
-    "currentReservedDevices":{
-        "en":"Current Reserved Devices",
-        "ar":"الأجهزة المحجوزة حالياً"
+    "currentRunningSessions":{
+        "en":"Current Running Sessions",
+        "ar":"الجلسات الجارية حالياً"
     },
-    "noReservedDevices":{
-        "en":"No Reserved Devices",
-        "ar":"لا توجد أجهزة محجوزة"
+    "noRunningSessions":{
+        "en":"No Running Sessions",
+        "ar":"لا توجد جلسات جارية"
     },
     "latestTodayTransactions":{
         "en":"Latest Today Transactions",

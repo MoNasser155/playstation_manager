@@ -5,6 +5,8 @@ import '../../../../../core/constants/app_values.dart';
 import '../../../../../core/languages/local_keys.g.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/gaps.dart';
+import '../../../../../core/widgets/custom_section_title.dart';
+import '../../../../main_view/presentation/cubits/main_view_cubit/main_view_cubit.dart';
 import '../../../data/models/home_profit.dart';
 
 class ProfitWidget extends StatelessWidget {
@@ -26,12 +28,13 @@ class ProfitWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            LocaleKeys.todayIncome,
-            style: context.textTheme.displayMedium?.copyWith(
-              color: context.colorScheme.secondaryFixed,
-              fontWeight: FontWeight.w600,
-            ),
+          CustomSectionHeader(
+            title: LocaleKeys.todayIncome,
+            isViewAll: true,
+            onTap: () {
+              final cubit = MainViewCubit.get(context);
+              cubit.setSelectedTap(5);
+            },
           ),
           gapH(16),
           Expanded(
