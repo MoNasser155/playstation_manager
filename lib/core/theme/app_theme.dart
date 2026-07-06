@@ -145,7 +145,7 @@ class AppTheme {
   //light theme
   static ThemeData get lightTheme => _buildTheme(
     scheme: _lightColorScheme,
-    scaffoldBg: AppColors.lightScaffoldBackgroundColor,
+    scaffoldBg: AppColors.grey50,
     isDark: false,
   );
 
@@ -167,7 +167,7 @@ class AppTheme {
     onSecondaryContainer:
         AppColors.orange, // for text color upove secondaryContainer
     secondaryContainer: AppColors.salmon,
-    surfaceContainerLowest: AppColors.lightScaffoldBackgroundColor,
+    surfaceContainerLowest: AppColors.grey50,
     surfaceContainerHigh: AppColors.lightContainer,
     secondaryFixed: AppColors.grey600,
     surfaceContainer: AppColors.grey500,
@@ -200,7 +200,6 @@ class AppTheme {
   static AppBarTheme _appBarTheme(ColorScheme colorScheme, bool isDark) {
     return AppBarTheme(
       toolbarHeight: AppSize.appbarHeight,
-
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
         statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
@@ -214,9 +213,7 @@ class AppTheme {
       ),
       surfaceTintColor: Colors.transparent,
       backgroundColor:
-          isDark
-              ? AppColors.darkScaffoldBackgroundColor
-              : AppColors.lightScaffoldBackgroundColor,
+          isDark ? AppColors.darkScaffoldBackgroundColor : AppColors.grey50,
       elevation: 0,
       shadowColor: isDark ? AppColors.black : AppColors.white,
       scrolledUnderElevation: 8,

@@ -1146,5 +1146,10 @@
     "income":{
         "en":"Income",
         "ar":"الدخل"
-    }
+    },
+    "revenue": {
+        "en": "Revenue",
+        "ar": "الإيرادات"
+    },
+    
 }

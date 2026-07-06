@@ -856,4 +856,7 @@ abstract class LocaleKeys {
   static const String _income = 'income';
   static String get income => _income.tr();
 
+  static const String _revenue = 'revenue';
+  static String get revenue => _revenue.tr();
+
 }

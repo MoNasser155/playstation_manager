@@ -2,6 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../constants/app_values.dart';
+import '../../languages/local_keys.g.dart';
+
 class CustomLineChart extends StatefulWidget {
   final List<double> values;
   final List<String> labels;
@@ -32,11 +35,11 @@ class _CustomLineChartState extends State<CustomLineChart> {
         height: 250,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerLow,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppRadius.r16),
         ),
         child: const Center(
           child: Text(
-            'No data available',
+            LocaleKeys.noDataAvailable,
             style: TextStyle(color: Colors.grey),
           ),
         ),
