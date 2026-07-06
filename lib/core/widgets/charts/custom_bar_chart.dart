@@ -34,7 +34,7 @@ class _CustomBarChartState extends State<CustomBarChart>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1500),
     );
     _animation = CurvedAnimation(
       parent: _animationController,
