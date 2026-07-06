@@ -26,8 +26,40 @@ class CustomLineChart extends StatefulWidget {
   State<CustomLineChart> createState() => _CustomLineChartState();
 }
 
-class _CustomLineChartState extends State<CustomLineChart> {
+class _CustomLineChartState extends State<CustomLineChart>
+    with SingleTickerProviderStateMixin {
   int _hoveredIndex = -1;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    _animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    );
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant CustomLineChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.values != widget.values) {
+      _animationController.reset();
+      _animationController.forward();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +131,7 @@ class _CustomLineChartState extends State<CustomLineChart> {
               child: CustomPaint(
                 size: Size(width, height),
                 painter: _LineChartPainter(
+                  animation: _animation,
                   values: widget.values,
                   labels: widget.labels,
                   maxValue: adjustedMax,
@@ -122,6 +155,7 @@ class _CustomLineChartState extends State<CustomLineChart> {
 }
 
 class _LineChartPainter extends CustomPainter {
+  final Animation<double> animation;
   final List<double> values;
   final List<String> labels;
   final double maxValue;
@@ -136,6 +170,7 @@ class _LineChartPainter extends CustomPainter {
   final double bottomPadding;
 
   _LineChartPainter({
+    required this.animation,
     required this.values,
     required this.labels,
     required this.maxValue,
@@ -148,7 +183,7 @@ class _LineChartPainter extends CustomPainter {
     required this.rightPadding,
     required this.topPadding,
     required this.bottomPadding,
-  });
+  }) : super(repaint: animation);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -224,7 +259,8 @@ class _LineChartPainter extends CustomPainter {
 
     for (int i = 0; i < numPoints; i++) {
       final double xPos = leftPadding + i * spacing;
-      final double yPos = chartBottom - (values[i] / maxValue) * chartHeight;
+      final double yPos =
+          chartBottom - (values[i] / maxValue) * chartHeight * animation.value;
       points.add(Offset(xPos, yPos));
     }
 
@@ -427,7 +463,8 @@ class _LineChartPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _LineChartPainter oldDelegate) {
-    return oldDelegate.values != values ||
+    return oldDelegate.animation != animation ||
+        oldDelegate.values != values ||
         oldDelegate.labels != labels ||
         oldDelegate.hoveredIndex != hoveredIndex ||
         oldDelegate.highlightIndex != highlightIndex ||

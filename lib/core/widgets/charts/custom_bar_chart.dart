@@ -23,8 +23,40 @@ class CustomBarChart extends StatefulWidget {
   State<CustomBarChart> createState() => _CustomBarChartState();
 }
 
-class _CustomBarChartState extends State<CustomBarChart> {
+class _CustomBarChartState extends State<CustomBarChart>
+    with SingleTickerProviderStateMixin {
   int _hoveredIndex = -1;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    _animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    );
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant CustomBarChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.devices != widget.devices) {
+      _animationController.reset();
+      _animationController.forward();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +139,7 @@ class _CustomBarChartState extends State<CustomBarChart> {
               child: CustomPaint(
                 size: Size(width, height),
                 painter: _BarChartPainter(
+                  animation: _animation,
                   devices: widget.devices,
                   maxCount: adjustedMax,
                   hoveredIndex: _hoveredIndex,
@@ -130,6 +163,7 @@ class _CustomBarChartState extends State<CustomBarChart> {
 }
 
 class _BarChartPainter extends CustomPainter {
+  final Animation<double> animation;
   final List<DeviceUsage> devices;
   final int maxCount;
   final int hoveredIndex;
@@ -144,6 +178,7 @@ class _BarChartPainter extends CustomPainter {
   final double barSpacing;
 
   _BarChartPainter({
+    required this.animation,
     required this.devices,
     required this.maxCount,
     required this.hoveredIndex,
@@ -156,7 +191,7 @@ class _BarChartPainter extends CustomPainter {
     required this.bottomPadding,
     required this.barWidth,
     required this.barSpacing,
-  });
+  }) : super(repaint: animation);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -219,7 +254,8 @@ class _BarChartPainter extends CustomPainter {
     // 2. Draw bars
     for (int i = 0; i < devices.length; i++) {
       final d = devices[i];
-      final double barHeight = (d.sessionCount / maxCount) * chartHeight;
+      final double barHeight =
+          (d.sessionCount / maxCount) * chartHeight * animation.value;
       final double barX =
           leftPadding + i * barSpacing + (barSpacing - barWidth) / 2;
       final double barY = chartBottom - barHeight;
@@ -342,7 +378,8 @@ class _BarChartPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _BarChartPainter oldDelegate) {
-    return oldDelegate.devices != devices ||
+    return oldDelegate.animation != animation ||
+        oldDelegate.devices != devices ||
         oldDelegate.hoveredIndex != hoveredIndex ||
         oldDelegate.theme != theme ||
         oldDelegate.isArabic != isArabic;

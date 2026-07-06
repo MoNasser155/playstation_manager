@@ -22,8 +22,40 @@ class CustomPieChart extends StatefulWidget {
   State<CustomPieChart> createState() => _CustomPieChartState();
 }
 
-class _CustomPieChartState extends State<CustomPieChart> {
+class _CustomPieChartState extends State<CustomPieChart>
+    with SingleTickerProviderStateMixin {
   int _hoveredIndex = -1;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    _animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    );
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant CustomPieChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.products != widget.products) {
+      _animationController.reset();
+      _animationController.forward();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,6 +175,7 @@ class _CustomPieChartState extends State<CustomPieChart> {
                   child: CustomPaint(
                     size: Size(constraints.maxWidth, size),
                     painter: _PieChartPainter(
+                      animation: _animation,
                       products: widget.products,
                       totalQuantity: totalQuantity,
                       hoveredIndex: _hoveredIndex,
@@ -164,6 +197,7 @@ class _CustomPieChartState extends State<CustomPieChart> {
 }
 
 class _PieChartPainter extends CustomPainter {
+  final Animation<double> animation;
   final List<ProductSale> products;
   final double totalQuantity;
   final int hoveredIndex;
@@ -171,12 +205,13 @@ class _PieChartPainter extends CustomPainter {
   final ThemeData theme;
 
   _PieChartPainter({
+    required this.animation,
     required this.products,
     required this.totalQuantity,
     required this.hoveredIndex,
     required this.isArabic,
     required this.theme,
-  });
+  }) : super(repaint: animation);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -199,7 +234,7 @@ class _PieChartPainter extends CustomPainter {
       final p = products[i];
       final double sweepAngle =
           totalQuantity > 0
-              ? (p.quantitySold / totalQuantity) * 2 * math.pi
+              ? (p.quantitySold / totalQuantity) * 2 * math.pi * animation.value
               : 0.0;
 
       final isHovered = hoveredIndex == i;
@@ -278,7 +313,8 @@ class _PieChartPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _PieChartPainter oldDelegate) {
-    return oldDelegate.products != products ||
+    return oldDelegate.animation != animation ||
+        oldDelegate.products != products ||
         oldDelegate.hoveredIndex != hoveredIndex ||
         oldDelegate.theme != theme ||
         oldDelegate.isArabic != isArabic;
