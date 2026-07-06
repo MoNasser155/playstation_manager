@@ -26,6 +26,8 @@ class ProfitLocalDataSourceImpl implements ProfitLocalDataSource {
           return true;
         }).toList();
 
+    transactions.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
     final totalProfit = transactions.fold<double>(
       0,
       (previous, element) => previous + (element.sessionProfit ?? 0),

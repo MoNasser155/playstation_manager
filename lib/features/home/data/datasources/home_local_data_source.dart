@@ -90,6 +90,9 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
     // Sort today's transactions by date desc for display in UI
     todayTransactions.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
+    // Sort active sessions by date desc for display in UI
+    sessions.sort((a, b) => b.sessionDate.compareTo(a.sessionDate));
+
     return HomeModel(
       profit: HomeProfit(
         todayProfit: todayProfit,

@@ -102,6 +102,7 @@ class SessionLocalDataSourceImpl implements SessionLocalDataSource {
     if (results.isEmpty) {
       throw NoSessionsFoundException();
     }
+    results.sort((a, b) => b.sessionDate.compareTo(a.sessionDate));
     return results;
   }
 
@@ -111,6 +112,7 @@ class SessionLocalDataSourceImpl implements SessionLocalDataSource {
         _store.sessions.query(SessionModel_.isSession.equals(true)).build();
     final results = query.find();
     query.close();
+    results.sort((a, b) => b.sessionDate.compareTo(a.sessionDate));
     return results;
   }
 

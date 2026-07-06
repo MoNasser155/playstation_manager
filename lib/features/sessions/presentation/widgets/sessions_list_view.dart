@@ -30,8 +30,7 @@ class SessionsListView extends StatelessWidget {
         final sessions =
             state.sessionsListStatus.isLoading
                   ? List.generate(length, (_) => SessionModel.initial())
-                  : [...state.sessionList]
-              ..sort((a, b) => b.sessionDate.compareTo(a.sessionDate));
+                  : state.sessionList;
 
         return CustomScrollView(
           slivers: [
