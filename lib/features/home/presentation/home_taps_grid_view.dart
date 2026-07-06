@@ -31,7 +31,7 @@ class HomeTapsGridView extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: context.primaryContainer,
-                borderRadius: BorderRadius.circular(AppRadius.r12),
+                borderRadius: BorderRadius.circular(AppRadius.r16),
               ),
               child: Row(
                 spacing: AppSpacing.h16,

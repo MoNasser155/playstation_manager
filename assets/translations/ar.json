@@ -270,6 +270,21 @@
   "latest_today_transactions": "أحدث المعاملات اليوم",
   "no_transactions_yet": "لا توجد معاملات حتى الآن",
   "price_per_hour": "السعر لكل ساعة",
-  "price_per_hour_hint": "ج/س"
+  "price_per_hour_hint": "ج/س",
+  "reports": "التقارير",
+  "today_filter": "اليوم",
+  "this_week": "هذا الأسبوع",
+  "this_month": "هذا الشهر",
+  "this_year": "هذه السنة",
+  "total_revenue": "إجمالي الإيرادات",
+  "total_sessions_count": "إجمالي الجلسات",
+  "avg_session_value": "متوسط قيمة الجلسة",
+  "products_sold": "المنتجات المباعة",
+  "revenue_overview": "نظرة عامة على الإيرادات",
+  "most_used_devices": "الأجهزة الأكثر استخدامًا",
+  "best_selling_products": "المنتجات الأكثر مبيعًا",
+  "monthly_income": "الدخل الشهري",
+  "compared_to_previous": "مقارنة بالفترة السابقة",
+  "income": "الدخل"
 
 }

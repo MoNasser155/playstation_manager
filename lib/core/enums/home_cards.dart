@@ -41,13 +41,13 @@ enum HomeCards {
         );
       case HomeCards.viewReports:
         return Icon(
-          Icons.analytics,
+          Icons.insert_chart_rounded,
           color: context.colorScheme.onPrimary,
           size: 32,
         );
       case HomeCards.settings:
         return Icon(
-          Icons.settings,
+          Icons.settings_rounded,
           color: context.colorScheme.onPrimary,
           size: 32,
         );
@@ -64,7 +64,9 @@ enum HomeCards {
         cubit.setSelectedTap(1);
         break;
       case HomeCards.viewReports:
-        cubit.setSelectedTap(4); // Shifted from 5 because customers tab was removed (index 2)
+        cubit.setSelectedTap(
+          4,
+        ); // Shifted from 5 because customers tab was removed (index 2)
         break;
       case HomeCards.settings:
         cubit.setCustomizedView(SettingsScreen());

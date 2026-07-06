@@ -270,6 +270,21 @@
   "latest_today_transactions": "Latest Today Transactions",
   "no_transactions_yet": "No Transactions Yet",
   "price_per_hour": "Price Per Hour",
-  "price_per_hour_hint": "EGP/hr"
+  "price_per_hour_hint": "EGP/hr",
+  "reports": "Reports",
+  "today_filter": "Today",
+  "this_week": "This Week",
+  "this_month": "This Month",
+  "this_year": "This Year",
+  "total_revenue": "Total Revenue",
+  "total_sessions_count": "Total Sessions",
+  "avg_session_value": "Avg Session Value",
+  "products_sold": "Products Sold",
+  "revenue_overview": "Revenue Overview",
+  "most_used_devices": "Most Used Devices",
+  "best_selling_products": "Best Selling Products",
+  "monthly_income": "Monthly Income",
+  "compared_to_previous": "compared to previous period",
+  "income": "Income"
 
 }

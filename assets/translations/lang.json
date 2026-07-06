@@ -1086,5 +1086,65 @@
     "pricePerHourHint":{
         "en":"EGP/hr",
         "ar":"ج/س"
+    },
+    "reports": {
+        "en": "Reports",
+        "ar": "التقارير"
+    },
+    "todayFilter": {
+        "en": "Today",
+        "ar": "اليوم"
+    },
+    "thisWeek": {
+        "en": "This Week",
+        "ar": "هذا الأسبوع"
+    },
+    "thisMonth": {
+        "en": "This Month",
+        "ar": "هذا الشهر"
+    },
+    "thisYear": {
+        "en": "This Year",
+        "ar": "هذه السنة"
+    },
+    "totalRevenue": {
+        "en": "Total Revenue",
+        "ar": "إجمالي الإيرادات"
+    },
+    "totalSessionsCount": {
+        "en": "Total Sessions",
+        "ar": "إجمالي الجلسات"
+    },
+    "avgSessionValue": {
+        "en": "Avg Session Value",
+        "ar": "متوسط قيمة الجلسة"
+    },
+    "productsSold": {
+        "en": "Products Sold",
+        "ar": "المنتجات المباعة"
+    },
+    "revenueOverview": {
+        "en": "Revenue Overview",
+        "ar": "نظرة عامة على الإيرادات"
+    },
+    "mostUsedDevices": {
+        "en": "Most Used Devices",
+        "ar": "الأجهزة الأكثر استخدامًا"
+    },
+    "bestSellingProducts": {
+        "en": "Best Selling Products",
+        "ar": "المنتجات الأكثر مبيعًا"
+    },
+    "monthlyIncome": {
+        "en": "Monthly Income",
+        "ar": "الدخل الشهري"
+    },
+    "comparedToPrevious": {
+        "en": "compared to previous period",
+        "ar": "مقارنة بالفترة السابقة"
+    },
+    "income":{
+        "en":"Income",
+        "ar":"الدخل"
     }
 }

@@ -8,6 +8,7 @@ import '../../features/main_view/di.dart';
 import '../../features/profit/di.dart';
 import '../../features/storage/di.dart';
 import '../../features/transactions/di.dart';
+import '../../features/reports/di.dart';
 import '../objectbox/objectbox_store.dart';
 import 'cubits/global_theming_cubit.dart';
 
@@ -22,6 +23,7 @@ initDI() async {
   initSessionsDI();
   initTransactionsDI();
   initProfitDI();
+  initReportsDI();
 }
 
 sharedDI() async {

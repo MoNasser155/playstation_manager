@@ -811,4 +811,49 @@ abstract class LocaleKeys {
   static const String _pricePerHourHint = 'price_per_hour_hint';
   static String get pricePerHourHint => _pricePerHourHint.tr();
 
+  static const String _reports = 'reports';
+  static String get reports => _reports.tr();
+
+  static const String _todayFilter = 'today_filter';
+  static String get todayFilter => _todayFilter.tr();
+
+  static const String _thisWeek = 'this_week';
+  static String get thisWeek => _thisWeek.tr();
+
+  static const String _thisMonth = 'this_month';
+  static String get thisMonth => _thisMonth.tr();
+
+  static const String _thisYear = 'this_year';
+  static String get thisYear => _thisYear.tr();
+
+  static const String _totalRevenue = 'total_revenue';
+  static String get totalRevenue => _totalRevenue.tr();
+
+  static const String _totalSessionsCount = 'total_sessions_count';
+  static String get totalSessionsCount => _totalSessionsCount.tr();
+
+  static const String _avgSessionValue = 'avg_session_value';
+  static String get avgSessionValue => _avgSessionValue.tr();
+
+  static const String _productsSold = 'products_sold';
+  static String get productsSold => _productsSold.tr();
+
+  static const String _revenueOverview = 'revenue_overview';
+  static String get revenueOverview => _revenueOverview.tr();
+
+  static const String _mostUsedDevices = 'most_used_devices';
+  static String get mostUsedDevices => _mostUsedDevices.tr();
+
+  static const String _bestSellingProducts = 'best_selling_products';
+  static String get bestSellingProducts => _bestSellingProducts.tr();
+
+  static const String _monthlyIncome = 'monthly_income';
+  static String get monthlyIncome => _monthlyIncome.tr();
+
+  static const String _comparedToPrevious = 'compared_to_previous';
+  static String get comparedToPrevious => _comparedToPrevious.tr();
+
+  static const String _income = 'income';
+  static String get income => _income.tr();
+
 }

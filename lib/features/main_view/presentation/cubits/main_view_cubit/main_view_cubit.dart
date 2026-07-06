@@ -14,6 +14,7 @@ import '../../../../../core/shared/cubits/base_cubit_emiter.dart';
 import '../../../../devices/presentation/screens/devices_screen.dart';
 import '../../../../home/presentation/screens/home_screen.dart';
 import '../../../../profit/presentation/screens/profit_screen.dart';
+import '../../../../reports/presentation/screens/reports_screen.dart';
 import '../../../../sessions/presentation/screens/session_screen.dart';
 import '../../../../storage/presentation/screens/storage_screen.dart';
 import '../../../../transactions/presentation/screens/transactions_screen.dart';
@@ -42,6 +43,7 @@ class MainViewCubit extends BaseCubit<MainViewState> {
     TapsModel(title: LocaleKeys.inventory, icon: VectorIcons.inventory),
     TapsModel(title: LocaleKeys.transactions, icon: VectorIcons.transactions),
     TapsModel(title: LocaleKeys.profit, icon: VectorIcons.profit),
+    TapsModel(title: LocaleKeys.reports, icon: VectorIcons.reports),
     TapsModel(
       title: LocaleKeys.saveLocalBackup,
       icon: VectorIcons.save,
@@ -66,6 +68,7 @@ class MainViewCubit extends BaseCubit<MainViewState> {
     StorageScreen(),
     TransactionsScreen(),
     ProfitScreen(),
+    ReportsScreen(),
   ];
 
   void updateMode(BoxConstraints constraints) {
