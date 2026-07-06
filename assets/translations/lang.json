@@ -111,6 +111,10 @@
         "en": "No Suppliers",
         "ar": "لا يوجد موردين"
     },
+    "noDataAvailable": {
+        "en": "No data available",
+        "ar": "لا توجد بيانات متاحة"
+    },
     "addNewSupplier": {
         "en": "Add New Supplier",
         "ar": "اضافة مورد جديد"
@@ -1150,6 +1154,5 @@
     "revenue": {
         "en": "Revenue",
         "ar": "الإيرادات"
-    },
-    
+    }
 }

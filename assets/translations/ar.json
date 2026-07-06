@@ -27,6 +27,7 @@
   "contact": "معلومات الاتصال",
   "add_supplier": "اضافة مورد",
   "no_suppliers": "لا يوجد موردين",
+  "no_data_available": "لا توجد بيانات متاحة",
   "add_new_supplier": "اضافة مورد جديد",
   "enter_name_required": "ادخل الاسم (مطلوب)",
   "enter_phone_required": "ادخل رقم الهاتف (مطلوب)",

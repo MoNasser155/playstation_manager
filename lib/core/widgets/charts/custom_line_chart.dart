@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:playstation_manager/core/extentions/theme_extensions.dart';
 
 import '../../constants/app_values.dart';
 import '../../languages/local_keys.g.dart';
@@ -34,10 +35,10 @@ class _CustomLineChartState extends State<CustomLineChart> {
       return Container(
         height: 250,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerLow,
+          color: context.colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(AppRadius.r16),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
             LocaleKeys.noDataAvailable,
             style: TextStyle(color: Colors.grey),
@@ -51,15 +52,11 @@ class _CustomLineChartState extends State<CustomLineChart> {
     final double adjustedMax = maxValue > 0 ? maxValue : 1.0;
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(AppPadding.p16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(
-            context,
-          ).colorScheme.outlineVariant.withValues(alpha: 0.4),
-        ),
+        color: context.colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(AppRadius.r16),
+        boxShadow: context.appShadow,
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -109,7 +106,7 @@ class _CustomLineChartState extends State<CustomLineChart> {
                   highlightIndex: widget.highlightIndex,
                   tooltipLabel: widget.tooltipLabel,
                   isArabic: widget.isArabic,
-                  theme: Theme.of(context),
+                  theme: context.theme,
                   leftPadding: leftPadding,
                   rightPadding: rightPadding,
                   topPadding: topPadding,
@@ -203,7 +200,7 @@ class _LineChartPainter extends CustomPainter {
       // Draw Y label
       final labelPainter = TextPainter(
         text: TextSpan(
-          text: '${yVal.toStringAsFixed(0)} ${isArabic ? 'ج.م' : 'EGP'}',
+          text: '${yVal.toStringAsFixed(0)} ${LocaleKeys.egp}',
           style: textStyle,
         ),
         textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
@@ -377,7 +374,7 @@ class _LineChartPainter extends CustomPainter {
       final tooltipTextPainter = TextPainter(
         text: TextSpan(
           text:
-              '${labels[hoveredIndex]}\n$tooltipLabel: ${values[hoveredIndex].toStringAsFixed(0)} ${isArabic ? 'ج.م' : 'EGP'}',
+              '${labels[hoveredIndex]}\n$tooltipLabel: ${values[hoveredIndex].toStringAsFixed(0)} ${LocaleKeys.egp}',
           style: TextStyle(
             color: theme.colorScheme.onInverseSurface,
             fontSize: 11,

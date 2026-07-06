@@ -3,6 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../../features/reports/data/models/reports_model.dart';
+import '../../constants/app_values.dart';
+import '../../extentions/theme_extensions.dart';
+import '../../languages/local_keys.g.dart';
 
 class CustomBarChart extends StatefulWidget {
   final List<DeviceUsage> devices;
@@ -29,13 +32,13 @@ class _CustomBarChartState extends State<CustomBarChart> {
       return Container(
         height: 250,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerLow,
-          borderRadius: BorderRadius.circular(16),
+          color: context.colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(AppRadius.r16),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            'No device usage data available',
-            style: TextStyle(color: Colors.grey),
+            LocaleKeys.noDataAvailable,
+            style: const TextStyle(color: Colors.grey),
           ),
         ),
       );
@@ -48,15 +51,11 @@ class _CustomBarChartState extends State<CustomBarChart> {
     final int adjustedMax = maxCount > 0 ? maxCount : 1;
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(AppPadding.p16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(
-            context,
-          ).colorScheme.outlineVariant.withValues(alpha: 0.4),
-        ),
+        color: context.colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(AppRadius.r16),
+        boxShadow: context.appShadow,
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -113,7 +112,7 @@ class _CustomBarChartState extends State<CustomBarChart> {
                   hoveredIndex: _hoveredIndex,
                   tooltipLabel: widget.tooltipLabel,
                   isArabic: widget.isArabic,
-                  theme: Theme.of(context),
+                  theme: context.theme,
                   leftPadding: leftPadding,
                   rightPadding: rightPadding,
                   topPadding: topPadding,

@@ -27,6 +27,7 @@
   "contact": "Contact",
   "add_supplier": "Add Supplier",
   "no_suppliers": "No Suppliers",
+  "no_data_available": "No data available",
   "add_new_supplier": "Add New Supplier",
   "enter_name_required": "Enter Name (Required)",
   "enter_phone_required": "Enter Phone (Required)",

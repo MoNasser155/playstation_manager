@@ -82,6 +82,9 @@ abstract class LocaleKeys {
   static const String _noSuppliers = 'no_suppliers';
   static String get noSuppliers => _noSuppliers.tr();
 
+  static const String _noDataAvailable = 'no_data_available';
+  static String get noDataAvailable => _noDataAvailable.tr();
+
   static const String _addNewSupplier = 'add_new_supplier';
   static String get addNewSupplier => _addNewSupplier.tr();
 

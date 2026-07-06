@@ -3,6 +3,10 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../../features/reports/data/models/reports_model.dart';
+import '../../constants/app_values.dart';
+import '../../extentions/theme_extensions.dart';
+import '../../languages/local_keys.g.dart';
+import '../../utils/gaps.dart';
 
 class CustomPieChart extends StatefulWidget {
   final List<ProductSale> products;
@@ -27,13 +31,13 @@ class _CustomPieChartState extends State<CustomPieChart> {
       return Container(
         height: 250,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerLow,
-          borderRadius: BorderRadius.circular(16),
+          color: context.colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(AppRadius.r16),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            'No sales data available',
-            style: TextStyle(color: Colors.grey),
+            LocaleKeys.noDataAvailable,
+            style: const TextStyle(color: Colors.grey),
           ),
         ),
       );
@@ -45,22 +49,17 @@ class _CustomPieChartState extends State<CustomPieChart> {
     );
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(AppPadding.p16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(
-            context,
-          ).colorScheme.outlineVariant.withValues(alpha: 0.4),
-        ),
+        color: context.colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(AppRadius.r16),
+        boxShadow: context.appShadow,
       ),
       child: Column(
         children: [
           LayoutBuilder(
             builder: (context, constraints) {
-              final double size = math.min(constraints.maxWidth, 180.0);
-
+              final double size = math.min(constraints.maxWidth, 200.0);
               void updateHover(Offset localPos) {
                 final double cx = constraints.maxWidth / 2;
                 final double cy = size / 2;
@@ -148,14 +147,14 @@ class _CustomPieChartState extends State<CustomPieChart> {
                       totalQuantity: totalQuantity,
                       hoveredIndex: _hoveredIndex,
                       isArabic: widget.isArabic,
-                      theme: Theme.of(context),
+                      theme: context.theme,
                     ),
                   ),
                 ),
               );
             },
           ),
-          const SizedBox(height: 16),
+          gapH(AppSpacing.v16),
           // Elegant layout legend list below the chart
           _LegendList(products: widget.products, totalQuantity: totalQuantity),
         ],
@@ -295,9 +294,9 @@ class _LegendList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = [
-      Theme.of(context).colorScheme.primary,
-      Theme.of(context).colorScheme.secondary,
-      Theme.of(context).colorScheme.tertiary,
+      context.colorScheme.primary,
+      context.colorScheme.secondary,
+      context.colorScheme.tertiary,
       Colors.teal,
       Colors.deepPurpleAccent,
     ];
@@ -325,7 +324,7 @@ class _LegendList extends StatelessWidget {
               '${p.productName} (${pct.toStringAsFixed(0)}%)',
               style: TextStyle(
                 fontSize: 11,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ],

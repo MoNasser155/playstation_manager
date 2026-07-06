@@ -21,4 +21,13 @@ extension ThemeExtensions on BuildContext {
   Color get idleGlowColor => containerColors.idleGlowColor;
   Color get idleGlowColor2 => containerColors.idleGlowColor2;
   Color get errorGlowColor => containerColors.errorGlowColor;
+
+  List<BoxShadow> get appShadow => [
+    BoxShadow(
+      color: colorScheme.shadow.withValues(alpha: 0.3),
+      blurRadius: 16,
+      offset: const Offset(0, 4),
+      spreadRadius: 0,
+    ),
+  ];
 }
